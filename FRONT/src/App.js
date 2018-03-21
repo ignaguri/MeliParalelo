@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Test from './views/Test'
+import Banner from './views/Banner'
 
 class App extends React.Component {
     render() {
         return (
-            <Test />
+            <Banner />
         );
     }
 }
