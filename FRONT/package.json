@@ -1,11 +1,10 @@
 {
-  "name": "ejreact",
+  "name": "MeliParalelo",
   "version": "0.1.0",
   "proxy": "http://localhost:5000/",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "bootstrap": "^4.0.0",
     "express": "^4.16.3",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
