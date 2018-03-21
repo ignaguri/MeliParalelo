@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Test from './views/Test'
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-                Hola Grupo B!
-            </div>
+            <Test />
         );
     }
 }
