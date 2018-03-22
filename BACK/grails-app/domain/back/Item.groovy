@@ -5,27 +5,45 @@ class Item {
     String siteId
     String title
     Double price
+    Double originalPrice
+    Integer initialQuantity
     Integer availableQuantity
+    Integer soldQuantity
     String conditionItem
     String thumbnail
     String categoryId
-    String pictureUrl
     String stateName
+    boolean acceptsMP
+    Integer qualification
+    String description
+
+    static hasMany = [pictures: Picture]
+
+    static mapping = {
+        description sqlType: 'longText'
+    }
 
     static constraints = {
     }
 
     String toString() {
         return [
-                this.siteId,
-                this.title,
-                this.price,
-                this.availableQuantity,
-                this.conditionItem,
-                this.thumbnail,
-                this.categoryId,
-                this.pictureUrl,
-                this.stateName
+         siteId,
+         title,
+         price,
+         originalPrice,
+         initialQuantity,
+         availableQuantity,
+         soldQuantity,
+         conditionItem,
+         thumbnail,
+         categoryId,
+         pictures,
+         stateName,
+         acceptsMP,
+         qualification,
+         description
         ]
     }
+
 }
