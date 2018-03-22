@@ -15,7 +15,7 @@ class PopulateDB {
 
         categoriesList.each {
             def categoryId = it.id
-            def urlI = 'https://api.mercadolibre.com/sites/MLA/search?category=' + categoryId + '&limit=1'
+            def urlI = 'https://api.mercadolibre.com/sites/MLA/search?category=' + categoryId + '&limit=10'
             def itemsList = getRequest(urlI)
 
             def auxCategory = new Category('categoryId': it.id, 'name': it.name).save()
@@ -27,7 +27,15 @@ class PopulateDB {
 
                 def token = '$4d35cfa3df04fd66892659d65edb27f3-2609a553b4e8d3daf99e27136d48eb61-ce1c80f54ce4aff9d2dbe0aa87dc1e1f'
                 def urlD = 'https://api.mercadolibre.com/items/' + it.id + '/description?access_token=' + token
-                def description = getRequest(urlD).plain_text
+
+                def description
+                try {
+                    description = getRequest(urlD).plain_text
+                } catch (FileNotFoundException e) {
+                    description = ''
+                    println(e.message)
+                }
+
 
 
                 def pictureList = []
