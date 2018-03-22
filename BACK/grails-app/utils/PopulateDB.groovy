@@ -42,7 +42,6 @@ class PopulateDB {
                 println(auxItem)
             }
         }
-
     }
 
     static def getRequest(url) {
