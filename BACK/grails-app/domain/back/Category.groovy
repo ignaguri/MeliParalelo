@@ -1,7 +1,5 @@
 package back
 
-import grails.rest.Resource
-
 class Category {
 
     String categoryId
