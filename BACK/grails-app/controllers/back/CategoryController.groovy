@@ -1,9 +1,10 @@
 package back
 
 import grails.converters.JSON
-import grails.validation.ValidationException
+import grails.gorm.transactions.Transactional
 import static org.springframework.http.HttpStatus.*
 
+@Transactional(readOnly = true)
 class CategoryController {
 
     CategoryService categoryService
@@ -12,6 +13,13 @@ class CategoryController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+
+        JSON.registerObjectMarshaller(Category) {
+            def output = [:]
+            output['id'] = it.categoryId
+            output['name'] = it.name
+            return output;
+        }
 
         withFormat {
             json {
