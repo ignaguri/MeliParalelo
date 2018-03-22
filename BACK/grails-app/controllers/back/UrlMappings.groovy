@@ -9,6 +9,8 @@ class UrlMappings {
             }
         }
 
+        "/checkout"  ("resources" : "checkout")
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
