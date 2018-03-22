@@ -23,7 +23,7 @@ class ItemController {
                 outputPicture.push(Picture.findById(it.id).url)
             }
 
-            output['id'] = it.siteId
+            output['id'] = it.itemId
             output['title'] = it.title
             output['price'] = it.price
             output['original_price'] = it.originalPrice
@@ -52,6 +52,45 @@ class ItemController {
 
     def show(Long id) {
         respond itemService.get(id)
+    }
+
+    def preferences() {
+        JSON.registerObjectMarshaller(Item) {
+
+            def output = [:]
+            def outputPicture = []
+
+            it.pictures.each {
+                outputPicture.push(Picture.findById(it.id).url)
+            }
+
+            output['id'] = it.itemId
+            output['title'] = it.title
+            output['price'] = it.price
+            output['original_price'] = it.originalPrice
+            output['initial_quantity'] = it.initialQuantity
+            output['available_quantity'] = it.availableQuantity
+            output['sold_quantity'] = it.soldQuantity
+            output['condition_item'] = it.conditionItem
+            output['thumbnail'] = it.thumbnail
+            output['category_id'] = it.categoryId
+            output['state_name'] = it.stateName
+            output['accepts_mercadopago'] = it.acceptsMP
+            output['qualification'] = it.qualification
+            output['description'] = it.description
+            output['pictures'] = outputPicture
+            return output
+        }
+
+        def itemAux = Item.findByCategoryId('MLA5725')
+        println(itemAux)
+
+
+        withFormat {
+            json {
+                render itemAux as JSON
+            }
+        }
     }
 
     protected void notFound() {
