@@ -3,6 +3,8 @@ package back
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 import grails.validation.ValidationException
+import org.springframework.http.HttpStatus
+
 import static org.springframework.http.HttpStatus.*
 
 @Transactional(readOnly = true)
@@ -50,8 +52,34 @@ class ItemController {
 
     }
 
-    def show(Long id) {
-        respond itemService.get(id)
+    def show() {
+
+        String itemId = params.get('id')
+
+        Item item = Item.findBySiteId(itemId)
+
+        def responseData = ""
+
+        if (item != null) {
+            //encontro el item
+            response.status = HttpStatus.OK.value()
+            responseData = [
+                item
+            ]
+
+        } else {
+            //item inexistente
+            response.status = HttpStatus.NOT_FOUND.value()
+            responseData = [
+                "error": "No se encontro el item con ID "+itemId+"."
+            ]
+        }
+
+        withFormat {
+            json {
+                render responseData as JSON
+            }
+        }
     }
 
     protected void notFound() {
