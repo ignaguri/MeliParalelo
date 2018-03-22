@@ -4,7 +4,10 @@ package back
 class BootStrap {
 
     def init = { servletContext ->
-        //PopulateDB.populate()
+
+        if(Category.findAll().isEmpty())
+            PopulateDB.populate()
+
      }
     def destroy = {
     }
