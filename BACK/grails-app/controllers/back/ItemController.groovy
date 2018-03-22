@@ -56,19 +56,19 @@ class ItemController {
 
         String itemId = params.get('id')
 
-        Item item = Item.findBySiteId(itemId)
+        Item item = Item.findByItemId(itemId)
 
         def responseData = ""
 
         if (item != null) {
-            //encontro el item
+            //Encontro el item
             response.status = HttpStatus.OK.value()
             responseData = [
                 item
             ]
 
         } else {
-            //item inexistente
+            //Item inexistente
             response.status = HttpStatus.NOT_FOUND.value()
             responseData = [
                 "error": "No se encontro el item con ID "+itemId+"."
