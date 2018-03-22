@@ -12,6 +12,14 @@ class Item {
     String pictureUrl
     String stateName
 
+    //initial, available, sold
+    //price, original price
+    //pictures todas
+    //accepts mercadopago
+    //description
+
+    //random qualification Generar random
+
     static constraints = {
     }
 
