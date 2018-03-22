@@ -10,6 +10,9 @@ class UrlMappings {
         }
 
         "/checkout"  ("resources" : "checkout")
+        "/categories" (resources: "category")
+        "/items" (resources: "item")
+
 
         "/"(view:"/index")
         "500"(view:'/error')
