@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
 
 export default class Example extends React.Component {
     constructor(props) {
@@ -41,19 +41,20 @@ export default class Example extends React.Component {
     render() {
         return (
             <Container>
-                <Row >
-                    <Col xs="3" style={{ "float": "none", "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>
+                <Row style={{ "padding-top": "10%" }}>
+                    <Col xs="12" md="4" style={{ "float": "none", "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>
                         <Form onSubmit={this.handleSubmit}>
-
-                            <FormGroup>
-                                <Label for="user">Usuario</Label>
-                                <Input type="text" name="user" id="user" placeholder="Ingrese su nombre de usuario" value={this.state.value} onChange={this.handleChange} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="password">Contraseña</Label>
-                                <Input type="password" name="password" id="password" placeholder="Ingrese su contraseña" value={this.state.value} onChange={this.handleChange} />
-                            </FormGroup>
-                            <Button type="submit" value="Submit">Submit</Button>
+                            <Jumbotron>
+                                <FormGroup>
+                                    <Label for="user">Usuario</Label>
+                                    <Input type="text" name="user" id="user" placeholder="Ingrese su nombre de usuario" value={this.state.value} onChange={this.handleChange} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="password">Contraseña</Label>
+                                    <Input type="password" name="password" id="password" placeholder="Ingrese su contraseña" value={this.state.value} onChange={this.handleChange} />
+                                </FormGroup>
+                                <Button type="submit" value="Submit" color="success" >Ingresar</Button>
+                            </Jumbotron>
                         </Form>
                     </Col>
                 </Row>

@@ -47,12 +47,11 @@ export default class Example extends React.Component {
     render() {
         return (
             <Container>
-                <Row >
-                    <Col xs="6" style={{ "display": "flex", "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>
-                        {/* <Col xs="6  " style={{ "aling-items": "center", "justify-content": "center" }}> */}
+                <Row style={{ "padding-top": "10%" }}>
+                    <Col xs="12" md="6" style={{ "display": "flex", "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>
                         <Form onSubmit={this.handleSubmit}>
                             <Row>
-                                <Col md="6" xs="3">
+                                <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
                                             <Label for="name">Nombre</Label>
@@ -68,7 +67,7 @@ export default class Example extends React.Component {
                                         </FormGroup>
                                     </Jumbotron>
                                 </Col>
-                                <Col md="6" xs="3">
+                                <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
                                             <Label for="email">E-mail</Label>
@@ -84,7 +83,7 @@ export default class Example extends React.Component {
                                         </FormGroup>
                                     </Jumbotron>
                                 </Col>
-                                <Button type="submit" value="Submit" style={{ "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>Submit</Button>
+                                <Button type="submit" value="Submit" color="success" style={{ "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>Crear Cuenta</Button>
                             </Row>
                         </Form>
                     </Col>
