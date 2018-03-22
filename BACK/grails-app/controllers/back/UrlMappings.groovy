@@ -11,6 +11,7 @@ class UrlMappings {
 
         "/categories" (resources: "category")
         "/items" (resources: "item")
+        "/items/preferences" (resources: "item", controller: "item", action: "preferences")
 
         "/"(view:"/index")
         "500"(view:'/error')

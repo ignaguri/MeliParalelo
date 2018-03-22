@@ -53,7 +53,7 @@ class PopulateDB {
 
 
                 def auxItem = new Item(
-                        siteId: it.id,
+                        itemId: it.id,
                         title: it.title,
                         price: it.price,
                         originalPrice: it.original_price,
@@ -65,7 +65,7 @@ class PopulateDB {
                         categoryId:  auxCategory.categoryId,
                         stateName: it.address.state_name,
                         acceptsMP: it.accepts_mercadopago,
-                        qualification: Math.abs(new Random().nextInt() % 5) + 3,
+                        qualification: Math.abs(new Random().nextInt() % 4) + 3,
                         description: description
                 )
 
