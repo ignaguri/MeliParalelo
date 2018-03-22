@@ -40,6 +40,8 @@ class UserController {
 
         try {
             user = userService.login(username, password)
+
+            //Armo la respuesta
             response.status = HttpStatus.OK.value()
             responseData = [
                 "username": user.username,
@@ -48,16 +50,19 @@ class UserController {
             ]
 
         } catch (UserNotFoundException e) {
+            //Usuario inexistente
             response.status = HttpStatus.UNAUTHORIZED.value()
             responseData = [
                 "error": e.message
             ]
         } catch (IncorrectPasswordException e) {
+            //Password incorrecta
             response.status = HttpStatus.UNAUTHORIZED.value()
             responseData = [
                 "error": e.message
             ]
         } catch (Exception e) {
+            //Error inesperado
             response.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
             responseData = [
                 "error": e.message
