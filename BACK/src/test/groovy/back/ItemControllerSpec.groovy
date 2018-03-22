@@ -65,8 +65,8 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
 
         controller.save(item)
 
-        then:"A redirect is issued to the login action"
-        response.redirectedUrl == '/item/login/1'
+        then:"A redirect is issued to the show action"
+        response.redirectedUrl == '/item/show/1'
         controller.flash.message != null
     }
 
@@ -95,7 +95,7 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
             1 * get(null) >> null
         }
 
-        when:"The login action is executed with a null domain"
+        when:"The show action is executed with a null domain"
         controller.show(null)
 
         then:"A 404 error is returned"
@@ -108,7 +108,7 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
             1 * get(2) >> new Item()
         }
 
-        when:"A domain instance is passed to the login action"
+        when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
@@ -121,7 +121,7 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
             1 * get(null) >> null
         }
 
-        when:"The login action is executed with a null domain"
+        when:"The show action is executed with a null domain"
         controller.edit(null)
 
         then:"A 404 error is returned"
@@ -134,7 +134,7 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
             1 * get(2) >> new Item()
         }
 
-        when:"A domain instance is passed to the login action"
+        when:"A domain instance is passed to the show action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
@@ -169,8 +169,8 @@ class ItemControllerSpec extends Specification implements ControllerUnitTest<Ite
 
         controller.update(item)
 
-        then:"A redirect is issued to the login action"
-        response.redirectedUrl == '/item/login/1'
+        then:"A redirect is issued to the show action"
+        response.redirectedUrl == '/item/show/1'
         controller.flash.message != null
     }
 
