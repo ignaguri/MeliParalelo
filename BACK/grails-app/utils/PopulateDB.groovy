@@ -23,7 +23,13 @@ class PopulateDB {
             itemsList.results.each {
 
                 def urlP = 'https://api.mercadolibre.com/items/' + it.id
-                def itemsList2 = getRequest(urlP)
+                def itemsList2
+
+                try {
+                    itemsList2 = getRequest(urlP)
+                } catch (FileNotFoundException e) {
+                    println(e.message)
+                }
 
                 def token = '$4d35cfa3df04fd66892659d65edb27f3-2609a553b4e8d3daf99e27136d48eb61-ce1c80f54ce4aff9d2dbe0aa87dc1e1f'
                 def urlD = 'https://api.mercadolibre.com/items/' + it.id + '/description?access_token=' + token
