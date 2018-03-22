@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import CarouselDisplay from './views/CarouselDisplay'
+import Banner from './views/Banner'
 
 class App extends React.Component {
     render() {
         return (
-            <CarouselDisplay />
+            <Banner />
         );
     }
 }

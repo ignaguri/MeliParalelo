@@ -6,11 +6,11 @@ Proyecto del Grupo B de la MELI Academy
 ### Registro/Login:
 - Landing inicial.
 - Registro (Por ahora alta, ver posibilidad de modificacion y baja).
-- Login.
+- Login. (Back ✅)
 
 ### Principal:
 - VIP, con productos segun las preferencias del user (listado, mosaico, paginada por item).
-- Barra de filtros.
+- Barra de filtros. ✅
 - Ver la chance de agregar busqueda.
 
 ### Vista de Producto:
