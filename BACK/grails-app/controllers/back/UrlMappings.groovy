@@ -12,6 +12,7 @@ class UrlMappings {
         "/checkout"  ("resources" : "checkout")
         "/categories" (resources: "category")
         "/items" (resources: "item")
+        "/items/preferences" (resources: "item", controller: "item", action: "preferences")
 
 
         "/"(view:"/index")
