@@ -83,40 +83,24 @@ class ItemController {
     }
 
     def preferences() {
-        JSON.registerObjectMarshaller(Item) {
 
-            def output = [:]
-            def outputPicture = []
+        // http://localhost:8080/item/preferences?categories=MLA5725,MLA1384
 
-            it.pictures.each {
-                outputPicture.push(Picture.findById(it.id).url)
-            }
+        def itemList = []
+        def values
 
-            output['id'] = it.itemId
-            output['title'] = it.title
-            output['price'] = it.price
-            output['original_price'] = it.originalPrice
-            output['initial_quantity'] = it.initialQuantity
-            output['available_quantity'] = it.availableQuantity
-            output['sold_quantity'] = it.soldQuantity
-            output['condition_item'] = it.conditionItem
-            output['thumbnail'] = it.thumbnail
-            output['category_id'] = it.categoryId
-            output['state_name'] = it.stateName
-            output['accepts_mercadopago'] = it.acceptsMP
-            output['qualification'] = it.qualification
-            output['description'] = it.description
-            output['pictures'] = outputPicture
-            return output
+        if(params.categories != null)
+            values = params.categories.split(',')
+
+        values.each {
+            def itemAux = Item.findByCategoryId(it)
+            if(itemAux != null)
+                itemList.push(itemAux)
         }
-
-        def itemAux = Item.findByCategoryId('MLA5725')
-        println(itemAux)
-
 
         withFormat {
             json {
-                render itemAux as JSON
+                render itemList as JSON
             }
         }
     }
