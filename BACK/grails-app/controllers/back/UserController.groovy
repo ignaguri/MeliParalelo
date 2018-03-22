@@ -1,7 +1,16 @@
 package back
 
+import grails.converters.JSON
+import grails.gorm.transactions.Transactional
+import org.springframework.http.HttpStatus
+import user.IncorrectPasswordException
+import user.UserNotFoundException
+
+@Transactional(readOnly = true)
 class UserController {
     static allowedMethods = [save: "POST"]
+
+    UserService userService
 
     def index() {
 
@@ -22,5 +31,43 @@ class UserController {
         }
     }
 
+    def login() {
+        String username = request.JSON.username
+        String password = request.JSON.password
 
+        def responseData = ""
+        User user
+
+        try {
+            user = userService.login(username, password)
+            response.status = HttpStatus.OK.value()
+            responseData = [
+                "username": user.username,
+                "name": user.name,
+                "lastname": user.lastname
+            ]
+
+        } catch (UserNotFoundException e) {
+            response.status = HttpStatus.UNAUTHORIZED.value()
+            responseData = [
+                "error": e.message
+            ]
+        } catch (IncorrectPasswordException e) {
+            response.status = HttpStatus.UNAUTHORIZED.value()
+            responseData = [
+                "error": e.message
+            ]
+        } catch (Exception e) {
+            response.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
+            responseData = [
+                "error": e.message
+            ]
+        }
+
+        withFormat {
+            json {
+                render responseData as JSON
+            }
+        }
+    }
 }

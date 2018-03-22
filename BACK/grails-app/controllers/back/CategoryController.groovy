@@ -18,7 +18,7 @@ class CategoryController {
             def output = [:]
             output['id'] = it.categoryId
             output['name'] = it.name
-            return output;
+            return output
         }
 
         withFormat {

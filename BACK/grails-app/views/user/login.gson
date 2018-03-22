@@ -1,0 +1,6 @@
+import back.User
+
+model {
+    User user
+}
+json tmpl.user(responseData.user ?: [])

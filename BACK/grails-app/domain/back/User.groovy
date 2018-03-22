@@ -6,7 +6,7 @@ class User {
     String name
     String lastname
     String email
-    Date birthdate
+    String birthdate
     int loyaltyPoints
 
     static hasMany = [preferencies: Category]
@@ -19,7 +19,7 @@ class User {
         loyaltyPoints min: 0, default: 0
     }
 
-    User(String username, String password, String name, String lastname, String email, Date birthdate, int loyaltyPoints) {
+    User(String username, String password, String name, String lastname, String email, String birthdate, int loyaltyPoints) {
         this.username = username
         this.password = password
         this.name = name
@@ -69,11 +69,11 @@ class User {
         this.email = email
     }
 
-    Date getBirthdate() {
+    String getBirthdate() {
         return birthdate
     }
 
-    void setBirthdate(Date birthdate) {
+    void setBirthdate(String birthdate) {
         this.birthdate = birthdate
     }
 
