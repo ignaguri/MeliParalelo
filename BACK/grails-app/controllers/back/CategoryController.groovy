@@ -1,5 +1,6 @@
 package back
 
+import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
@@ -11,80 +12,16 @@ class CategoryController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond categoryService.list(params), model:[categoryCount: categoryService.count()]
+
+        withFormat {
+            json {
+                render categoryService.list(params) as JSON
+            }
+        }
     }
 
     def show(Long id) {
         respond categoryService.get(id)
-    }
-
-    def create() {
-        respond new Category(params)
-    }
-
-    def save(Category category) {
-        if (category == null) {
-            notFound()
-            return
-        }
-
-        try {
-            categoryService.save(category)
-        } catch (ValidationException e) {
-            respond category.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'category.label', default: 'Category'), category.id])
-                redirect category
-            }
-            '*' { respond category, [status: CREATED] }
-        }
-    }
-
-    def edit(Long id) {
-        respond categoryService.get(id)
-    }
-
-    def update(Category category) {
-        if (category == null) {
-            notFound()
-            return
-        }
-
-        try {
-            categoryService.save(category)
-        } catch (ValidationException e) {
-            respond category.errors, view:'edit'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'category.label', default: 'Category'), category.id])
-                redirect category
-            }
-            '*'{ respond category, [status: OK] }
-        }
-    }
-
-    def delete(Long id) {
-        if (id == null) {
-            notFound()
-            return
-        }
-
-        categoryService.delete(id)
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'category.label', default: 'Category'), id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
     }
 
     protected void notFound() {
