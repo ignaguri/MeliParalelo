@@ -10,7 +10,7 @@ Proyecto del Grupo B de la MELI Academy
 
 ### Principal:
 - VIP, con productos segun las preferencias del user (listado, mosaico, paginada por item).
-- Barra de filtros.
+- Barra de filtros. ✅
 - Ver la chance de agregar busqueda.
 
 ### Vista de Producto:
