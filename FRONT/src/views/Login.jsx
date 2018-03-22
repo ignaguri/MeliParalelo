@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
 
-export default class Example extends React.Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
