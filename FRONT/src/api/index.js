@@ -83,7 +83,7 @@ export default {
     },
 
     //cargar combo filtros
-    //arreglo strings 
+    //arreglo strings
     getLocations() {
         return axios.get(API + 'localidades')
             .then(r => {
@@ -98,7 +98,26 @@ export default {
 
     //get categorias ya esta arriba
 
-
+    agregarACarrito(producto, cantidad) {
+        const prod = {
+            id: producto.id,
+            title: producto.title,
+            price: producto.price,
+            quantity: cantidad
+        };
+        let carrito = sessionStorage.getItem('carrito');
+        if (carrito) {
+            let aux = JSON.parse(carrito);
+            aux.push(prod);
+            sessionStorage.setItem('carrito', JSON.stringify(aux));
+        } else {
+            let aux = JSON.stringify([prod]);
+            sessionStorage.setItem('carrito', aux);
+        }
+    },
+    getCarrito() {
+        return JSON.parse(sessionStorage.getItem('carrito'))
+    }
 
 
 
@@ -111,4 +130,3 @@ export default {
 
 
 }
-

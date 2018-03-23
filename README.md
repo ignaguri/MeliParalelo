@@ -14,9 +14,9 @@ Proyecto del Grupo B de la MELI Academy
 - Ver la chance de agregar busqueda.
 
 ### Vista de Producto:
-- Datos y caracteristicas del item. (Back ✅)
-- Selector de cantidad.
-- Add to shop cart. (Manejar una Session). 
+- Datos y caracteristicas del item. ✅
+- Selector de cantidad. ✅
+- Add to shop cart. (Manejar una Session). ✅
 - Ver de agregar un proceed to checkout como en amazon despues de agregar un item al cart
 
 ### Checkout:
