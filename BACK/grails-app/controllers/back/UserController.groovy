@@ -4,6 +4,8 @@ import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 import org.springframework.http.HttpStatus
 import user.IncorrectPasswordException
+import user.UserAlreadyExistsException
+import user.UserCreationException
 import user.UserNotFoundException
 
 @Transactional(readOnly = true)
@@ -12,21 +14,49 @@ class UserController {
 
     UserService userService
 
+    @Transactional
     def index() {
 
-        String username = request.JSON.username
-        String password = request.JSON.password
-        String name = request.JSON.name
-        String lastname = request.JSON.lastname
-        String email = request.JSON.email
-        String birthdate = request.JSON.birthdate
-        String points = request.JSON.loyaltyPoints
+        boolean created
+        def responseData = ""
 
-        User newUser = new User(username, password, name, lastname, email, birthdate, points);
+        try {
+            created = userService.createUser(request.JSON.username,
+                    request.JSON.password,
+                    request.JSON.name,
+                    request.JSON.lastname,
+                    request.JSON.email,
+                    request.JSON.birthdate,
+                    request.JSON.loyaltyPoints)
+            response.status = HttpStatus.OK.value()
+            responseData = ["created":created,
+                            "error":""]
+        } catch (UserCreationException e) {
+            created = false
+            response.status = 500
+            responseData = [
+                    "created": created,
+                    "error": "Ocurrió un problema al crear el usuario."
+            ]
+        } catch (UserAlreadyExistsException e) {
+            created = false
+            response.status = 403
+            responseData = [
+                    "created": created,
+                    "error": "El usuario ya existe."
+            ]
+        } catch (Exception e) {
+            created = false
+            response.status = 500
+            responseData = [
+                    "created": created,
+                    "error": "Ocurrió un error inesperado."
+            ]
+        }
 
         withFormat {
             json {
-                render 'usuario'
+                render responseData as JSON
             }
         }
     }
