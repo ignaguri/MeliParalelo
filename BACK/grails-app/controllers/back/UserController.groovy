@@ -105,4 +105,22 @@ class UserController {
             }
         }
     }
+
+    def preferences() {
+        boolean set
+        def responseData = ""
+
+        def user = User.findByUsername(request.JSON.username)
+        request.JSON.preferences.each{
+            user.addTo('preferencies',Category.findByCategoryId(it))
+        }
+
+        def prefs = user.getPreferencies()
+
+        withFormat {
+            json {
+                render prefs as JSON
+            }
+        }
+    }
 }
