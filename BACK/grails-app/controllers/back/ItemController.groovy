@@ -10,9 +10,8 @@ import static org.springframework.http.HttpStatus.*
 
 class ItemController {
 
-    ItemService itemService
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    ItemService itemService
 
     def index(Integer max) {
         JSON.registerObjectMarshaller(Item) {
@@ -45,7 +44,7 @@ class ItemController {
         def responseData
         try {
             response.status = HttpStatus.OK.value()
-            responseData = itemService.list(params)
+            responseData = Item.findAll()
         } catch(Exception e) {
             response.status = HttpStatus.BAD_REQUEST.value()
             responseData = [
@@ -132,16 +131,7 @@ class ItemController {
                 "state_name": ['state_name', params.statename, ' = ']
         ]
 
-        def sql = "FROM Item WHERE "
-        def i = 0
-        filters.each {
-            sql += (i != 0 && it.value[1] != null)? " AND " : ""
-            sql += it.value[1] != null? it.value[0] + it.value[2] + "'" +it.value[1] +"'" : ""
-            i ++
-        }
-
-        def item = Item.findAll(sql)
-
+        def item = itemService.filterItems(filters)
 
         withFormat {
             json {
