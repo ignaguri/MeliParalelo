@@ -15,48 +15,52 @@ class Preferences extends Component {
     }
 
     componentWillMount() {
-        this.setState({ categories: api.getCategories() });
-    }
+        api.getCategories()
+        .then(res => {
+            this.setState({ categories: res })
+            console.log(this.state.categories)
+          });
+        
+   }
 
-
+    
     onCheckboxBtnClick(selected) {
-        const index = this.state.selectedCategories.indexOf(selected);
-        if (index < 0) {
-            this.state.selectedCategories.push(selected);
-        } else {
-            this.state.selectedCategories.splice(index, 1);
-        }
-        this.setState({ selectedCategories: [...this.state.selectedCategories] });
-    }
-
-    onAcceptClick() {
-        //call de fucking bacon's app
-    }
-
-    render() {
-        return (
-            <Container style={{ "padding-top": "10%" }}>
-                <Jumbotron style={{ textAlign: "center" }} >
-                    <h1> <Badge color="Light">Preferencias</Badge></h1>
-                    <Row>
-                        {
-                            this.state.categories.map((category, i) => {
-                                return (
-                                    <Col md="2" xs="4" style={{ margin: "10px", padding: "0px" }}>
-                                        <Button outline color="info" style={{ "height": "50", "width": "100%" }} onClick={() => this.onCheckboxBtnClick(category)} active={this.state.selectedCategories.includes(category)}>{category}</Button>
-                                    </Col>);
-                            })
-                        }
-                    </Row>
-                    {/* <p>Selección: {JSON.stringify(this.state.selectedCategories)}</p> */}
-                    <Button color="success" onClick={() => this.onAcceptClick()}>Aceptar</Button>
-                </Jumbotron>
-            </Container>
-        );
-    }
+    const index = this.state.selectedCategories.indexOf(selected);
+if (index < 0) {
+        this.state.selectedCategories.push(selected);
+    } else {
+        this.state.selectedCategories.splice(index, 1);
 }
-
-export default Preferences;
-
-
+        this.setState({ selectedCategories: [...this.state.selectedCategories] });
+}
+    
+    onAcceptClick() {
+        
+        //call de fuckng bacon's app
+}
+    
+render() {
+    return (
+    <Container style={{ "paddingTop": "10%" }}>
+    <Jumbotron style={{ textAlign: "center" }} >
+    <h1> <Badge color="Light">Preferencias</Badge></h1>
+    <Row>
+    {
+    this.state.categories.map((category, i) => {
+    return (
+    <Col md="2" xs="4" key={i} style={{ margin: "10px", padding: "0px" }}>
+    <Button outline color="info" style={{ "height": "50", "width": "100%" , "white-space": "normal"}} onClick={() => this.onCheckboxBtnClick(category.id)} active={this.state.selectedCategories.includes(category.id)}>{category.name}</Button>
+    </Col>);
+    })
+    }
+    </Row>
+    {/* <p>Selección: {JSON.stringify(this.state.selectedCategories)}</p> */}
+    <Button color="success" onClick={() => this.onAcceptClick()}>Aceptar</Button>
+    </Jumbotron>
+    </Container>
+    );
+    }
+    }
+    
+    export default Preferences;
 

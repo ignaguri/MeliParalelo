@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
+import api from "../api"
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -24,19 +25,21 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        alert('A name was submitted: ' + this.state.password);
+
+        this.postearLogin();
     }
 
-    // postearLogin() {
-    //     api.postLogin('suario', 'pass')
-    //         .then(r => {
-    //             if (r) {
-    //                 alert('logueado!')
-    //             } else {
-    //                 alert('hay un problema')
-    //             }
-    //         })
-    // }
+    postearLogin() {
+        api.postLogin(this.state.user, this.state.password)
+            .then(r => {
+                console.log(r);
+                if (r[0]) {
+                    console.log('ir a pagina principal')
+                } else {
+                    alert(r[1].error)
+                }
+            })
+    }
 
     render() {
         return (
