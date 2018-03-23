@@ -122,6 +122,20 @@ class ItemController {
         }
     }
 
+    def filter() {
+
+        def filters = [
+                "category": params.category,
+                "condition": params.condition,
+                "price_min": params.price_min,
+                "price_max": params.price_max,
+                "statename": params.statename
+        ]
+
+
+
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
