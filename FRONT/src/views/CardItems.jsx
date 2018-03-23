@@ -6,6 +6,7 @@ export default class CardItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
       items: []
     }
   }
@@ -17,11 +18,14 @@ export default class CardItems extends React.Component {
       });
   }
 
+
   render() {
     return (
       <div className="text-center" >
         {this.state.items.map((item, i) => {
+
           return <CardItem key={i} obj={item} reference={"https://google.com.ar/" + i} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.state_name} />
+
         })}
       </div>
     );
