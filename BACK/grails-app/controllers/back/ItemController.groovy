@@ -15,80 +15,30 @@ class ItemController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        JSON.registerObjectMarshaller(Item) {
 
-            def output = [:]
-            def outputPicture = []
-
-            it.pictures.each {
-                outputPicture.push(Picture.findById(it.id).url)
-            }
-
-            output['id'] = it.itemId
-            output['title'] = it.title
-            output['price'] = it.price
-            output['original_price'] = it.originalPrice
-            output['initial_quantity'] = it.initialQuantity
-            output['available_quantity'] = it.availableQuantity
-            output['sold_quantity'] = it.soldQuantity
-            output['condition_item'] = it.conditionItem
-            output['thumbnail'] = it.thumbnail
-            output['category_id'] = it.categoryId
-            output['state_name'] = it.stateName
-            output['accepts_mercadopago'] = it.acceptsMP
-            output['qualification'] = it.qualification
-            output['description'] = it.description
-            output['pictures'] = outputPicture
-            return output
-        }
-
-        def responseData
         try {
             response.status = HttpStatus.OK.value()
-            responseData = itemService.list(params)
-        } catch(Exception e) {
-            response.status = HttpStatus.BAD_REQUEST.value()
-            responseData = [
-                    "error": e.message
-            ]
-
+            respond itemService.list(params)
+        } catch (Exception e) {
+            response.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
+            render([error: e.message] as JSON)
         }
-
-        withFormat {
-            json {
-                render responseData as JSON
-            }
-        }
-
     }
 
     def show() {
+        //http://localhost:8080/item/show/':itemID'?user=':userID'
 
         String itemId = params.get('id')
 
         Item item = Item.findByItemId(itemId)
 
-        def responseData = ""
-
         if (item != null) {
-            //Encontro el item
             response.status = HttpStatus.OK.value()
-            responseData = [
-                item
-            ]
-
+            respond item
         } else {
             //Item inexistente
             response.status = HttpStatus.NOT_FOUND.value()
-            responseData = [
-                "error": "No se encontro el item con ID "+itemId+"."
-            ]
-        }
-
-        withFormat {
-            json {
-                render responseData as JSON
-            }
+            render([error: "No se encontraron datos del item "+itemId+"."] as JSON)
         }
     }
 
