@@ -65,8 +65,8 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
 
         controller.save(category)
 
-        then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/category/show/1'
+        then:"A redirect is issued to the login action"
+        response.redirectedUrl == '/category/login/1'
         controller.flash.message != null
     }
 
@@ -95,7 +95,7 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
             1 * get(null) >> null
         }
 
-        when:"The show action is executed with a null domain"
+        when:"The login action is executed with a null domain"
         controller.show(null)
 
         then:"A 404 error is returned"
@@ -108,7 +108,7 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
             1 * get(2) >> new Category()
         }
 
-        when:"A domain instance is passed to the show action"
+        when:"A domain instance is passed to the login action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
@@ -121,7 +121,7 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
             1 * get(null) >> null
         }
 
-        when:"The show action is executed with a null domain"
+        when:"The login action is executed with a null domain"
         controller.edit(null)
 
         then:"A 404 error is returned"
@@ -134,7 +134,7 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
             1 * get(2) >> new Category()
         }
 
-        when:"A domain instance is passed to the show action"
+        when:"A domain instance is passed to the login action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
@@ -169,8 +169,8 @@ class CategoryControllerSpec extends Specification implements ControllerUnitTest
 
         controller.update(category)
 
-        then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/category/show/1'
+        then:"A redirect is issued to the login action"
+        response.redirectedUrl == '/category/login/1'
         controller.flash.message != null
     }
 

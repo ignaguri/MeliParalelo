@@ -5,11 +5,11 @@ Proyecto del Grupo B de la MELI Academy
 ----
 ### Registro/Login:
 - Landing inicial.
-- Registro (Por ahora alta, ver posibilidad de modificacion y baja).
-- Login.
+- Registro (Por ahora alta, ver posibilidad de modificacion y baja). (Back ✅)
+- Login. (Back ✅)
 
 ### Principal:
-- VIP, con productos segun las preferencias del user (listado, mosaico, paginada por item).
+- VIP, con productos segun las preferencias del user (listado, mosaico, paginada por item). (Back ✅)
 - Barra de filtros. ✅
 - Ver la chance de agregar busqueda.
 
@@ -21,7 +21,7 @@ Proyecto del Grupo B de la MELI Academy
 
 ### Checkout:
 - Listar productos en el carrito.
-- Seleccionar forma de envío (Opcional ??).
-- Calcular puntos fidelizacion.
+- Seleccionar forma de envío (Opcional ??). 
+- Calcular puntos fidelizacion. 
 - Pagar.
-- Guardar las compras para refinar las preferencias del cliente.
+- Guardar las compras para refinar las preferencias del cliente. 

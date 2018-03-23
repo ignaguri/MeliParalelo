@@ -9,9 +9,6 @@ class UrlMappings {
             }
         }
 
-        "/categories" (resources: "category")
-        "/items" (resources: "item")
-
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')

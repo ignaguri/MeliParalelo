@@ -2,7 +2,7 @@ package back
 
 class Item {
 
-    String siteId
+    String itemId
     String title
     Double price
     Double originalPrice
@@ -28,7 +28,7 @@ class Item {
 
     String toString() {
         return [
-         siteId,
+         itemId,
          title,
          price,
          originalPrice,
