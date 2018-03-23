@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from "../api"
 import { Button, ButtonGroup, Jumbotron, Col, Container, Row, Badge } from 'reactstrap';
 
-class Example extends Component {
+class Preferences extends Component {
     constructor(props) {
         super(props);
 
@@ -56,7 +56,7 @@ class Example extends Component {
     }
 }
 
-export default Example;
+export default Preferences;
 
 
 
