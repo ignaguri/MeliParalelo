@@ -72,6 +72,45 @@ class ItemController {
         }
     }
 
+    def filter() {
+
+        def filters = [
+                "category_id": ['category_id', params.category, ' = '],
+                "condition_item": ['condition_item', params.condition, ' = '],
+                "price_min": ['price', params.price_min, ' > '],
+                "price_max": ['price', params.price_max, ' < '],
+                "state_name": ['state_name', params.statename, ' = ']
+        ]
+
+        def item = itemService.filterItems(filters)
+
+        withFormat {
+            json {
+                render item as JSON
+            }
+        }
+
+    }
+
+    def locations() {
+
+        def locations = []
+
+        def c = Item.createCriteria()
+        locations = c.list {
+            projections { //projection does the trick
+                property('stateName')
+            }
+        } as Set
+
+        withFormat {
+            json {
+                render locations as JSON
+            }
+        }
+    }
+
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
