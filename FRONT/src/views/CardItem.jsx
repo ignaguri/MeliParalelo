@@ -47,7 +47,7 @@ export default class CardItem extends React.Component {
         width: "250px",
         display: "inline-block"
     }
-    const tittleStyle = {
+    const titleStyle = {
         overflow: "hidden",
         display: "-webkit-box",
         WebkitLineClamp: 2,
@@ -71,7 +71,7 @@ export default class CardItem extends React.Component {
         <Card style={ listItemStyle } onClick={ testing } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <CardImg top width="100%" src={ this.props.thumbnail } alt="Card image cap" style={ thumbnailStyle } />
             <CardBody style={ detailsStyle }>
-                <CardTitle style={ tittleStyle }>{ this.props.tittle }</CardTitle>
+                <CardTitle style={ titleStyle }>{ this.props.title }</CardTitle>
                 <CardSubtitle style={ locationStyle }>{ this.props.location }</CardSubtitle>
                 <CardText style={ priceStyle }>${ this.props.price }</CardText>
             </CardBody>

@@ -15,7 +15,8 @@ import {
     Label,
     Input,
     Button
-    } from 'reactstrap';
+} from 'reactstrap';
+import Icon from "./Icon";
 
 export default class Banner extends React.Component {
     constructor(props) {
@@ -90,6 +91,15 @@ export default class Banner extends React.Component {
                 }
             })
     }
+    verCuadricula() {
+        console.log('implementar')
+    }
+    verLista() {
+        console.log('implementar')
+    }
+    verSlider() {
+        console.log('implementar')
+    }
     verCarrito(e) {
         e.preventDefault();
         console.log('ver carrito', e)
@@ -108,6 +118,11 @@ export default class Banner extends React.Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
+                            <span className="align-self-center">Ver:</span>
+                            {/*<Button className="btn btn-light" disabled>Ver:</Button>*/}
+                            <Button className="btn btn-light" onClick={this.verCuadricula}><Icon icon="cuadricula"/></Button>{' '}
+                            <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista"/></Button>{' '}
+                            <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider"/></Button>{' '}
                             <Form inline>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="condicion" className="mr-sm-2">Condición:</Label>
@@ -123,16 +138,15 @@ export default class Banner extends React.Component {
                                     <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
                                         <option value="">Sin filtro</option>
                                         {this.state.locations.map((loc) =>
-                                            <option key={loc.nombre} value={loc.nombre}>{loc.nombre}</option>
+                                            <option key={loc.name} value={loc.name}>{loc.name}</option>
                                         )}
                                     </Input>
                                 </FormGroup>
                                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                    <Label for="precioMin" className="mr-sm-2">Precio mín.: $</Label>
+                                    <Label for="precioMin" className="mr-sm-2">Precio $</Label>
                                     <Input type="number" name="number" id="precioMin" placeholder="Mínimo" bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange}/>
                                 </FormGroup>
                                 <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                    <Label for="precioMax" className="mr-sm-2">Precio máx.: $</Label>
                                     <Input type="number" name="number" id="precioMax" placeholder="Máximo" bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange}/>
                                 </FormGroup>
                                 {' '}

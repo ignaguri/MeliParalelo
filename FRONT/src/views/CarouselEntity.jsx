@@ -52,7 +52,7 @@ export default class CarouselEntity extends React.Component {
             width: "70%",
             display: "inline-block"
         }
-        const tittleStyle = {
+        const titleStyle = {
             display: "inline-block",
             textOverflow: "ellipsis",
             fontSize: "18px",
@@ -77,13 +77,10 @@ export default class CarouselEntity extends React.Component {
                         <img src={this.props.thumbnail} alt={"true"} />
                     </Col>
                     <Col xs="9" style={detailsStyle}>
-                        <p style={tittleStyle} >{this.props.tittle}</p>
+                        <p style={titleStyle} >{this.props.title}</p>
                         <p style={locationStyle} >{this.props.location}</p>
                         <p style={locationStyle} >{this.props.condition}</p>
                         <h4 className="text-success" >${this.props.price}</h4>
-                        <Button className="btn btn-info btn-lg">
-                            <span className="glyphicon glyphicon-shopping-cart"></span> Agregar al carrito
-                        </Button>
                     </Col>
                 </Row>
             </Container>
