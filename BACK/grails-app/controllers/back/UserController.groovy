@@ -105,4 +105,44 @@ class UserController {
             }
         }
     }
+
+    @Transactional
+    def preferences() {
+
+        def responseData
+        def user = User.findByUsername(request.JSON.username)
+
+        if(user == null) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            responseData = [
+                    "error": "User not found"
+            ]
+        }
+
+        try {
+
+            request.JSON.preferences.each {
+                user.addTo('preferencies', Category.findByCategoryId(it))
+            }
+
+            user.save(flush: true, failOnError: true)
+
+            response.status = HttpStatus.OK.value()
+            responseData = user.getPreferencies()
+
+        } catch (Exception e) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            responseData = [
+                    "error": e.message
+            ]
+
+        }
+
+
+        withFormat {
+            json {
+                render responseData as JSON
+            }
+        }
+    }
 }

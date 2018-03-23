@@ -15,7 +15,6 @@ class Preferences extends Component {
     }
 
     componentWillMount() {
-        var categories = [];
         api.getCategories()
         .then(res => {
             this.setState({ categories: res })
@@ -64,4 +63,4 @@ render() {
     }
     
     export default Preferences;
-    
+
