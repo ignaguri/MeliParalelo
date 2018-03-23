@@ -89,7 +89,6 @@ class ItemController {
                 render item as JSON
             }
         }
-
     }
 
     def locations() {
