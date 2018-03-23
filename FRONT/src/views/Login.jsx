@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
 import api from "../api"
 
-
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +25,7 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
         this.postearLogin();
     }
 
