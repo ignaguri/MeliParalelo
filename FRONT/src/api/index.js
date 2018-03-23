@@ -1,5 +1,6 @@
 const axios = require('axios');
 //axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 const API = "http://localhost:8080/";
 
 
@@ -44,7 +45,7 @@ export default {
             })
     },
     
-    getCategories() {
+    getCategories() { 
         return axios.get(API+'categories')
             .then(r => {
                 console.log(r);
@@ -54,6 +55,7 @@ export default {
                 console.error(err);
                 return false
             })
+
     },
 
     postPreferences(categories){
@@ -112,4 +114,5 @@ export default {
     
     
 }
+
 

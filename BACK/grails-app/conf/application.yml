@@ -101,7 +101,8 @@ dataSource:
 environments:
     development:
         dataSource:
-            dbCreate: create-drop
+            logSql: true
+            dbCreate: update
             url: jdbc:mysql://localhost:3306/MeliParalelo
     test:
         dataSource:
