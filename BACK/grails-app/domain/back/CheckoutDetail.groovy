@@ -7,6 +7,8 @@ class CheckoutDetail {
     Integer quantity
     Double price
 
+    static belongsTo = [checkout: Checkout]
+
     static constraints = {
     }
 }
