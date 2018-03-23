@@ -141,6 +141,25 @@ class ItemController {
 
     }
 
+    def locations() {
+
+        def locations = []
+
+        def c = Item.createCriteria()
+        locations = c.list {
+            projections { //projection does the trick
+                property('stateName')
+            }
+        } as Set
+
+        withFormat {
+            json {
+                render locations as JSON
+            }
+        }
+    }
+
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
