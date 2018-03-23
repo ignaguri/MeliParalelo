@@ -20,7 +20,7 @@ export default class Producto extends React.Component {
         };
     }
 
-    handleCounter(cant) {
+        handleCounter(cant) {
         if (cant !== '') {
             this.setState({cantidad: cant});
         }
