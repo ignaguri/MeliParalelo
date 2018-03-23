@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 
 export default class ListItem extends React.Component {
@@ -47,7 +46,7 @@ export default class ListItem extends React.Component {
         width: "70%",
         display: "inline-block"
     }
-    const tittleStyle = {
+    const titleStyle = {
         display: "inline-block",
         textOverflow: "ellipsis",
         fontSize: "18px",
@@ -65,13 +64,13 @@ export default class ListItem extends React.Component {
     }
 
     return (
-        <Container style={ listItemStyle } onClick={ testing } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+        <Container className="text-left" style={ listItemStyle } onClick={ testing } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <Row>
                 <Col xs="3" style={ thumbnailStyle }>
                     <img src ={ this.props.thumbnail } alt={ "true" } />
                 </Col>
                 <Col xs="auto" style={ detailsStyle }>
-                    <p style={ tittleStyle } >{ this.props.tittle }</p>
+                    <p style={ titleStyle } >{ this.props.title }</p>
                     <p style={ locationStyle } >{ this.props.location }</p>
                     <h4 className="text-success" >${this.props.price}</h4>
                 </Col>
