@@ -125,14 +125,29 @@ class ItemController {
     def filter() {
 
         def filters = [
-                "category": params.category,
-                "condition": params.condition,
-                "price_min": params.price_min,
-                "price_max": params.price_max,
-                "statename": params.statename
+                "category_id": ['category_id', params.category, ' = '],
+                "condition_item": ['condition_item', params.condition, ' = '],
+                "price_min": ['price', params.price_min, ' > '],
+                "price_max": ['price', params.price_max, ' < '],
+                "state_name": ['state_name', params.statename, ' = ']
         ]
 
+        def sql = "FROM Item WHERE "
+        def i = 0
+        filters.each {
+            sql += (i != 0 && it.value[1] != null)? " AND " : ""
+            sql += it.value[1] != null? it.value[0] + it.value[2] + "'" +it.value[1] +"'" : ""
+            i ++
+        }
 
+        def item = Item.findAll(sql)
+
+
+        withFormat {
+            json {
+                render item as JSON
+            }
+        }
 
     }
 
