@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../api'
+import strings from '../assets/languages'
 import logo from '../assets/logo.png'
 import carrito from '../assets/carrito.svg'
 import logout from '../assets/logout.svg'
@@ -24,6 +25,7 @@ export default class Banner extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
+            language: 'spanish',
             isOpen: false,
             locations: [],
             condicion: "",
@@ -109,6 +111,7 @@ export default class Banner extends React.Component {
         console.log('salir', e)
     }
     render() {
+        const lang = strings[this.state.language];
         return (
             <div>
                 <Navbar color="light" light expand="lg">
@@ -118,8 +121,7 @@ export default class Banner extends React.Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <span className="align-self-center">Ver:</span>
-                            {/*<Button className="btn btn-light" disabled>Ver:</Button>*/}
+                            <span className="align-self-center">{lang.bannerVer}:</span>
                             <Button className="btn btn-light" onClick={this.verCuadricula}><Icon icon="cuadricula"/></Button>{' '}
                             <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista"/></Button>{' '}
                             <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider"/></Button>{' '}
