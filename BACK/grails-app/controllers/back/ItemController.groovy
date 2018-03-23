@@ -2,7 +2,6 @@ package back
 
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
-import grails.validation.ValidationException
 import org.springframework.http.HttpStatus
 
 import static org.springframework.http.HttpStatus.*
@@ -43,10 +42,21 @@ class ItemController {
             return output
         }
 
+        def responseData
+        try {
+            response.status = HttpStatus.OK.value()
+            responseData = itemService.list(params)
+        } catch(Exception e) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            responseData = [
+                    "error": e.message
+            ]
+
+        }
 
         withFormat {
             json {
-                render itemService.list(params) as JSON
+                render responseData as JSON
             }
         }
 
@@ -86,21 +96,28 @@ class ItemController {
 
         // http://localhost:8080/item/preferences?categories=MLA5725,MLA1384
 
-        def itemList = []
         def values
+        def responseData = []
 
-        if(params.categories != null)
+        if(params.categories != null) {
             values = params.categories.split(',')
+            response.status = HttpStatus.OK.value()
+        } else {
+            responseData = [
+                    "error": "Se esperaban parametros separados por coma"
+            ]
+            response.status = HttpStatus.BAD_REQUEST.value()
+        }
 
         values.each {
             def itemAux = Item.findByCategoryId(it)
             if(itemAux != null)
-                itemList.push(itemAux)
+                responseData.push(itemAux)
         }
 
         withFormat {
             json {
-                render itemList as JSON
+                render responseData as JSON
             }
         }
     }
