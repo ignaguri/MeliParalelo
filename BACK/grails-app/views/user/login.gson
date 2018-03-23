@@ -3,4 +3,5 @@ import back.User
 model {
     User user
 }
-json tmpl.user(responseData.user ?: [])
+//json g.render(template:'user', model:[user: user])
+json tmpl.user(user ?: [])

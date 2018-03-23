@@ -11,6 +11,10 @@ class ItemService {
 
     }
 
+    List<Item> list(Map args) {
+        return Item.list(args)
+    }
+
     def filterItems(Map filters) {
         def item = []
 
