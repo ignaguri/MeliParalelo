@@ -21,7 +21,18 @@ class BootStrap {
                              Role.findByName('admin')
         )
 
-        user.save();
+        user.save()
+
+        User user2 = new User("martin",
+                "martin",
+                "Martin",
+                "Paralelo",
+                "mparalelo@mercadolibre.com",
+                "22/03/2018",
+                0,
+                Role.findByName('user'))
+
+        user2.save();
      }
     def destroy = {
     }

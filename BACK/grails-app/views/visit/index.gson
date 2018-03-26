@@ -1,0 +1,7 @@
+import back.Visit
+
+model {
+    List<Visit> visitList
+}
+
+json tmpl.visit(visitList ?: [])

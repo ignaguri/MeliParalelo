@@ -66,7 +66,11 @@ class UserService {
         return user
     }
 
-    private boolean checkUserExists(String username) {
+    boolean checkUserExists(String username) {
         return User.findByUsername(username) == null ? false : true
+    }
+
+    boolean checkUserAdmin(String username) {
+        return User.findByUsernameAndRole(username, Role.findByName('admin')) == null ? false : true
     }
 }
