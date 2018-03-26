@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from "../api"
+import strings from '../assets/languages'
 import { Button, ButtonGroup, Jumbotron, Col, Container, Row, Badge } from 'reactstrap';
 
 class Preferences extends Component {
@@ -8,7 +9,8 @@ class Preferences extends Component {
 
         this.state = {
             selectedCategories: [],
-            categories: [{ id: 'fdsf12', name: 'juan' }]
+            categories: [],
+            language: 'spanish'
         }
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
         this.onAcceptClick = this.onAcceptClick.bind(this);
@@ -35,7 +37,7 @@ class Preferences extends Component {
     }
 
     onAcceptClick() {
-
+        const lang = strings[this.state.language];
         api.postPreferences(this.state.selectedCategories)
             .then(r => {
                 console.log(r);

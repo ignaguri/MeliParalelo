@@ -30,13 +30,24 @@ export default {
     },
     //Crear Usuario
     postSingin(user, password, name, lastname, birthdate, email) {
-        return axios.post('/singin', { username: user, password: password, name: name, lastname: lastname, birthdate: birthdate, email: email })
+        const body = {
+            username: user,
+            password: password,
+            name: name,
+            lastname: lastname,
+            email: email,
+            birthdate: birthdate,
+            loyaltyPoints: "0"
+        };
+        console.log("body", body);
+        return axios.post(API + 'user', body)
             .then(function (response) {
+                console.log(response)
                 return response
             })
             .catch(err => {
                 console.error(err);
-                return false
+                return [false, err.response.data]
             })
     },
     getCategories() {
@@ -128,7 +139,7 @@ export default {
     },
 
     postCheckout() {
-        return axios.post('/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
                 return response
             })
@@ -136,6 +147,29 @@ export default {
                 console.error(err);
                 return false
             })
-    }
+    },
+
+    getComents() {
+        return axios.get(API + 'comment')
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
+    postComents(comment) {
+        return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
 }
 
