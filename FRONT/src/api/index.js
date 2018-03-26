@@ -111,12 +111,24 @@ export default {
             sessionStorage.setItem('carrito', aux);
         }
     },
+    quitarACarrito(idProducto) {
+        let carrito = sessionStorage.getItem('carrito');
+        if (carrito) {
+            let aux = JSON.parse(carrito);
+            const index = aux.indexOf(idProducto);
+            if (index >= 0) {
+                aux.splice(index, 1);
+                sessionStorage.setItem('carrito', JSON.stringify(aux));
+            }
+        }
+    },
+
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
 
-    postCheckout(user, items) {
-        return axios.post('/checkout/save', { username: user, items: items })
+    postCheckout() {
+        return axios.post('/checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
                 return response
             })
