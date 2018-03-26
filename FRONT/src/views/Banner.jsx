@@ -15,7 +15,7 @@ import {
     Label,
     Input,
     Button
-    } from 'reactstrap';
+} from 'reactstrap';
 
 export default class Banner extends React.Component {
     constructor(props) {
@@ -38,6 +38,7 @@ export default class Banner extends React.Component {
         this.verCarrito = this.verCarrito.bind(this);
         this.salir = this.salir.bind(this);
     }
+    /*
     componentDidMount() {
         api.getLocations().then(response => {
             this.setState({
@@ -45,22 +46,23 @@ export default class Banner extends React.Component {
             });
         });
     }
+    */
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     handleLocationChange(event) {
-        this.setState({location: event.target.value});
+        this.setState({ location: event.target.value });
     }
     handleConditionChange(event) {
-        this.setState({condicion: event.target.value});
+        this.setState({ condicion: event.target.value });
     }
     handlePriceMinChange(event) {
-        this.setState({precioMin: event.target.value});
+        this.setState({ precioMin: event.target.value });
     }
     handlePriceMaxChange(event) {
-        this.setState({precioMax: event.target.value});
+        this.setState({ precioMax: event.target.value });
     }
     filtrar(e) {
         let filtros = {};
@@ -100,15 +102,14 @@ export default class Banner extends React.Component {
     }
     render() {
         return (
-            <div>
-                <Navbar color="light" light expand="lg">
-                    <NavbarBrand>
-                        <img src={logo} width="80px" height="50px" alt="logo"/>
-                    </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <Form inline>
+            <Navbar color="light" light expand="lg" fixed="top">
+                <NavbarBrand>
+                    <img src={logo} width="80px" height="50px" alt="logo" />
+                </NavbarBrand>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        <Form inline>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="condicion" className="mr-sm-2">Condición:</Label>
                                 <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
@@ -118,33 +119,32 @@ export default class Banner extends React.Component {
                                     <option value="refurbished">Restaurado</option>
                                 </Input>
                             </FormGroup>
-                                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                    <Label for="ubicacion" className="mr-sm-2">Ubicación:</Label>
-                                    <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
-                                        <option value="">Sin filtro</option>
-                                        {this.state.locations.map((loc) =>
-                                            <option key={loc.nombre} value={loc.nombre}>{loc.nombre}</option>
-                                        )}
-                                    </Input>
-                                </FormGroup>
-                                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                    <Label for="precioMin" className="mr-sm-2">Precio mín.: $</Label>
-                                    <Input type="number" name="number" id="precioMin" placeholder="Mínimo" bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange}/>
-                                </FormGroup>
-                                <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                    <Label for="precioMax" className="mr-sm-2">Precio máx.: $</Label>
-                                    <Input type="number" name="number" id="precioMax" placeholder="Máximo" bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange}/>
-                                </FormGroup>
-                                {' '}
-                                <Button color="success" onClick={this.filtrar}>Filtrar</Button>
-                            </Form>
-                            {'      '}
-                            <NavLink href="#" onClick={this.verCarrito}><img src={carrito} width="40px" height="50px" alt="carrito"/></NavLink>
-                            <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir"/></NavLink>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
-            </div>
+                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                <Label for="ubicacion" className="mr-sm-2">Ubicación:</Label>
+                                <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
+                                    <option value="">Sin filtro</option>
+                                    {this.state.locations.map((loc) =>
+                                        <option key={loc.nombre} value={loc.nombre}>{loc.nombre}</option>
+                                    )}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                <Label for="precioMin" className="mr-sm-2">Precio mín.: $</Label>
+                                <Input type="number" name="number" id="precioMin" placeholder="Mínimo" bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} />
+                            </FormGroup>
+                            <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
+                                <Label for="precioMax" className="mr-sm-2">Precio máx.: $</Label>
+                                <Input type="number" name="number" id="precioMax" placeholder="Máximo" bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} />
+                            </FormGroup>
+                            {' '}
+                            <Button color="success" onClick={this.filtrar}>Filtrar</Button>
+                        </Form>
+                        {'      '}
+                        <NavLink href="#" onClick={this.verCarrito}><img src={carrito} width="40px" height="50px" alt="carrito" /></NavLink>
+                        <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir" /></NavLink>
+                    </Nav>
+                </Collapse>
+            </Navbar>
         );
     }
 }

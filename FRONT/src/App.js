@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import Banner from './views/Banner'
+import OurContainer from './views/OurContainer'
 
 class App extends React.Component {
     render() {
         return (
-            <Banner />
+            <div className="text-center">
+                <OurContainer />
+            </div>
         );
     }
 }

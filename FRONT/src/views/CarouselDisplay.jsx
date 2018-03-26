@@ -101,7 +101,6 @@ class CarouselDisplay extends Component {
           key={i}
         >
           <CarouselEntity obj={item} key={i} reference={"https://google.com.ar/"} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.location} condition={item.condition} />
-          { /* <CarouselCaption captionText={item.altText} captionHeader={item.caption} style={{ position: "absolute", right: "0px", top: "10%", margin: "0% 10%", marginLeft: "30%" }} />*/}
         </CarouselItem>
       );
     });
