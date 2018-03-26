@@ -6,7 +6,7 @@ export default {
             pass: 'Constraseña',
             ingresar: 'Ingresar'
         },
-        singIn: {
+        signIn: {
             nombre: 'Nombre',
             apellido: 'Apellido',
             fechaNacimiento: 'Fecha de Nacimineto',

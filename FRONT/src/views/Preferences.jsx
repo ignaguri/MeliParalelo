@@ -44,16 +44,17 @@ class Preferences extends Component {
                 if (r) {
                     console.log('ir a pagina principal')
                 } else {
-                    alert('No se pudieron guardar sus preferencias')
+                    alert(lang.preferences.errorGuardar)
                 }
             })
     }
 
     render() {
+        const lang = strings[this.state.language];
         return (
             <Container style={{ "paddingTop": "10%" }}>
                 <Jumbotron style={{ textAlign: "center" }} >
-                    <h1> <Badge color="Light">Preferencias</Badge></h1>
+                    <h1> <Badge color="Light">{lang.preferences.preferences}</Badge></h1>
                     <Row>
                         {
                             this.state.categories.map((category, i) => {
@@ -65,7 +66,7 @@ class Preferences extends Component {
                         }
                     </Row>
                     {/* <p>Selección: {JSON.stringify(this.state.selectedCategories)}</p> */}
-                    <Button color="success" onClick={() => this.onAcceptClick()}>Aceptar</Button>
+                    <Button color="success" onClick={() => this.onAcceptClick()}>{lang.preferences.ok}</Button>
                 </Jumbotron>
             </Container>
         );
