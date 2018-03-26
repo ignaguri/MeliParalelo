@@ -147,6 +147,18 @@ export default {
                 console.error(err);
                 return false
             })
+    },
+
+    getComents() {
+        return axios.get(API + '')
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
     }
 }
 
