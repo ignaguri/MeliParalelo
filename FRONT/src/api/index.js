@@ -139,7 +139,7 @@ export default {
     },
 
     postCheckout() {
-        return axios.post('/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
                 return response
             })
@@ -150,7 +150,7 @@ export default {
     },
 
     getComents() {
-        return axios.get(API + '')
+        return axios.get(API + 'comment')
             .then(r => {
                 console.log(r);
                 return r
@@ -159,6 +159,17 @@ export default {
                 console.error(err);
                 return false
             })
-    }
+    },
+
+    postComents(comment) {
+        return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
 }
 

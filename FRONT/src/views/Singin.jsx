@@ -1,6 +1,7 @@
 import api from "../api";
 import React from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
+import strings from '../assets/languages'
 
 export default class Singin extends React.Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export default class Singin extends React.Component {
             name: '',
             lastName: '',
             birthdate: '',
-            loyaltyPoints: ''
+            loyaltyPoints: '',
+            language: 'spanish'
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -47,6 +49,7 @@ export default class Singin extends React.Component {
     }
 
     render() {
+        const lang = strings[this.state.language];
         return (
             <Container>
                 <Row style={{ "padding-top": "10%" }}>
@@ -56,15 +59,15 @@ export default class Singin extends React.Component {
                                 <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
-                                            <Label for="name">Nombre</Label>
+                                            <Label for="name">lang.signIn.nombre</Label>
                                             <Input type="text" name="name" id="name" placeholder="Ingrese su nombre" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="lastName">Apellido</Label>
+                                            <Label for="lastName">lang.signIn.apellido</Label>
                                             <Input type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="birthdate">Fecha Nacimiento</Label>
+                                            <Label for="birthdate">lang.signIn.fechaNacimiento</Label>
                                             <Input type="date" name="birthdate" id="birthdate" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                     </Jumbotron>
@@ -72,15 +75,15 @@ export default class Singin extends React.Component {
                                 <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
-                                            <Label for="email">E-mail</Label>
+                                            <Label for="email">lang.signIn.email</Label>
                                             <Input type="email" name="email" id="email" placeholder="Ingrese su correo" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="user">Usuario</Label>
+                                            <Label for="user">lang.signIn.usuario</Label>
                                             <Input type="text" name="user" id="user" placeholder="Ingrese un usuario" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="password">Contraseña</Label>
+                                            <Label for="password">lang.signIn.pass</Label>
                                             <Input type="password" name="password" id="password" placeholder="Ingrese una contraseña" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                     </Jumbotron>

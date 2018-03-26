@@ -1,14 +1,67 @@
 export default {
     spanish: {
-        loginError: 'El usuario o la contrasenha no son correctas',
-        bannerVer: 'Ver'
+        login: {
+            error: 'El usuario o la contraseña no son correctas',
+            usuario: 'Usuario',
+            pass: 'Constraseña',
+            ingresar: 'Ingresar'
+        },
+        singIn: {
+            nombre: 'Nombre',
+            apellido: 'Apellido',
+            fechaNacimiento: 'Fecha de Nacimineto',
+            email: 'Email',
+            usuario: 'Nombre de Usuario',
+            pass: 'Contraseña'
+        },
+        banner: {
+            ver: 'Vista',
+            condicion: 'Condicion',
+            noFilter: 'Sin Filtro',
+            new: 'Nuevo',
+            used: 'Usado',
+            refurbished: 'Restaurado',
+            location: 'Ubicación',
+            price: 'Precio',
+            min: 'Mínimo',
+            max: 'Máximo',
+            filtrar: 'Filtrar'
+        },
+        preferences: {
+            errorGuardar: 'Ups! No se pudieron guardar tus preferencias :(',
+            preferences: 'Preferencias',
+            ok: 'Aceptar'
+        }
+
     },
     english: {
         loginError: 'Wrong username or password',
-        bannerVer: 'View'
+        bannerVer: 'View',
+        loginUsuario: 'User',
+        loginPass: 'Password',
+        loginIngresar: 'Log In!',
+        singIn: {
+            nombre: 'Nombre',
+            apellido: 'Apellido',
+            fechaNacimiento: 'Fecha de Nacimineto',
+            email: 'Email',
+            usuario: 'Nombre de Usuario',
+            pass: 'Contraseña'
+        }
     },
     portuguese: {
-        loginError: 'estao mal username or password',
-        bannerVer: 'Olha'
+        loginError: 'O usuário ou senha está incorreto',
+        bannerVer: 'Vista',
+        loginUsuario: 'Usuário',
+        loginPass: 'Senha',
+        loginIngresar: 'Entrar',
+        singIn: {
+            nombre: 'Nombre',
+            apellido: 'Apellido',
+            fechaNacimiento: 'Fecha de Nacimineto',
+            email: 'Email',
+            usuario: 'Nombre de Usuario',
+            pass: 'Contraseña'
+        }
     }
 }
