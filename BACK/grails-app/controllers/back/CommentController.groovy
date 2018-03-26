@@ -19,7 +19,7 @@ class CommentController {
 
     def save() {
         String username = request.JSON.username
-        String message = request.JSON.message
+        String message = request.JSON.comment
 
         def hasErrors = false
         if (!username || !message) {

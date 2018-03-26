@@ -9,6 +9,5 @@ class Comment {
 
     static constraints = {
         message blank: false, nullable: false, size: 1..255
-        createDate min: new Date()
     }
 }
