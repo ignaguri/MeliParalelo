@@ -18,7 +18,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ textAlign: "left" }}>
+                    <div style={{ marginTop: "80px", textAlign: "left" }}>
                         <ChatSlide />
                         <ListItems />
                     </div>
@@ -29,7 +29,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ textAlign: "left" }}>
+                    <div style={{ marginTop: "80px", textAlign: "left" }}>
                         <ChatSlide />
                         <CardItems />
                     </div>
@@ -40,7 +40,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ textAlign: "left" }}>
+                    <div style={{ marginTop: "80px", textAlign: "left" }}>
                         <ChatSlide />
                         <CarouselDisplay />
                     </div>
