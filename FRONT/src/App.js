@@ -1,20 +1,16 @@
 import React from 'react';
 import './App.css';
-import Banner from './views/Banner'
-import Producto from "./views/Producto";
+import OurContainer from './views/OurContainer'
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-            <Banner />
-            <Producto producto={producto} />
+            <div className="text-center">
+                <OurContainer />
             </div>
         );
     }
 }
-
-export default App;
 
 const producto = {
         id: "MLA614976100",

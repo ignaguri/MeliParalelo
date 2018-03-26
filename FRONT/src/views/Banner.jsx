@@ -17,6 +17,7 @@ import {
     Input,
     Button
 } from 'reactstrap';
+
 import Icon from "./Icon";
 
 export default class Banner extends React.Component {
@@ -41,6 +42,7 @@ export default class Banner extends React.Component {
         this.verCarrito = this.verCarrito.bind(this);
         this.salir = this.salir.bind(this);
     }
+    /*
     componentDidMount() {
         api.getLocations().then(response => {
             this.setState({
@@ -48,22 +50,23 @@ export default class Banner extends React.Component {
             });
         });
     }
+    */
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     handleLocationChange(event) {
-        this.setState({location: event.target.value});
+        this.setState({ location: event.target.value });
     }
     handleConditionChange(event) {
-        this.setState({condicion: event.target.value});
+        this.setState({ condicion: event.target.value });
     }
     handlePriceMinChange(event) {
-        this.setState({precioMin: event.target.value});
+        this.setState({ precioMin: event.target.value });
     }
     handlePriceMaxChange(event) {
-        this.setState({precioMax: event.target.value});
+        this.setState({ precioMax: event.target.value });
     }
     filtrar(e) {
         let filtros = {};
@@ -113,6 +116,7 @@ export default class Banner extends React.Component {
     render() {
         const lang = strings[this.state.language];
         return (
+
             <div>
                 <Navbar color="light" light expand="lg">
                     <NavbarBrand>
@@ -126,6 +130,7 @@ export default class Banner extends React.Component {
                             <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista"/></Button>{' '}
                             <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider"/></Button>{' '}
                             <Form inline>
+
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="condicion" className="mr-sm-2">Condición:</Label>
                                 <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
@@ -135,6 +140,7 @@ export default class Banner extends React.Component {
                                     <option value="refurbished">Restaurado</option>
                                 </Input>
                             </FormGroup>
+
                                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                     <Label for="ubicacion" className="mr-sm-2">Ubicación:</Label>
                                     <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
