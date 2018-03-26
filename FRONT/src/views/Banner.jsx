@@ -146,7 +146,7 @@ export default class Banner extends React.Component {
                                     <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
                                         <option value="">Sin filtro</option>
                                         {this.state.locations.map((loc) =>
-                                            <option key={loc.name} value={loc.name}>{loc.name}</option>
+                                            <option key={loc} value={loc}>{loc}</option>
                                         )}
                                     </Input>
                                 </FormGroup>
