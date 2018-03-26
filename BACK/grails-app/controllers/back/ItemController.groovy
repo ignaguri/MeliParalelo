@@ -44,25 +44,24 @@ class ItemController {
 
     def preferences() {
 
-        // http://localhost:8080/item/preferences?categories=MLA5725,MLA1384
+        // categories=MLA5725,MLA1384
+        // http://localhost:8080/item/preferences?username=guido
 
-        def values
         def responseData = []
 
-        if(params.categories != null) {
-            values = params.categories.split(',')
-            response.status = HttpStatus.OK.value()
-        } else {
-            responseData = [
-                    "error": "Se esperaban parametros separados por coma"
-            ]
-            response.status = HttpStatus.BAD_REQUEST.value()
-        }
+        try {
+            def username = params.username
+            def user = User.findByUsername(username)
+            def values = user.getPreferencies()
 
-        values.each {
-            def itemAux = Item.findByCategoryId(it)
-            if(itemAux != null)
-                responseData.push(itemAux)
+            values.each {
+                def itemAux = Item.findByCategoryId(it.categoryId)
+                if(itemAux != null)
+                    responseData.push(itemAux)
+            }
+
+        } catch (Exception e) {
+            responseData = [e.getMessage()]
         }
 
         withFormat {
