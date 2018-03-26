@@ -65,39 +65,60 @@ class UserController {
         String username = request.JSON.username
         String password = request.JSON.password
 
-        def responseData = ""
         User user
 
         try {
             user = userService.login(username, password)
-
-            //Armo la respuesta
-            response.status = HttpStatus.OK.value()
-            responseData = [
-                "username": user.username,
-                "name": user.name,
-                "lastname": user.lastname
-            ]
-
         } catch (UserNotFoundException e) {
             //Usuario inexistente
             response.status = HttpStatus.UNAUTHORIZED.value()
-            responseData = [
-                "error": e.message
-            ]
+            render([error: e.message] as JSON)
         } catch (IncorrectPasswordException e) {
             //Password incorrecta
             response.status = HttpStatus.UNAUTHORIZED.value()
-            responseData = [
-                "error": e.message
-            ]
+            render([error: e.message] as JSON)
         } catch (Exception e) {
             //Error inesperado
             response.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
+            render([error: e.message] as JSON)
+        }
+
+        response.status = HttpStatus.OK.value()
+        respond user
+    }
+
+    @Transactional
+    def preferences() {
+
+        def responseData
+        def user = User.findByUsername(request.JSON.username)
+
+        if(user == null) {
+            response.status = HttpStatus.BAD_REQUEST.value()
             responseData = [
-                "error": e.message
+                    "error": "User not found"
             ]
         }
+
+        try {
+
+            request.JSON.preferences.each {
+                user.addTo('preferencies', Category.findByCategoryId(it))
+            }
+
+            user.save(flush: true, failOnError: true)
+
+            response.status = HttpStatus.OK.value()
+            responseData = user.getPreferencies()
+
+        } catch (Exception e) {
+            response.status = HttpStatus.BAD_REQUEST.value()
+            responseData = [
+                    "error": e.message
+            ]
+
+        }
+
 
         withFormat {
             json {

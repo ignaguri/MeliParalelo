@@ -1,0 +1,7 @@
+import back.Item
+
+model {
+    List<Item> itemList
+}
+
+json tmpl.item(itemList ?: [])

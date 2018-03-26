@@ -4,8 +4,6 @@ const API = "http://localhost:8080/";
 
 
 export default {
-
-
     //login
     //401 unathoraized devuelve error: "usuario inexistente"/"contraseña incorrecta"
     //500 otro error
@@ -30,8 +28,6 @@ export default {
                 return [false]
             })
     },
-
-
     //Crear Usuario
     postSingin(user, password, name, lastname, birthdate, email) {
         return axios.post('/singin', { username: user, password: password, name: name, lastname: lastname, birthdate: birthdate, email: email })
@@ -43,7 +39,6 @@ export default {
                 return false
             })
     },
-
     getCategories() {
         return axios.get(API + 'category')
             .then(r => {
@@ -54,7 +49,6 @@ export default {
                 return false
             })
     },
-
     postPreferences(categories) {
         //return axios.post('/preferences', { user: this.getUser, categories: categories })
         return axios.post(API + 'preferences', { user: 'admin', categories: categories })
@@ -66,11 +60,7 @@ export default {
                 return false
             })
     },
-
-
-
     //Pagina Principal
-
     getItems() {
         return axios.get(API + 'items')
             .then(r => {
@@ -82,37 +72,47 @@ export default {
                 return false
             })
     },
-
     //cargar combo filtros
-    //arreglo strings 
+    //arreglo strings
     getLocations() {
-        return axios.get(API + 'localidades')
-            .then(r => {
-                console.log(r);
-                return r
-            })
-            .catch(err => {
-                console.error(err);
-                return false
-            })
+        return Promise.resolve([{name: 'Cordoba'}])
+        // return axios.get(API + 'localidades')
+        //     .then(r => {
+        //         console.log(r);
+        //         return r
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //         return false
+        //     })
     },
-
     //get categorias ya esta arriba
+
 
     getUser() {
         return JSON.parse(sessionStorage.getItem('user')).username;
+    },
+
+
+    agregarACarrito(producto, cantidad) {
+        const prod = {
+            id: producto.id,
+            title: producto.title,
+            price: producto.price,
+            quantity: cantidad
+        };
+        let carrito = sessionStorage.getItem('carrito');
+        if (carrito) {
+            let aux = JSON.parse(carrito);
+            aux.push(prod);
+            sessionStorage.setItem('carrito', JSON.stringify(aux));
+        } else {
+            let aux = JSON.stringify([prod]);
+            sessionStorage.setItem('carrito', aux);
+        }
+    },
+    getCarrito() {
+        return JSON.parse(sessionStorage.getItem('carrito'))
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
 

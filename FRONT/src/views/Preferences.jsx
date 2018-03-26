@@ -68,6 +68,8 @@ class Preferences extends Component {
             </Container>
         );
     }
+
 }
 
 export default Preferences;
+

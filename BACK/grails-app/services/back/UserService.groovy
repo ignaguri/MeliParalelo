@@ -40,19 +40,15 @@ class UserService {
 
         if (user == null) {
             // Usuario inexistente
-            println "Usuario inexistente"
             throw new UserNotFoundException("Usuario inexistente.")
         } else {
             // Usuario existente, verifico la contraseña
-
             if (!user.password.equals(password)) {
                 // Contraseña Incorrecta
-                println "Contraseña incorrecta"
                 throw new IncorrectPasswordException("Contraseña incorrecta.")
             }
         }
 
-        println "Usuario: " + user.toString()
         // Contraseña Correcta
         return user
     }

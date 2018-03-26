@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../api'
+import strings from '../assets/languages'
 import logo from '../assets/logo.png'
 import carrito from '../assets/carrito.svg'
 import logout from '../assets/logout.svg'
@@ -15,7 +16,9 @@ import {
     Label,
     Input,
     Button
-    } from 'reactstrap';
+} from 'reactstrap';
+
+import Icon from "./Icon";
 
 export default class Banner extends React.Component {
     constructor(props) {
@@ -23,6 +26,7 @@ export default class Banner extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
+            language: 'spanish',
             isOpen: false,
             locations: [],
             condicion: "",
@@ -38,6 +42,7 @@ export default class Banner extends React.Component {
         this.verCarrito = this.verCarrito.bind(this);
         this.salir = this.salir.bind(this);
     }
+    /*
     componentDidMount() {
         api.getLocations().then(response => {
             this.setState({
@@ -45,22 +50,23 @@ export default class Banner extends React.Component {
             });
         });
     }
+    */
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     handleLocationChange(event) {
-        this.setState({location: event.target.value});
+        this.setState({ location: event.target.value });
     }
     handleConditionChange(event) {
-        this.setState({condicion: event.target.value});
+        this.setState({ condicion: event.target.value });
     }
     handlePriceMinChange(event) {
-        this.setState({precioMin: event.target.value});
+        this.setState({ precioMin: event.target.value });
     }
     handlePriceMaxChange(event) {
-        this.setState({precioMax: event.target.value});
+        this.setState({ precioMax: event.target.value });
     }
     filtrar(e) {
         let filtros = {};
@@ -90,6 +96,15 @@ export default class Banner extends React.Component {
                 }
             })
     }
+    verCuadricula() {
+        console.log('implementar')
+    }
+    verLista() {
+        console.log('implementar')
+    }
+    verSlider() {
+        console.log('implementar')
+    }
     verCarrito(e) {
         e.preventDefault();
         console.log('ver carrito', e)
@@ -99,7 +114,9 @@ export default class Banner extends React.Component {
         console.log('salir', e)
     }
     render() {
+        const lang = strings[this.state.language];
         return (
+
             <div>
                 <Navbar color="light" light expand="lg">
                     <NavbarBrand>
@@ -108,7 +125,12 @@ export default class Banner extends React.Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
+                            <span className="align-self-center">{lang.bannerVer}:</span>
+                            <Button className="btn btn-light" onClick={this.verCuadricula}><Icon icon="cuadricula"/></Button>{' '}
+                            <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista"/></Button>{' '}
+                            <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider"/></Button>{' '}
                             <Form inline>
+
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label for="condicion" className="mr-sm-2">Condición:</Label>
                                 <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
@@ -118,21 +140,21 @@ export default class Banner extends React.Component {
                                     <option value="refurbished">Restaurado</option>
                                 </Input>
                             </FormGroup>
+
                                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                     <Label for="ubicacion" className="mr-sm-2">Ubicación:</Label>
                                     <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
                                         <option value="">Sin filtro</option>
                                         {this.state.locations.map((loc) =>
-                                            <option key={loc.nombre} value={loc.nombre}>{loc.nombre}</option>
+                                            <option key={loc.name} value={loc.name}>{loc.name}</option>
                                         )}
                                     </Input>
                                 </FormGroup>
                                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                    <Label for="precioMin" className="mr-sm-2">Precio mín.: $</Label>
+                                    <Label for="precioMin" className="mr-sm-2">Precio $</Label>
                                     <Input type="number" name="number" id="precioMin" placeholder="Mínimo" bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange}/>
                                 </FormGroup>
                                 <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                    <Label for="precioMax" className="mr-sm-2">Precio máx.: $</Label>
                                     <Input type="number" name="number" id="precioMax" placeholder="Máximo" bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange}/>
                                 </FormGroup>
                                 {' '}
