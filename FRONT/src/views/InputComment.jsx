@@ -22,7 +22,7 @@ export default class InputComment extends React.Component {
     render() {
         return (
             <InputGroup id="inputDiv">
-                <Input value={this.state.inputValue} onChange={this.updateInput}/>
+                <Input value={this.state.inputValue} onChange={this.updateInput} maxLength="256" minLength="1" />
                 <InputGroupAddon addonType="append">
                     <Button color="secondary" onClick={this.handleClick} >Enviar</Button>
                 </InputGroupAddon>

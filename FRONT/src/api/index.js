@@ -62,7 +62,7 @@ export default {
     },
     //Pagina Principal
     getItems() {
-        return axios.get(API + 'items')
+        return axios.get(API + 'item')
             .then(r => {
                 console.log(r);
                 return r
@@ -75,7 +75,7 @@ export default {
     //cargar combo filtros
     //arreglo strings
     getLocations() {
-        return Promise.resolve([{name: 'Cordoba'}])
+        return Promise.resolve([{ name: 'Cordoba' }])
         // return axios.get(API + 'localidades')
         //     .then(r => {
         //         console.log(r);
@@ -111,8 +111,31 @@ export default {
             sessionStorage.setItem('carrito', aux);
         }
     },
+    quitarACarrito(idProducto) {
+        let carrito = sessionStorage.getItem('carrito');
+        if (carrito) {
+            let aux = JSON.parse(carrito);
+            const index = aux.indexOf(idProducto);
+            if (index >= 0) {
+                aux.splice(index, 1);
+                sessionStorage.setItem('carrito', JSON.stringify(aux));
+            }
+        }
+    },
+
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
+    },
+
+    postCheckout() {
+        return axios.post('/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
     }
 }
 
