@@ -60,15 +60,15 @@ export default class Signin extends React.Component {
                                 <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
-                                            <Label for="name">lang.signIn.nombre</Label>
+                                            <Label for="name">{lang.signIn.nombre}</Label>
                                             <Input type="text" name="name" id="name" placeholder="Ingrese su nombre" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="lastName">lang.signIn.apellido</Label>
+                                            <Label for="lastName">{lang.signIn.apellido}</Label>
                                             <Input type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="birthdate">lang.signIn.fechaNacimiento</Label>
+                                            <Label for="birthdate">{lang.signIn.fechaNacimiento}</Label>
                                             <Input type="date" name="birthdate" id="birthdate" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                     </Jumbotron>
@@ -76,20 +76,20 @@ export default class Signin extends React.Component {
                                 <Col md="6" xs="12">
                                     <Jumbotron>
                                         <FormGroup>
-                                            <Label for="email">lang.signIn.email</Label>
+                                            <Label for="email">{lang.signIn.email}</Label>
                                             <Input type="email" name="email" id="email" placeholder="Ingrese su correo" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="user">lang.signIn.usuario</Label>
+                                            <Label for="user">{lang.signIn.usuario}</Label>
                                             <Input type="text" name="user" id="user" placeholder="Ingrese un usuario" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="password">lang.signIn.pass</Label>
+                                            <Label for="password">{lang.signIn.pass}</Label>
                                             <Input type="password" name="password" id="password" placeholder="Ingrese una contraseña" value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                     </Jumbotron>
                                 </Col>
-                                <Button type="submit" value="Submit" color="success" style={{ "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>Crear Cuenta</Button>
+                                <Button type="submit" value="Submit" color="success" style={{ "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>{lang.signIn.crearCuenta}</Button>
                             </Row>
                         </Form>
                     </Col>

@@ -52,14 +52,14 @@ export default class Login extends React.Component {
                         <Form onSubmit={this.handleSubmit}>
                             <Jumbotron>
                                 <FormGroup>
-                                    <Label for="user">lang.login.usuario</Label>
+                                    <Label for="user">{lang.login.usuario}</Label>
                                     <Input type="text" name="user" id="user" placeholder="Ingrese su nombre de usuario" value={this.state.value} onChange={this.handleChange} />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label for="password">lang.login.pass</Label>
+                                    <Label for="password">{lang.login.pass}</Label>
                                     <Input type="password" name="password" id="password" placeholder="Ingrese su contraseña" value={this.state.value} onChange={this.handleChange} />
                                 </FormGroup>
-                                <Button type="submit" value="Submit" color="success" >lang.login.ingresar</Button>
+                                <Button type="submit" value="Submit" color="success" >{lang.login.ingresar}</Button>
                             </Jumbotron>
                         </Form>
                     </Col>

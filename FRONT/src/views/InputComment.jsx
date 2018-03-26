@@ -1,11 +1,13 @@
 import React from 'react'
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
 import api from '../api'
+import strings from '../assets/languages'
 
 export default class InputComment extends React.Component {
     constructor() {
         super();
         this.state = {
+            language: 'spanish',
             message: ""
         }
         this.updateInput = this.updateInput.bind(this);
@@ -25,11 +27,12 @@ export default class InputComment extends React.Component {
     }
 
     render() {
+        const lang = strings[this.state.language];
         return (
             <InputGroup id="inputDiv">
                 <Input value={this.state.inputValue} onChange={this.updateInput} maxLength="256" minLength="1" />
                 <InputGroupAddon addonType="append">
-                    <Button color="secondary" onClick={this.handleClick} >Enviar</Button>
+                    <Button color="secondary" onClick={this.handleClick} >{lang.comment.enviar}</Button>
                 </InputGroupAddon>
             </InputGroup>
         );
