@@ -9,7 +9,7 @@ class User {
     String birthdate
     int loyaltyPoints
 
-    static hasMany = [preferencies: Category]
+    static hasMany = [preferencies: Category, comments: Comment]
 
     static constraints = {
         username blank: false, nullable: false, unique: true, size: 4..30
