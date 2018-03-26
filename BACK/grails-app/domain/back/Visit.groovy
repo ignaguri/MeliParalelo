@@ -12,6 +12,12 @@ class Visit {
         count min: 0
     }
 
+    Visit(User user, Item item) {
+        this.user = user
+        this.item = item
+        this.count = 1
+    }
+
     User getUser() {
         return user
     }

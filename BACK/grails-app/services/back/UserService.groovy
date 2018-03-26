@@ -25,7 +25,7 @@ class UserService {
                 status = true
             }else{
                 println(newUser.errors)
-                throw new UserCreationException("error al crear el usuario")
+                throw new UserCreationException("Error al crear el usuario")
             }
         } else {
             throw new UserAlreadyExistsException("El usuario ya existe")

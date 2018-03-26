@@ -3,6 +3,7 @@ package back
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 import org.springframework.http.HttpStatus
+import user.UserNotFoundException
 
 import static org.springframework.http.HttpStatus.*
 
@@ -11,6 +12,7 @@ import static org.springframework.http.HttpStatus.*
 class ItemController {
 
     ItemService itemService
+    VisitService visitService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -25,14 +27,28 @@ class ItemController {
         }
     }
 
+    @Transactional
     def show() {
-        //http://localhost:8080/item/show/':itemID'?user=':userID'
+        //http://localhost:8080/item/show/':itemID'?username=':userID'
 
         String itemId = params.get('id')
+        String username = params.get('username')
 
         Item item = Item.findByItemId(itemId)
 
         if (item != null) {
+            //Busco el usuario
+            User user = User.findByUsername(username)
+
+            if (user == null) {
+                response.status = HttpStatus.INTERNAL_SERVER_ERROR.value()
+                render([error: "Usuario inexistente."] as JSON)
+            }
+
+            //incremento las visitas
+            visitService.addVisit(user, item)
+
+            //Response
             response.status = HttpStatus.OK.value()
             respond item
         } else {

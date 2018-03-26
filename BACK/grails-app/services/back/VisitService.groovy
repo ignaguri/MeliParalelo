@@ -1,6 +1,7 @@
 package back
 
 import grails.gorm.transactions.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class VisitService {
@@ -9,13 +10,26 @@ class VisitService {
 
     }
 
+    List<Visit> list(Map args) {
+        return Visit.list(args)
+    }
+
     def addVisit(User user, Item item) {
         //Metodo que acumula visitas de un usuario a un item
 
         if (checkVisitExists(user, item)) {
-            //buscar y traer la visita
+            //buscar la visita
+            Visit visit = Visit.findByUserAndItem(user, item)
+
+            visit.count ++
+
+            visit.save()
+
         } else {
-            //throw
+            //Crear visita
+            Visit visit = new Visit(user, item)
+
+            visit.save()
         }
 
     }
