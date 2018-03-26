@@ -9,7 +9,7 @@ export default class OurContainer extends React.Component {
     constructor() {
         super();
         this.state = {
-            displayType: "list"
+            displayType: "carousel"
         }
     }
     // landing, login, preferences, registration
@@ -18,7 +18,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ marginTop: "80px", textAlign: "left" }}>
+                    <div style={{ textAlign: "left" }}>
                         <ChatSlide />
                         <ListItems />
                     </div>
@@ -29,7 +29,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ marginTop: "80px", textAlign: "left" }}>
+                    <div style={{ textAlign: "left" }}>
                         <ChatSlide />
                         <CardItems />
                     </div>
@@ -40,7 +40,7 @@ export default class OurContainer extends React.Component {
             return (
                 <div>
                     <Banner />
-                    <div style={{ marginTop: "80px", textAlign: "left" }}>
+                    <div style={{ textAlign: "left" }}>
                         <ChatSlide />
                         <CarouselDisplay />
                     </div>
