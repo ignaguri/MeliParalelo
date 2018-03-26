@@ -9,54 +9,10 @@ export default class OurContainer extends React.Component {
         this.state = {
             isToggleOn: false,
             currentClass: "slide-out",
-            comments: [
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                },
-                {
-                    username: "userComment",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                }
-            ]
+            comments: []
         }
         this.handleClick = this.handleClick.bind(this);
+        this.loadComments = this.loadComments.bind(this);
     }
 
     changeState() {
@@ -77,23 +33,26 @@ export default class OurContainer extends React.Component {
         }
     }
 
-    /*
     componentWillMount() {
+        this.loadComments();
+    }
+
+    loadComments() {
         api.getComments()
             .then(res => {
                 this.setState({ comments: res.data })
             });
     }
-*/
+
     render() {
 
         return (
             <div>
                 <div id="slider" className={this.state.currentClass} style={{ zIndex: "102", right: "0px", bottom: "0px", position: "fixed" }}>
                     <div style={{ margin: "10px" }} >
-                        {this.state.comments.map((comment, i) => <CommentBox key={i} obj={comment} user={comment.username} comment={comment.comment} />)}
+                        {this.state.comments ? this.state.comments.map((comment, i) => <CommentBox key={i} obj={comment} user={comment.username} comment={comment.comment} />) : <div></div>}
                     </div>
-                    <InputComment />
+                    <InputComment loadComments={this.loadComments} />
                 </div>
                 <div id="toggle" className="chatButton" onClick={this.handleClick}></div>
             </div>

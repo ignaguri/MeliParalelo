@@ -83,6 +83,35 @@ export default {
                 return false
             })
     },
+
+    // getItemsWithFilter() {
+    //     return axios.get(API + 'item/filter')
+    //     category
+    //     condition
+    //     price_min
+    //     price_max
+    //     statename
+    //         .then(r => {
+    //             console.log(r);
+    //             return r
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //             return false
+    //         })
+    // },
+
+    getItemsPreferences() {
+        return axios.get(API + 'item/preferences?username=' + this.getUser())
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
     //cargar combo filtros
     //arreglo strings
     getLocations() {
@@ -149,7 +178,7 @@ export default {
             })
     },
 
-    getComents() {
+    getComments() {
         return axios.get(API + 'comment')
             .then(r => {
                 console.log(r);
@@ -161,8 +190,9 @@ export default {
             })
     },
 
-    postComents(comment) {
-        return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
+    postComment(comment) {
+        //return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
+        return axios.post(API + 'comment/save', { username: "admin", comment: comment })
             .then(function (response) {
                 return response
             })
@@ -170,6 +200,6 @@ export default {
                 console.error(err);
                 return false
             })
-    },
+    }
 }
 

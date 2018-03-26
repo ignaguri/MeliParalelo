@@ -1,5 +1,6 @@
-import React from 'react';
-import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
+import React from 'react'
+import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap'
+import api from '../api'
 
 export default class InputComment extends React.Component {
     constructor() {
@@ -10,13 +11,17 @@ export default class InputComment extends React.Component {
         this.updateInput = this.updateInput.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
-    
+
     updateInput(evt) {
-        this.setState({message: evt.target.value})
+        this.setState({ message: evt.target.value })
     }
-    
+
     handleClick() {
         console.log(this.state.message)
+        api.postComment(this.state.message)
+            .then(r => {
+                this.props.loadComments()
+            })
     }
 
     render() {
