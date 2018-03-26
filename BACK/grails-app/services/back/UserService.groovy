@@ -5,6 +5,7 @@ import user.IncorrectPasswordException
 import user.UserAlreadyExistsException
 import user.UserCreationException
 import user.UserNotFoundException
+import user.UserParametersException
 
 @Transactional
 class UserService {
@@ -19,13 +20,25 @@ class UserService {
 
         if(user == null) {
             int loyaltyPoints = points == null || points.size() == 0 || points.equals("") ? 0 : points.toInteger()
+
+            if(
+                    (username == null || username.equals("") || username.length() < 4) ||
+                    (password == null || password.equals("")) ||
+                    (name == null || name.equals("")) ||
+                    (lastname == null || lastname.equals(""))
+                ) {
+                throw new UserParametersException("parametros del usuario incorrectos")
+            }
+
             User newUser = new User(username, password, name, lastname, email, birthdate, loyaltyPoints, Role.findByName('user'))
             newUser.validate()
-            if(newUser.save()){
+
+            if(newUser.save()) {
                 status = true
-            }else{
+            } else {
                 println(newUser.errors)
                 throw new UserCreationException("error al crear el usuario")
+                status = false
             }
         } else {
             throw new UserAlreadyExistsException("El usuario ya existe")
