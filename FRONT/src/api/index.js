@@ -30,13 +30,24 @@ export default {
     },
     //Crear Usuario
     postSingin(user, password, name, lastname, birthdate, email) {
-        return axios.post('/singin', { username: user, password: password, name: name, lastname: lastname, birthdate: birthdate, email: email })
+        const body = {
+            username: user,
+            password: password,
+            name: name,
+            lastname: lastname,
+            email: email,
+            birthdate: birthdate,
+            loyaltyPoints: "0"
+        };
+        console.log("body", body);
+        return axios.post(API + 'user', body)
             .then(function (response) {
+                console.log(response)
                 return response
             })
             .catch(err => {
                 console.error(err);
-                return false
+                return [false, err.response.data]
             })
     },
     getCategories() {
