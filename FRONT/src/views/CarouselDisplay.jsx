@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from "../api"
 import CarouselEntity from './CarouselEntity'
 import {
   Carousel,
@@ -12,56 +13,20 @@ class CarouselDisplay extends Component {
     super(props);
     this.state = {
       activeIndex: 0,
-      items: [
-        {
-          thumbnail: "https://http2.mlstatic.com/celulares-motorola-D_Q_NP_781526-MLA26962080389_032018-X.webp",
-          price: 2.499,
-          title: "1Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel",
-          location: "Cordoba",
-          condition: "Nuevo"
-        },
-        {
-          thumbnail: "https://http2.mlstatic.com/camas-cuchetas-D_Q_NP_970172-MLA26064700803_092017-X.webp",
-          price: 5.309,
-          title: "2Cama Cucheta Triple Superpuesta Mdf Laqueada Blanco Infantil",
-          location: "Mendoza",
-          condition: "Nuevo"
-        },
-        {
-          thumbnail: "https://http2.mlstatic.com/zapatillas-D_Q_NP_887999-MLA26260623016_102017-X.webp",
-          price: 849,
-          title: "3Zapatillas Volcom Hombre Ninety One",
-          location: "Buenos Aires",
-          condition: "Usado"
-        },
-        {
-          thumbnail: "https://http2.mlstatic.com/celulares-motorola-D_Q_NP_781526-MLA26962080389_032018-X.webp",
-          price: 2.499,
-          title: "4Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel Motorola Moto C 4g 8gb Nuevo Libre Gtía 1 Año Techcel",
-          location: "Cordoba",
-          condition: "Nuevo"
-        },
-        {
-          thumbnail: "https://http2.mlstatic.com/camas-cuchetas-D_Q_NP_970172-MLA26064700803_092017-X.webp",
-          price: 5.309,
-          title: "5Cama Cucheta Triple Superpuesta Mdf Laqueada Blanco Infantil",
-          location: "Mendoza",
-          condition: "Nuevo"
-        },
-        {
-          thumbnail: "https://http2.mlstatic.com/zapatillas-D_Q_NP_887999-MLA26260623016_102017-X.webp",
-          price: 849,
-          title: "6Zapatillas Volcom Hombre Ninety One",
-          location: "Buenos Aires",
-          condition: "Usado"
-        }
-      ]
+      items: []
     };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
+  }
+
+  componentWillMount() {
+    api.getItems()
+      .then(res => {
+        this.setState({ items: res.data })
+      });
   }
 
   onExiting() {
@@ -100,7 +65,9 @@ class CarouselDisplay extends Component {
           onExited={this.onExited}
           key={i}
         >
-          <CarouselEntity obj={item} key={i} reference={"https://google.com.ar/"} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.location} condition={item.condition} />
+          <CarouselEntity obj={item} key={i} reference={"https://google.com.ar/"} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.state_name} condition={item.item_condition} />
+
+          { /* <CarouselCaption captionText={item.altText} captionHeader={item.caption} style={{ position: "absolute", right: "0px", top: "10%", margin: "0% 10%", marginLeft: "30%" }} />*/}
         </CarouselItem>
       );
     });

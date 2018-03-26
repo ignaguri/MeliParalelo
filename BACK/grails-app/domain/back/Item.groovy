@@ -21,6 +21,7 @@ class Item {
 
     static mapping = {
         description sqlType: 'longText'
+        pictures fetch: 'join'
     }
 
     static constraints = {
