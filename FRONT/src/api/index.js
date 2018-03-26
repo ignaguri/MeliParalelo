@@ -127,8 +127,8 @@ export default {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
 
-    postCheckout(user, items) {
-        return axios.post('/checkout/save', { username: user, items: items })
+    postCheckout() {
+        return axios.post('/checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
                 return response
             })
