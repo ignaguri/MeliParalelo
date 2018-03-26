@@ -40,7 +40,7 @@ export default {
             })
     },
     getCategories() {
-        return axios.get(API + 'categories')
+        return axios.get(API + 'category')
             .then(r => {
                 return r.data
             })
@@ -50,7 +50,8 @@ export default {
             })
     },
     postPreferences(categories) {
-        return axios.post('/preferences', { cateegories: categories })
+        //return axios.post('/preferences', { user: this.getUser, categories: categories })
+        return axios.post(API + 'preferences', { user: 'admin', categories: categories })
             .then(function (response) {
                 return response
             })
@@ -86,6 +87,13 @@ export default {
         //     })
     },
     //get categorias ya esta arriba
+
+
+    getUser() {
+        return JSON.parse(sessionStorage.getItem('user')).username;
+    },
+
+
     agregarACarrito(producto, cantidad) {
         const prod = {
             id: producto.id,
@@ -107,3 +115,4 @@ export default {
         return JSON.parse(sessionStorage.getItem('carrito'))
     }
 }
+
