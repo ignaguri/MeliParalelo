@@ -1,6 +1,7 @@
 import React from 'react';
 import CommentBox from './CommentBox'
 import InputComment from './InputComment'
+import api from "../api"
 
 export default class OurContainer extends React.Component {
     constructor() {

@@ -44,7 +44,7 @@ export default class Login extends React.Component {
     render() {
         return (
             <Container>
-                <Row style={{ "padding-top": "10%" }}>
+                <Row style={{ "paddingTop": "10%" }}>
                     <Col xs="12" md="4" style={{ "float": "none", "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>
                         <Form onSubmit={this.handleSubmit}>
                             <Jumbotron>

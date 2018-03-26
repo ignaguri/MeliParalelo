@@ -3,8 +3,16 @@ import logo from '../assets/logo.png'
 import {Button, ButtonGroup, Container} from 'reactstrap';
 
 export default class Landing extends React.Component {
-    handleSubmit(event) {
-        event.preventDefault();
+    constructor(props) {
+        super(props);
+        this.registrar = this.registrar.bind(this);
+        this.login = this.login.bind(this);
+    }
+    registrar() {
+        this.props.go('registration')
+    }
+    login() {
+        this.props.go('login')
     }
 
     render() {
@@ -16,8 +24,8 @@ export default class Landing extends React.Component {
                     <h3>Comprá lo que quieras, ¡al mejor precio!</h3>
                     <hr />
                     <ButtonGroup>
-                        <Button color="primary">Registrarme</Button>{' '}
-                        <Button color="success">Iniciar Sesión</Button>
+                        <Button color="primary" onClick={this.registrar}>Registrarme</Button>{' '}
+                        <Button color="success" onClick={this.login}>Iniciar Sesión</Button>
                     </ButtonGroup>
                 </div>
             </Container>
