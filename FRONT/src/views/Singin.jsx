@@ -1,7 +1,8 @@
 import api from "../api";
 import React from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
-import strings from '../assets/languages'
+import strings from '../assets/languages';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, Jumbotron } from 'reactstrap';
+
 
 export default class Singin extends React.Component {
     constructor(props) {
@@ -52,8 +53,8 @@ export default class Singin extends React.Component {
         const lang = strings[this.state.language];
         return (
             <Container>
-                <Row style={{ "padding-top": "10%" }}>
-                    <Col xs="12" md="6" style={{ "display": "flex", "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>
+                <Row style={{ "paddingTop": "10%" }}>
+                    <Col xs="12" md="6" style={{ "display": "flex", "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>
                         <Form onSubmit={this.handleSubmit}>
                             <Row>
                                 <Col md="6" xs="12">
@@ -88,7 +89,7 @@ export default class Singin extends React.Component {
                                         </FormGroup>
                                     </Jumbotron>
                                 </Col>
-                                <Button type="submit" value="Submit" color="success" style={{ "margin": "0 auto", "justify-Content": "center", "align-Items": "center" }}>Crear Cuenta</Button>
+                                <Button type="submit" value="Submit" color="success" style={{ "margin": "0 auto", "justifyContent": "center", "alignItems": "center" }}>Crear Cuenta</Button>
                             </Row>
                         </Form>
                     </Col>

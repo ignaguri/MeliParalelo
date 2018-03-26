@@ -8,8 +8,9 @@ class User {
     String email
     String birthdate
     int loyaltyPoints
+    Role role
 
-    static hasMany = [preferencies: Category]
+    static hasMany = [preferencies: Category, comments: Comment]
 
     static constraints = {
         username blank: false, nullable: false, unique: true, size: 4..30
@@ -19,7 +20,7 @@ class User {
         loyaltyPoints min: 0, default: 0
     }
 
-    User(String username, String password, String name, String lastname, String email, String birthdate, int loyaltyPoints) {
+    User(String username, String password, String name, String lastname, String email, String birthdate, int loyaltyPoints, Role role) {
         this.username = username
         this.password = password
         this.name = name
@@ -27,6 +28,7 @@ class User {
         this.email = email
         this.birthdate = birthdate
         this.loyaltyPoints = loyaltyPoints
+        this.role = role
     }
 
     String getUsername() {

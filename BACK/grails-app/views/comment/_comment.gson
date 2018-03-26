@@ -1,0 +1,11 @@
+import back.Comment
+
+model {
+    Comment comment
+}
+json {
+    username comment.user.username
+    comment comment.message
+    date_created comment.createDate.getTime()
+
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import CommentBox from './CommentBox'
 import InputComment from './InputComment'
+import api from "../api"
 
 export default class OurContainer extends React.Component {
     constructor() {
@@ -10,47 +11,47 @@ export default class OurContainer extends React.Component {
             currentClass: "slide-out",
             comments: [
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 },
                 {
-                    user: "userComment",
+                    username: "userComment",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
                 }
             ]
@@ -90,7 +91,7 @@ export default class OurContainer extends React.Component {
             <div>
                 <div id="slider" className={this.state.currentClass} style={{ zIndex: "102", right: "0px", bottom: "0px", position: "fixed" }}>
                     <div style={{ margin: "10px" }} >
-                        {this.state.comments.map((comment, i) => <CommentBox key={i} obj={comment} user={comment.user} comment={comment.comment} />)}
+                        {this.state.comments.map((comment, i) => <CommentBox key={i} obj={comment} user={comment.username} comment={comment.comment} />)}
                     </div>
                     <InputComment />
                 </div>

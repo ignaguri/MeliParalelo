@@ -7,6 +7,7 @@ import user.IncorrectPasswordException
 import user.UserAlreadyExistsException
 import user.UserCreationException
 import user.UserNotFoundException
+import user.UserParametersException
 
 @Transactional(readOnly = true)
 class UserController {
@@ -29,8 +30,16 @@ class UserController {
                     request.JSON.birthdate,
                     request.JSON.loyaltyPoints)
             response.status = HttpStatus.OK.value()
-            responseData = ["created":created,
-                            "error":""]
+            responseData = ["created": created,
+                            "error"  : ""]
+
+        } catch(UserParametersException e) {
+            created = false
+            response.status = 422
+            responseData = [
+                    "created" : created,
+                    "error" : "Los parametros son incorrectos"
+            ]
         } catch (UserCreationException e) {
             created = false
             response.status = 500
