@@ -19,7 +19,7 @@ class UserService {
 
         if(user == null) {
             int loyaltyPoints = points == null || points.size() == 0 || points.equals("") ? 0 : points.toInteger()
-            User newUser = new User(username, password, name, lastname, email, birthdate, loyaltyPoints)
+            User newUser = new User(username, password, name, lastname, email, birthdate, loyaltyPoints, Role.findByName('user'))
             newUser.validate()
             if(newUser.save()){
                 status = true

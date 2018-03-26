@@ -15,7 +15,7 @@ class PopulateDB {
 
         categoriesList.each {
             def categoryId = it.id
-            def urlI = 'https://api.mercadolibre.com/sites/MLA/search?category=' + categoryId + '&limit=10'
+            def urlI = 'https://api.mercadolibre.com/sites/MLA/search?category=' + categoryId + '&limit=1'
             def itemsList = getRequest(urlI)
 
             def auxCategory = new Category('categoryId': it.id, 'name': it.name).save()
