@@ -7,4 +7,5 @@ json {
     username user.username
     name user.name
     lastname user.lastname
+    role user.role.name
 }

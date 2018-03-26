@@ -4,7 +4,7 @@ import strings from '../assets/languages';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, Jumbotron } from 'reactstrap';
 
 
-export default class Singin extends React.Component {
+export default class Signin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,11 +33,11 @@ export default class Singin extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.postearSingIn();
+        this.postearSignIn();
     }
 
-    postearSingIn() {
-        api.postSingin(this.state.user, this.state.password, this.state.name, this.state.lastName, this.state.birthdate, this.state.email)
+    postearSignIn() {
+        api.postSignin(this.state.user, this.state.password, this.state.name, this.state.lastName, this.state.birthdate, this.state.email)
             .then(r => {
                 if (r[0]) {
                     console.log(r)

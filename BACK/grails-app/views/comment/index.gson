@@ -1,0 +1,7 @@
+import back.Comment
+
+model {
+    List<Comment> commentList
+}
+
+json tmpl.comment(commentList ?: [])

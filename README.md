@@ -4,7 +4,7 @@ Proyecto del Grupo B de la MELI Academy
 ## ToDo
 
 ### Registro/Login:
-- Landing inicial.
+- Landing inicial. ✅
 - Registro (Por ahora alta, ver posibilidad de modificacion y baja). (Back ✅)
 - Login. (Back ✅)
 

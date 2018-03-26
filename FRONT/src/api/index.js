@@ -30,17 +30,28 @@ export default {
     },
     //Crear Usuario
     postSingin(user, password, name, lastname, birthdate, email) {
-        return axios.post('/singin', { username: user, password: password, name: name, lastname: lastname, birthdate: birthdate, email: email })
+        const body = {
+            username: user,
+            password: password,
+            name: name,
+            lastname: lastname,
+            email: email,
+            birthdate: birthdate,
+            loyaltyPoints: "0"
+        };
+        console.log("body", body);
+        return axios.post(API + 'user', body)
             .then(function (response) {
+                console.log(response)
                 return response
             })
             .catch(err => {
                 console.error(err);
-                return false
+                return [false, err.response.data]
             })
     },
     getCategories() {
-        return axios.get(API + 'categories')
+        return axios.get(API + 'category')
             .then(r => {
                 return r.data
             })
@@ -50,7 +61,8 @@ export default {
             })
     },
     postPreferences(categories) {
-        return axios.post('/preferences', { cateegories: categories })
+        //return axios.post('/preferences', { user: this.getUser, categories: categories })
+        return axios.post(API + 'preferences', { user: 'admin', categories: categories })
             .then(function (response) {
                 return response
             })
@@ -61,7 +73,36 @@ export default {
     },
     //Pagina Principal
     getItems() {
-        return axios.get(API + 'items')
+        return axios.get(API + 'item')
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
+    // getItemsWithFilter() {
+    //     return axios.get(API + 'item/filter')
+    //     category
+    //     condition
+    //     price_min
+    //     price_max
+    //     statename
+    //         .then(r => {
+    //             console.log(r);
+    //             return r
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //             return false
+    //         })
+    // },
+
+    getItemsPreferences() {
+        return axios.get(API + 'item/preferences?username=' + this.getUser())
             .then(r => {
                 console.log(r);
                 return r
@@ -74,7 +115,7 @@ export default {
     //cargar combo filtros
     //arreglo strings
     getLocations() {
-        return Promise.resolve([{name: 'Cordoba'}])
+        return Promise.resolve([{ name: 'Cordoba' }])
         // return axios.get(API + 'localidades')
         //     .then(r => {
         //         console.log(r);
@@ -86,6 +127,13 @@ export default {
         //     })
     },
     //get categorias ya esta arriba
+
+
+    getUser() {
+        return JSON.parse(sessionStorage.getItem('user')).username;
+    },
+
+
     agregarACarrito(producto, cantidad) {
         const prod = {
             id: producto.id,
@@ -103,7 +151,55 @@ export default {
             sessionStorage.setItem('carrito', aux);
         }
     },
+    quitarACarrito(idProducto) {
+        let carrito = sessionStorage.getItem('carrito');
+        if (carrito) {
+            let aux = JSON.parse(carrito);
+            const index = aux.indexOf(idProducto);
+            if (index >= 0) {
+                aux.splice(index, 1);
+                sessionStorage.setItem('carrito', JSON.stringify(aux));
+            }
+        }
+    },
+
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
+    },
+
+    postCheckout() {
+        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
+    getComments() {
+        return axios.get(API + 'comment')
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
+    postComment(comment) {
+        //return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
+        return axios.post(API + 'comment/save', { username: "admin", comment: comment })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
     }
 }
+
