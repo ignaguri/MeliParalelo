@@ -15,6 +15,12 @@ class VisitController {
 
         String username = params.get('username')
 
+        //Verifico usuario no autorizado
+        if(!userService.checkUserAdmin(username)) {
+            response.status = HttpStatus.UNAUTHORIZED.value()
+            render([error: 'Usuario no autorizado.'] as JSON)
+        }
+
         User user = User.findByUsername(username)
 
         if(user == null) {
@@ -34,6 +40,13 @@ class VisitController {
     def show() {
 
         String username = params.get('username')
+
+        //Verifico usuario no autorizado
+        if(!userService.checkUserAdmin(username)) {
+            response.status = HttpStatus.UNAUTHORIZED.value()
+            render([error: 'Usuario no autorizado.'] as JSON)
+        }
+
         String itemID = params.get('id')
 
         User user = User.findByUsername(username)
@@ -64,6 +77,8 @@ class VisitController {
     }
 
     def generateStatistics() {
+
+        //http://localhost:8080/visit/generateStatistics?username=':username'
 
         String username = params.get('username')
 
