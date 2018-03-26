@@ -106,6 +106,12 @@
   color: rgba(0,0,0,0.64)
 }
 
+#banner {
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+}
+
 .slide-in {
   animation: slide-in 0.5s forwards;
   -webkit-animation: slide-in 0.5s forwards;

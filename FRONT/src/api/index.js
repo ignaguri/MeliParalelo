@@ -62,7 +62,7 @@ export default {
     },
     //Pagina Principal
     getItems() {
-        return axios.get(API + 'items')
+        return axios.get(API + 'item')
             .then(r => {
                 console.log(r);
                 return r
@@ -75,7 +75,7 @@ export default {
     //cargar combo filtros
     //arreglo strings
     getLocations() {
-        return Promise.resolve([{name: 'Cordoba'}])
+        return Promise.resolve([{ name: 'Cordoba' }])
         // return axios.get(API + 'localidades')
         //     .then(r => {
         //         console.log(r);
