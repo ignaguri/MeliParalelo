@@ -113,6 +113,17 @@ export default {
     },
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
+    },
+
+    postCheckout(user, items) {
+        return axios.post('/checkout/save', { username: user, items: items })
+            .then(function (response) {
+                return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
     }
 }
 
