@@ -4,7 +4,7 @@ import CarouselDisplay from './CarouselDisplay'
 import ListItems from './ListItems'
 import CardItems from './CardItems'
 import ChatSlide from './ChatSlide'
-import Singin from './Singin'
+import Singin from './SignIn'
 import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
@@ -20,7 +20,7 @@ export default class OurContainer extends React.Component {
     }
 
     onGo(componente) {
-        this.setState({displayType: componente})
+        this.setState({ displayType: componente })
     }
     // landing, login, preferences, registration
     render() {
@@ -66,7 +66,7 @@ export default class OurContainer extends React.Component {
             case "landing":
                 return (
                     <div>
-                        <Landing go={this.onGo}/>
+                        <Landing go={this.onGo} />
                     </div>
                 );
             case "preferences":
