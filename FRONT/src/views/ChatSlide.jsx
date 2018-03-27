@@ -52,7 +52,7 @@ export default class OurContainer extends React.Component {
                     <div style={{ margin: "10px" }} >
                         {this.state.comments ? this.state.comments.map((comment, i) => <CommentBox key={i} obj={comment} user={comment.username} comment={comment.comment} />) : <div></div>}
                     </div>
-                    <InputComment loadComments={this.loadComments} />
+                    <InputComment loadComments={this.loadComments} language={this.props.language} />
                 </div>
                 <div id="toggle" className="chatButton" onClick={this.handleClick}></div>
             </div>

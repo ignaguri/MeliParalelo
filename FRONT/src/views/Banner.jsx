@@ -114,9 +114,8 @@ export default class Banner extends React.Component {
         console.log('salir', e)
     }
     render() {
-        const lang = strings[this.state.language];
+        const lang = strings[this.props.language];
         return (
-
             <div id="banner">
                 <Navbar color="light" light expand="lg">
                     <NavbarBrand>
