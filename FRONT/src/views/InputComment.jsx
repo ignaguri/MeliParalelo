@@ -7,7 +7,6 @@ export default class InputComment extends React.Component {
     constructor() {
         super();
         this.state = {
-            language: this.props.language,
             message: ""
         }
         this.updateInput = this.updateInput.bind(this);
@@ -19,7 +18,6 @@ export default class InputComment extends React.Component {
     }
 
     handleClick() {
-        console.log(this.state.message)
         api.postComment(this.state.message)
             .then(r => {
                 this.props.loadComments()
@@ -27,7 +25,7 @@ export default class InputComment extends React.Component {
     }
 
     render() {
-        const lang = strings[this.state.language];
+        const lang = strings[this.props.language];
         return (
             <InputGroup id="inputDiv">
                 <Input value={this.state.inputValue} onChange={this.updateInput} maxLength="256" minLength="1" />
