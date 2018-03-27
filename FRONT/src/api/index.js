@@ -39,14 +39,11 @@ export default {
             birthdate: birthdate,
             loyaltyPoints: "0"
         };
-        console.log("body", body);
         return axios.post(API + 'user', body)
             .then(function (response) {
-                console.log(response)
                 return response
             })
             .catch(err => {
-                console.error(err);
                 return [false, err.response.data]
             })
     },
@@ -61,8 +58,7 @@ export default {
             })
     },
     postPreferences(categories) {
-        //return axios.post('/preferences', { user: this.getUser, categories: categories })
-        return axios.post(API + 'preferences', { user: 'admin', categories: categories })
+        return axios.post('/preferences', { user: this.getUser, categories: categories })
             .then(function (response) {
                 return response
             })
@@ -96,22 +92,17 @@ export default {
             })
     },
 
-    // getItemsWithFilter() {
-    //     return axios.get(API + 'item/filter')
-    //     category
-    //     condition
-    //     price_min
-    //     price_max
-    //     statename
-    //         .then(r => {
-    //             console.log(r);
-    //             return r
-    //         })
-    //         .catch(err => {
-    //             console.error(err);
-    //             return false
-    //         })
-    // },
+    getItemsWithFilter(categoryId, condition, price_min, price_max, statename) {
+        return axios.get(API + 'item/filter?category=' + categoryId + '&condition=' + condition + '&price_min=' + price_min + '&price_max=' + price_max + '&statename=' + statename)
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
 
     getItemsPreferences() {
         return axios.get(API + 'item/preferences?username=' + this.getUser())
@@ -127,7 +118,7 @@ export default {
     //cargar combo filtros
     //arreglo strings
     getLocations() {
-        return Promise.resolve([{ name: 'Cordoba' }])
+        return Promise.resolve([{ name: 'Buenos Aires' }, { name: 'Capital Federal' }])
         // return axios.get(API + 'localidades')
         //     .then(r => {
         //         console.log(r);
@@ -206,8 +197,7 @@ export default {
     },
 
     postComment(comment) {
-        //return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
-        return axios.post(API + 'comment/save', { username: "admin", comment: comment })
+        return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
             .then(function (response) {
                 return response
             })
