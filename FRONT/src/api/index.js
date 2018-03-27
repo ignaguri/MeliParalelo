@@ -84,6 +84,18 @@ export default {
             })
     },
 
+    getItem(id) {
+        return axios.get(API + 'item/show/' + id + '?user=' + this.getUser())
+            .then(r => {
+                console.log(r);
+                return r
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
     // getItemsWithFilter() {
     //     return axios.get(API + 'item/filter')
     //     category
