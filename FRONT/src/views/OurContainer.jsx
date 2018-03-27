@@ -64,7 +64,7 @@ export default class OurContainer extends React.Component {
             case "list":
                 return (
                     <div>
-                        <Banner language={this.state.language} />
+                        <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language}/>
                             <ListItems language={this.state.language}/>
@@ -74,17 +74,17 @@ export default class OurContainer extends React.Component {
             case "card":
                 return (
                     <div>
-                        <Banner language={this.state.language} />
+                        <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <CardItems language={this.state.language} />
+                            <CardItems language={this.state.language} getProduct={this.getProduct} />
                         </div>
                     </div>
                 );
             case "carousel":
                 return (
                     <div>
-                        <Banner language={this.state.language} />
+                        <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
                             <CarouselDisplay language={this.state.language} />
@@ -117,7 +117,7 @@ export default class OurContainer extends React.Component {
             case "producto":
                 return (
                     <div>
-                        <Banner language={this.state.language} />
+                        <Banner go={this.onGo} language={this.state.language} />
                         <br /><br /><br /> <br />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
