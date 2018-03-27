@@ -9,6 +9,7 @@ import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
 import Producto from './Producto'
+import Dashboard from './Dashboard'
 import api from '../api'
 
 export default class OurContainer extends React.Component {
@@ -16,7 +17,7 @@ export default class OurContainer extends React.Component {
         super();
         this.selectedLang = this.selectedLang.bind(this);
         this.state = {
-            displayType: "card",
+            displayType: "dashboard",
             language: 'spanish',
             product: {
                 id: "MLA614976100",
@@ -133,7 +134,14 @@ export default class OurContainer extends React.Component {
                         </div>
                     </div>
                 );
-
+            case "dashboard":
+                return (
+                    <div>
+                        <Banner language={this.state.language} isDashboard />
+                        <br /><br /><br /><br />
+                        <Dashboard language={this.state.language}/>
+                    </div>
+                );
             default:
                 break;
         }
