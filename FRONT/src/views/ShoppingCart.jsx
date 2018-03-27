@@ -30,7 +30,8 @@ class ShoppingCart extends Component {
         this.state = {
             purchases: [],
             totalPrice: 0,
-            totalPoints: 0
+            totalPoints: 0,
+            language: this.props.language
         }
         this.onAcceptClick = this.onAcceptClick.bind(this);
         this.borrar = this.borrar.bind(this);

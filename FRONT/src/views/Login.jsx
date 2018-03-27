@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, Jumbotron } from 'reactstrap';
 import api from "../api"
 import strings from '../assets/languages'
 
@@ -9,7 +9,7 @@ export default class Login extends React.Component {
         this.state = {
             user: '',
             password: '',
-            language: 'spanish'
+            language: this.props.language
         };
 
         this.handleChange = this.handleChange.bind(this);

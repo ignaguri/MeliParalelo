@@ -40,16 +40,20 @@ export default {
             bienvenido: 'Bienvenido a',
             slogan: 'Comprá lo que quieras, ¡al mejor precio!',
             signin: 'Registrarme',
-            login: 'Iniciar Seción'
+            login: 'Iniciar Sesión'
         },
         producto: {
             precioOriginal: 'Precio Original',
             enGrupoB: 'En GrupoB',
             estado: 'Estado',
-            obicacion: 'Vendedor en',
+            ubicacion: 'Vendedor en',
             agregar: 'Agregar al carrito',
             mercadoPago: 'Acepta MercadoPago',
-            clasificacion: 'Clasificación'
+            clasificacion: 'Clasificación',
+            new: 'Nuevo',
+            used: 'Usado',
+            refurbished: 'Restaurado',
+            unknown: 'Desconocido'
         }
 
     },
@@ -91,7 +95,7 @@ export default {
         },
         landing: {
             bienvenido: 'Welcome to',
-            slogan: 'All what you want, at the best price!',
+            slogan: 'Everything you want, at the best price!',
             signin: 'Sign In',
             login: 'Log in'
         },
@@ -99,10 +103,14 @@ export default {
             precioOriginal: 'Original Price',
             enGrupoB: 'At GrupoB',
             estado: 'State',
-            obicacion: 'Seller in',
+            ubicacion: 'Seller in',
             agregar: 'Add to cart',
-            mercadoPago: 'Accept MercadoPago',
-            clasificacion: 'Classification'
+            mercadoPago: 'Accepts MercadoPago',
+            clasificacion: 'Rating',
+            new: 'New',
+            used: 'Used',
+            refurbished: 'Refurbished',
+            unknown: 'Unknown'
         }
     },
     portuguese: {
@@ -151,10 +159,14 @@ export default {
             precioOriginal: 'Preço Original',
             enGrupoB: 'Em GrupoB',
             estado: 'Estado',
-            obicacion: 'Vendedor em',
+            ubicacion: 'Vendedor em',
             agregar: 'Adicionar ao carrinho',
             mercadoPago: 'Aceite MercadoPago',
-            clasificacion: 'Classificação'
+            clasificacion: 'Classificação',
+            new: 'Novo',
+            used: 'Usado',
+            refurbished: 'Restaurado',
+            unknown: 'Desconocido'
         }
     }
 }

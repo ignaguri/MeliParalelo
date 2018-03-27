@@ -17,7 +17,7 @@ export default class Producto extends React.Component {
         this.agregarACarrito = this.agregarACarrito.bind(this);
         this.handleCounter = this.handleCounter.bind(this);
         this.state = {
-            language: 'spanish',
+            language: this.props.language,
             cantidad: 0
         };
     }
@@ -29,15 +29,16 @@ export default class Producto extends React.Component {
     }
 
     parsearEstado() {
+        const lang = strings[this.state.language];
         switch (this.props.producto.condition_item) {
             case "new":
-                return "Nuevo";
+                return lang.producto.new;
             case "used":
-                return "Usado";
+                return lang.product.used;
             case "refurbished":
-                return "Restaurado";
+                return lang.producto.refurbished;
             default:
-                return "Desconocido";
+                return lang.producto.unknown;
         }
     }
 

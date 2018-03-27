@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from "../api"
 import strings from '../assets/languages'
-import { Button, ButtonGroup, Jumbotron, Col, Container, Row, Badge } from 'reactstrap';
+import { Button, Jumbotron, Col, Container, Row, Badge } from 'reactstrap';
 
 class Preferences extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Preferences extends Component {
         this.state = {
             selectedCategories: [],
             categories: [],
-            language: 'spanish'
+            language: this.props.language
         }
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
         this.onAcceptClick = this.onAcceptClick.bind(this);

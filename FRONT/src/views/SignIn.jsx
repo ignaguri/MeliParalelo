@@ -15,7 +15,7 @@ export default class Signin extends React.Component {
             lastName: '',
             birthdate: '',
             loyaltyPoints: '',
-            language: 'spanish'
+            language: this.props.language
         };
 
         this.handleChange = this.handleChange.bind(this);

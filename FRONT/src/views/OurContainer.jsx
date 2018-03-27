@@ -4,7 +4,7 @@ import CarouselDisplay from './CarouselDisplay'
 import ListItems from './ListItems'
 import CardItems from './CardItems'
 import ChatSlide from './ChatSlide'
-import Singin from './Singin'
+import SignIn from './SignIn'
 import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
@@ -13,14 +13,19 @@ import Producto from './Producto'
 export default class OurContainer extends React.Component {
     constructor() {
         super();
-        this.onGo = this.onGo.bind(this)
+        this.onGo = this.onGo.bind(this);
+        this.selectedLang = this.selectedLang.bind(this);
         this.state = {
-            displayType: "producto"
+            displayType: "landing",
+            language: 'spanish'
         }
     }
 
     onGo(componente) {
         this.setState({displayType: componente})
+    }
+    selectedLang(lang){
+        this.setState({language: lang})
     }
     // landing, login, preferences, registration
     render() {
@@ -30,8 +35,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide />
-                            <ListItems />
+                            <ChatSlide language={this.state.language}/>
+                            <ListItems language={this.state.language}/>
                         </div>
                     </div>
                 );
@@ -40,8 +45,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide />
-                            <CardItems />
+                            <ChatSlide language={this.state.language} />
+                            <CardItems language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -50,8 +55,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide />
-                            <CarouselDisplay />
+                            <ChatSlide language={this.state.language} />
+                            <CarouselDisplay language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -59,33 +64,33 @@ export default class OurContainer extends React.Component {
                 return (
                     <div>
                         <div style={{ textAlign: "left" }}>
-                            <Login />
+                            <Login language={this.state.language} />
                         </div>
                     </div>
                 );
             case "landing":
                 return (
                     <div>
-                        <Landing go={this.onGo}/>
+                        <Landing go={this.onGo} langChange={this.selectedLang}/>
                     </div>
                 );
             case "preferences":
                 return (
                     <div>
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide />
-                            <Preferences />
+                            <ChatSlide language={this.state.language} />
+                            <Preferences language={this.state.language} />
                         </div>
                     </div>
                 );
             case "producto":
                 return (
                     <div>
-                        <Banner />
+                        <Banner language={this.state.language} />
                         <br /><br /><br /> <br />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide />
-                            <Producto producto={producto} />
+                            <ChatSlide language={this.state.language} />
+                            <Producto producto={producto} language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -93,7 +98,7 @@ export default class OurContainer extends React.Component {
                 return (
                     <div>
                         <div style={{ textAlign: "left" }}>
-                            <Singin />
+                            <SignIn language={this.state.language} />
                         </div>
                     </div>
                 );

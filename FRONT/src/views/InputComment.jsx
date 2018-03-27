@@ -7,7 +7,7 @@ export default class InputComment extends React.Component {
     constructor() {
         super();
         this.state = {
-            language: 'spanish',
+            language: this.props.language,
             message: ""
         }
         this.updateInput = this.updateInput.bind(this);

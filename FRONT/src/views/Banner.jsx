@@ -26,7 +26,7 @@ export default class Banner extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            language: 'spanish',
+            language: this.props.language,
             isOpen: false,
             locations: [],
             condicion: "",
