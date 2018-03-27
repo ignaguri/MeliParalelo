@@ -54,8 +54,17 @@ export default {
             used: 'Usado',
             refurbished: 'Restaurado',
             unknown: 'Desconocido'
+        },
+        dashboard: {
+            visitado: 'Este producto fue visitado',
+            comprado: 'Este producto fue comprado',
+            ratioCompra: 'Por cada vez que se lo visita, se lo compra',
+            vez: 'vez',
+            veces: 'veces',
+            select: 'Seleccione un producto',
+            productos: 'Productos',
+            stats: 'Estadísticas'
         }
-
     },
     english: {
         singIn: {
@@ -111,6 +120,16 @@ export default {
             used: 'Used',
             refurbished: 'Refurbished',
             unknown: 'Unknown'
+        },
+        dashboard: {
+            visitado: 'This item was visited',
+            comprado: 'This item was buyed',
+            ratioCompra: 'For each visit, it gets buyed',
+            vez: 'time',
+            veces: 'times',
+            select: 'Select an item',
+            productos: 'Products',
+            stats: 'Stats'
         }
     },
     portuguese: {
@@ -167,6 +186,16 @@ export default {
             used: 'Usado',
             refurbished: 'Restaurado',
             unknown: 'Desconocido'
+        },
+        dashboard: {
+            visitado: 'Este produto foi visitado',
+            comprado: 'Este produto foi comprado',
+            ratioCompra: 'Para cada vez que você visita, você compra',
+            vez: 'ocasião',
+            veces: 'ocasiões',
+            select: 'Selecione um produto',
+            productos: 'Produtos',
+            stats: 'Estatísticas'
         }
     }
 }

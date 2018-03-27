@@ -6,15 +6,20 @@ export default class ListItem extends React.Component {
         super();
         this.state = { 
             hover: false
-        }
-        this.toggleHover = this.toggleHover.bind(this)
+        };
+        this.toggleHover = this.toggleHover.bind(this);
+        this.clicked = this.clicked.bind(this);
     }
     toggleHover() {
         this.setState({hover: !this.state.hover})
     }
-    
+    clicked() {
+        // go to another page passing the link reference
+        //console.log(reference);
+        this.props.onSelected(this.props.reference);
+    }
     render() {
-    var listItemStyle;
+    let listItemStyle;
     if (this.state.hover) {
         listItemStyle = {
             width: "100%",
@@ -41,11 +46,11 @@ export default class ListItem extends React.Component {
     const thumbnailStyle = {
         width: "30%",
         display: "inline-block"
-    }
+    };
     const detailsStyle = {
         width: "70%",
         display: "inline-block"
-    }
+    };
     const titleStyle = {
         display: "inline-block",
         textOverflow: "ellipsis",
@@ -53,18 +58,13 @@ export default class ListItem extends React.Component {
         overflow: "hidden",
         WebkitLineClamp: "2",
         WebkitBoxOrient: "vertical"
-    }
+    };
     const locationStyle = {
         color: "black"
-    }
-    var reference = this.props.reference;
-    function testing() {
-        // go to another page passing the link reference
-        console.log(reference)
-    }
+    };
 
     return (
-        <Container className="text-left" style={ listItemStyle } onClick={ testing } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+        <Container className="text-left" style={ listItemStyle } onClick={ this.clicked } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <Row>
                 <Col xs="3" style={ thumbnailStyle }>
                     <img src ={ this.props.thumbnail } alt={ "true" } />

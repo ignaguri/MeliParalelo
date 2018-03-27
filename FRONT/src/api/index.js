@@ -81,10 +81,34 @@ export default {
     },
 
     getItem(id) {
-        return axios.get(API + 'item/show/' + id + '?user=' + this.getUser())
+        const user = 'admin'; //this.getUser()
+        return axios.get(API + 'item/show/' + id + '?username=' + user)
             .then(r => {
-                console.log(r);
-                return r
+                return r.data
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+
+    getItemsById(items) {
+        const user = 'admin'; //this.getUser()
+        let promesas = [];
+        items.forEach(i => {
+            promesas.push(axios.get(API + 'item/show/' + i + '?username=' + user)
+                .then(r => {
+                    return r.data
+                })
+                .catch(err => {
+                    console.error(err);
+                    return false
+                })
+            )
+        });
+        return Promise.all(promesas)
+            .then(r => {
+                return r;
             })
             .catch(err => {
                 console.error(err);
@@ -200,6 +224,17 @@ export default {
         return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
             .then(function (response) {
                 return response
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
+    },
+    getStats() {
+        const user = 'admin'; //this.getUser()
+        return axios.get(API + 'visit/generateStatistics?username=' + user)
+            .then(r => {
+                return r.data
             })
             .catch(err => {
                 console.error(err);
