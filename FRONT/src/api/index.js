@@ -153,12 +153,15 @@ export default {
     },
     quitarACarrito(idProducto) {
         let carrito = sessionStorage.getItem('carrito');
+        let aux = JSON.parse(carrito);
         if (carrito) {
-            let aux = JSON.parse(carrito);
-            const index = aux.indexOf(idProducto);
-            if (index >= 0) {
-                aux.splice(index, 1);
-                sessionStorage.setItem('carrito', JSON.stringify(aux));
+            for (let index = 0; index < aux.length; index++) {
+                const element = aux[index];
+                if (element.id === idProducto) {
+                    aux.splice(index, 1);
+                    sessionStorage.setItem('carrito', JSON.stringify(aux));
+                    break;
+                }
             }
         }
     },
