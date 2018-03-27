@@ -38,10 +38,14 @@ export default class Banner extends React.Component {
         this.handleLocationChange = this.handleLocationChange.bind(this);
         this.handlePriceMinChange = this.handlePriceMinChange.bind(this);
         this.handlePriceMaxChange = this.handlePriceMaxChange.bind(this);
+        this.verCuadricula = this.verCuadricula.bind(this);
+        this.verLista = this.verLista.bind(this);
+        this.verSlider = this.verSlider.bind(this);
         this.filtrar = this.filtrar.bind(this);
         this.verCarrito = this.verCarrito.bind(this);
         this.salir = this.salir.bind(this);
     }
+
     /*
     componentDidMount() {
         api.getLocations().then(response => {
@@ -51,6 +55,7 @@ export default class Banner extends React.Component {
         });
     }
     */
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -97,13 +102,13 @@ export default class Banner extends React.Component {
             })
     }
     verCuadricula() {
-        console.log('implementar')
+        this.props.go('card')
     }
     verLista() {
-        console.log('implementar')
+        this.props.go('list')
     }
     verSlider() {
-        console.log('implementar')
+        this.props.go('carousel')
     }
     verCarrito(e) {
         e.preventDefault();
