@@ -25,6 +25,9 @@ class Preferences extends Component {
 
     }
 
+    goPrincipal() {
+        this.props.go('list');
+    }
 
     onCheckboxBtnClick(selected) {
         const index = this.state.selectedCategories.indexOf(selected);
@@ -42,7 +45,7 @@ class Preferences extends Component {
             .then(r => {
                 console.log(r);
                 if (r) {
-                    console.log('ir a pagina principal')
+                    this.goPrincipal();
                 } else {
                     alert(lang.preferences.errorGuardar)
                 }
@@ -60,7 +63,7 @@ class Preferences extends Component {
                             this.state.categories.map((category, i) => {
                                 return (
                                     <Col md="2" xs="4" key={i} style={{ margin: "10px", padding: "0px" }}>
-                                        <Button outline color="info" style={{ "height": "50", "width": "100%", "white-space": "normal" }} onClick={() => this.onCheckboxBtnClick(category.id)} active={this.state.selectedCategories.includes(category.id)}>{category.name}</Button>
+                                        <Button outline color="info" style={{ "height": "50", "width": "100%", "whiteSpace": "normal" }} onClick={() => this.onCheckboxBtnClick(category.id)} active={this.state.selectedCategories.includes(category.id)}>{category.name}</Button>
                                     </Col>);
                             })
                         }
