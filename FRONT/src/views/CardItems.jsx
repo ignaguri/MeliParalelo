@@ -34,7 +34,7 @@ export default class CardItems extends React.Component {
             }
         } else {
             if(!this.state.all){
-                api.getItemsPreferences()
+                api.getItems()
                     .then(res => {
                         if(res.data !== this.state.items) {
                             this.setState({items: res.data, all: true})

@@ -36,7 +36,7 @@ export default class ListItems extends React.Component {
           }
       } else {
           if(!this.state.all){
-              api.getItemsPreferences()
+              api.getItems()
                   .then(res => {
                       if(res.data !== this.state.items) {
                           this.setState({items: res.data, all: true})
@@ -47,7 +47,8 @@ export default class ListItems extends React.Component {
   }
 
   render() {
-      this.checkChanges();
+    this.checkChanges();
+    console.log('items', this.state.items);
     return (
       <ListGroup>
         <ListGroupItem disabled tag="a" href="#" className="marginBanner" >

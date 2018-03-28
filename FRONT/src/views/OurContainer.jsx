@@ -31,12 +31,13 @@ export default class OurContainer extends React.Component {
         this.pushItems = this.pushItems.bind(this);
     }
     componentDidMount() {
-        const logged = api.isLoggedIn();
+        let logged = api.isLoggedIn();
         if (logged) {
-            if(logged.role === 'user') {
-                this.setState({displayType: 'list'})
-            } else {
+            logged = JSON.parse(logged);
+            if(logged.role === 'admin') {
                 this.setState({displayType: 'dashboard'})
+            } else {
+                this.setState({displayType: 'list'})
             }
         }
     }
