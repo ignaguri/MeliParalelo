@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import api from "../api"
+import api from "../api";
+import strings from '../assets/languages';
 import { Button, Col, Container, Row, Table } from 'reactstrap';
 
 const pointsPercentage = 0.1;
@@ -93,8 +94,8 @@ class ShoppingCart extends Component {
     }
 
     render() {
-
-        var purchasesRow = this.state.purchases.map((item) => {
+        const lang = strings[this.state.language];
+        let purchasesRow = this.state.purchases.map((item) => {
             return (
                 <tr key={item.id}>
 
@@ -112,21 +113,21 @@ class ShoppingCart extends Component {
                 <Row>
                     <Col md="5" sm="12">
 
-                        <h1>{textMap.title}</h1>
-                        <h3>{textMap.subtitle}</h3>
+                        <h1>{lang.checkout.title}</h1>
+                        <h3>{lang.checkout.subtitle}</h3>
                         <p>
-                            {textMap.message}
+                            {lang.checkout.message}
                         </p>
                     </Col>
                     <Col md="7" sm="12" >
                         <Table hover>
                             <thead>
                                 <tr style={{ width: "100%" }}>
-                                    <th>{textMap.table.header.quantity}</th>
-                                    <th>{textMap.table.header.title}</th>
-                                    <th>{textMap.table.header.price}</th>
-                                    <th>{textMap.table.header.subTotal}</th>
-                                    <th>{textMap.table.header.quit}</th>
+                                    <th>{lang.checkout.table.header.quantity}</th>
+                                    <th>{lang.checkout.table.header.title}</th>
+                                    <th>{lang.checkout.table.header.price}</th>
+                                    <th>{lang.checkout.table.header.subTotal}</th>
+                                    <th>{lang.checkout.table.header.quit}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,7 +143,7 @@ class ShoppingCart extends Component {
                                     <Row>
                                         <Container style={{ fontWeight: "bold" }}>
                                             <span style={{ color: "#727578", float: "left" }}>
-                                                {textMap.total}:
+                                                {lang.checkout.total}:
                                             </span>
                                             <span style={{ color: "#f06953" }}>{this.state.totalPrice}</span>
                                         </Container>
@@ -150,14 +151,14 @@ class ShoppingCart extends Component {
                                     <Row>
                                         <Container style={{ fontWeight: "bold" }}>
                                             <span style={{ color: "#727578", float: "left" }}>
-                                                {textMap.points}:
+                                                {lang.checkout.points}:
                                             </span>
                                             <span style={{ color: "#4CAF50" }}>{this.state.totalPoints}</span>
                                         </Container>
                                     </Row>
                                 </Col>
                                 <Col>
-                                    <Button onClick={() => this.onAcceptClick()} color="success" size="lg" className="float-right" style={{ backgroundColor: "#f06953", border: "none", color: "white" }}>{textMap.buttons.buy}</Button>
+                                    <Button onClick={() => this.onAcceptClick()} color="success" size="lg" className="float-right" style={{ backgroundColor: "#f06953", border: "none", color: "white" }}>{lang.checkout.buttons.buy}</Button>
                                 </Col>
                             </Row>
 

@@ -65,7 +65,27 @@ export default {
             select: 'Seleccione un producto',
             productos: 'Productos',
             stats: 'Estadísticas'
+        },
+        checkout: {
+            table: {
+                header: {
+                    quantity: 'Cantidad',
+                    title: 'Titulo',
+                    price: 'Precio',
+                    subTotal: 'Subtotal',
+                    quit: 'Quitar',
+                }
+            },
+            total: 'Total',
+            points: 'Puntos',
+            subtitle: 'Con cada compra sumas puntos',
+            message: 'El 10% del total de tu compra',
+            title: 'Productos seleccionados',
+            buttons: {
+                buy: 'Comprar'
+            }
         }
+
     },
     english: {
         signIn: {
@@ -133,6 +153,25 @@ export default {
             select: 'Select an item',
             productos: 'Products',
             stats: 'Stats'
+        },
+        checkout: {
+            table: {
+                header: {
+                    quantity: 'Quantity',
+                    title: 'Title',
+                    price: 'Price',
+                    subTotal: 'Subtotal',
+                    quit: 'Remove',
+                }
+            },
+            total: 'Total',
+            points: 'Points',
+            subtitle: 'With each purchase you earn points',
+            message: '10% of your purchase total',
+            title: 'Selected Products',
+            buttons: {
+                buy: 'Buy'
+            }
         }
     },
     portuguese: {
@@ -201,6 +240,25 @@ export default {
             select: 'Selecione um produto',
             productos: 'Produtos',
             stats: 'Estatísticas'
+        },
+        checkout: {
+            table: {
+                header: {
+                    quantity: 'Quantidade',
+                    title: 'Título',
+                    price: 'Preço',
+                    subTotal: 'Subtotal',
+                    quit: 'Remover',
+                }
+            },
+            total: 'Total',
+            points: 'Pontos',
+            subtitle: 'Com cada compra você ganha pontos',
+            message: '10% do total da sua compra',
+            title: 'Produtos Selecionados',
+            buttons: {
+                buy: 'Comprar'
+            }
         }
     }
 }
