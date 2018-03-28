@@ -73,6 +73,7 @@ class ItemController {
             values.each {
                 def itemAux = Item.findByCategoryId(it.categoryId)
                 if(itemAux != null)
+                    println itemAux
                     responseData.push(itemAux)
             }
 
@@ -99,11 +100,8 @@ class ItemController {
 
         def item = itemService.filterItems(filters)
 
-        withFormat {
-            json {
-                render item as JSON
-            }
-        }
+        response.status = HttpStatus.OK.value()
+        respond item
     }
 
     def locations() {
