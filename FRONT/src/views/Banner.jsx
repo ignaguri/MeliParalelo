@@ -126,7 +126,12 @@ export default class Banner extends React.Component {
     }
     verCarrito(e) {
         e.preventDefault();
-        this.props.go('carrito')
+        const aux = api.getCarrito();
+        if (aux === null || aux === "") {
+
+        } else {
+            this.props.go('carrito')
+        }
     }
     salir(e) {
         e.preventDefault();

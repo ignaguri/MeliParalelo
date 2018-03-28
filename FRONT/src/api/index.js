@@ -197,11 +197,20 @@ export default {
             }
         }
     },
+    vaciarCarrito() {
+        sessionStorage.setItem('carrito', '');
+    },
     getCarrito() {
-        return JSON.parse(sessionStorage.getItem('carrito'))
+        let aux;
+        try {
+            aux = JSON.parse(sessionStorage.getItem('carrito'));
+        } catch (e) {
+            aux = "";
+        }
+        return aux;
     },
     postCheckout() {
-        return axios.post(API + 'checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + 'checkout/save', { username: this.getUser(), detail_checkout: this.getCarrito(), observation: "none" })
             .then(function (response) {
                 sessionStorage.removeItem('carrito');
                 return response

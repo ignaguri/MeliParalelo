@@ -47,7 +47,10 @@ class ShoppingCart extends Component {
     componentWillMount() {
         // this.mockCarro();
         const aux = api.getCarrito();
-        if (aux != null) {
+        if (aux === null || aux === "") {
+            console.log("No hay items en el carro");
+        } else {
+
             this.setState({ purchases: aux }, function () {
                 this.totals();
             });
@@ -57,6 +60,7 @@ class ShoppingCart extends Component {
 
     onAcceptClick() {
         api.postCheckout();
+        api.vaciarCarrito();
         this.props.go('list');
         console.log('Compra Confirmada');
     }
