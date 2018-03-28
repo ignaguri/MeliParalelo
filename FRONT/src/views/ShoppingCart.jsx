@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from "../api"
-import { Button, Col, Container, Row, Table } from 'reactstrap';
+import { Button, Col, Container, Row, Table, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 
 const pointsPercentage = 0.1;
 const textMap = {
@@ -33,15 +33,30 @@ class ShoppingCart extends Component {
             ],
             totalPrice: 0,
             totalPoints: 0,
-            language: this.props.language
-        }
+            language: this.props.language,
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
         this.onAcceptClick = this.onAcceptClick.bind(this);
         this.borrar = this.borrar.bind(this);
+        this.goList = this.goList.bind(this);
     }
 
     mockCarro() {
         api.agregarACarrito({ id: 'MLA614976100', title: 'Kit De Seguridad Para Auto 9 En 1 Tarjeta Patente Vtv Neokit', price: 436.5 }, 2)
         api.agregarACarrito({ id: 'MLA627579355', title: 'Practicuna Plegable Cuna Bebé Megababy+colchón. Creciendo', price: 2899 }, 3)
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
+    }
+
+    goList() {
+        api.vaciarCarrito();
+        this.props.go('list');
     }
 
     componentWillMount() {
@@ -60,8 +75,8 @@ class ShoppingCart extends Component {
 
     onAcceptClick() {
         api.postCheckout();
-        api.vaciarCarrito();
-        this.props.go('list');
+        this.toggle();
+
         console.log('Compra Confirmada');
     }
 
@@ -107,6 +122,14 @@ class ShoppingCart extends Component {
             );
         });
 
+        var itemsList = this.state.purchases.map((item) => {
+            return (
+                <ul key={item.id}>
+                    <li>{item.quantity} - {item.title} por ${item.quantity * item.price}</li>
+                </ul>
+            );
+        });
+
         return (
             <Container >
                 <Row>
@@ -144,6 +167,7 @@ class ShoppingCart extends Component {
                                             <span style={{ color: "#727578", float: "left" }}>
                                                 {textMap.total}:
                                             </span>
+
                                             <span style={{ color: "#f06953" }}>{this.state.totalPrice}</span>
                                         </Container>
                                     </Row>
@@ -160,7 +184,23 @@ class ShoppingCart extends Component {
                                     <Button onClick={() => this.onAcceptClick()} color="success" size="lg" className="float-right" style={{ backgroundColor: "#f06953", border: "none", color: "white" }}>{textMap.buttons.buy}</Button>
                                 </Col>
                             </Row>
+                            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                                <ModalHeader toggle={this.toggle}>Compra Confirmada</ModalHeader>
+                                <ModalBody>
+                                    <span style={{ fontWeight: "bold" }}>
 
+                                        Items comprados:
+                                            </span>
+                                    {itemsList}
+                                    <span style={{ fontWeight: "bold" }}>
+                                        Total compra:
+                                            </span>$
+                                    {this.state.totalPrice}
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="primary" onClick={this.goList}>Aceptar</Button>
+                                </ModalFooter>
+                            </Modal>
                         </div>
 
 
