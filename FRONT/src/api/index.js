@@ -194,7 +194,13 @@ export default {
         sessionStorage.setItem('carrito', '');
     },
     getCarrito() {
-        return JSON.parse(sessionStorage.getItem('carrito'))
+        let aux;
+        try {
+            aux = JSON.parse(sessionStorage.getItem('carrito'));
+        } catch (e) {
+            aux = "";
+        }
+        return aux;
     },
     postCheckout() {
         return axios.post(API + 'checkout/save', { username: this.getUser(), detail_checkout: this.getCarrito(), observation: "none" })

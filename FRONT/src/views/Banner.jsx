@@ -108,7 +108,12 @@ export default class Banner extends React.Component {
     }
     verCarrito(e) {
         e.preventDefault();
-        this.props.go('carrito')
+        const aux = api.getCarrito();
+        if (aux === null || aux === "") {
+
+        } else {
+            this.props.go('carrito')
+        }
     }
     salir(e) {
         e.preventDefault();
@@ -126,49 +131,49 @@ export default class Banner extends React.Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         {
-                            this.props.isDashboard?
-                            <Nav className="ml-auto" navbar>
-                                <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir" /></NavLink>
-                            </Nav>
-                            :
-                            <Nav className="ml-auto" navbar>
-                                <span className="align-self-center">{lang.banner.ver}:</span>
-                                <Button className="btn btn-light" onClick={this.verCuadricula}><Icon icon="cuadricula" /></Button>{' '}
-                                <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista" /></Button>{' '}
-                                <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider" /></Button>{' '}
-                                <Form inline>
-                                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                        <Label for="condicion" className="mr-sm-2">{lang.banner.condicion}:</Label>
-                                        <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
-                                            <option value="">{lang.banner.noFilter}</option>
-                                            <option value="nuevo">{lang.banner.new}</option>
-                                            <option value="usado">{lang.banner.used}</option>
-                                            <option value="refurbished">{lang.banner.refurbished}</option>
-                                        </Input>
-                                    </FormGroup>
-                                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                        <Label for="ubicacion" className="mr-sm-2">{lang.banner.location}:</Label>
-                                        <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
-                                            <option value="">{lang.banner.noFilter}</option>
-                                            {this.state.locations.map((loc) =>
-                                                <option key={loc} value={loc}>{loc}</option>
-                                            )}
-                                        </Input>
-                                    </FormGroup>
-                                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                        <Label for="precioMin" className="mr-sm-2">{lang.banner.price} $</Label>
-                                        <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} style={{width: '100px'}}/>
-                                    </FormGroup>
-                                    <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                        <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} style={{width: '100px'}}/>
-                                    </FormGroup>
-                                    {' '}
-                                    <Button color="success" onClick={this.filtrar}>{lang.banner.filtrar}</Button>
-                                </Form>
-                                {'      '}
-                                <NavLink href="#" onClick={this.verCarrito}><img src={carrito} width="40px" height="50px" alt="carrito" /></NavLink>
-                                <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir" /></NavLink>
-                            </Nav>
+                            this.props.isDashboard ?
+                                <Nav className="ml-auto" navbar>
+                                    <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir" /></NavLink>
+                                </Nav>
+                                :
+                                <Nav className="ml-auto" navbar>
+                                    <span className="align-self-center">{lang.banner.ver}:</span>
+                                    <Button className="btn btn-light" onClick={this.verCuadricula}><Icon icon="cuadricula" /></Button>{' '}
+                                    <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista" /></Button>{' '}
+                                    <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider" /></Button>{' '}
+                                    <Form inline>
+                                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                            <Label for="condicion" className="mr-sm-2">{lang.banner.condicion}:</Label>
+                                            <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
+                                                <option value="">{lang.banner.noFilter}</option>
+                                                <option value="nuevo">{lang.banner.new}</option>
+                                                <option value="usado">{lang.banner.used}</option>
+                                                <option value="refurbished">{lang.banner.refurbished}</option>
+                                            </Input>
+                                        </FormGroup>
+                                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                            <Label for="ubicacion" className="mr-sm-2">{lang.banner.location}:</Label>
+                                            <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
+                                                <option value="">{lang.banner.noFilter}</option>
+                                                {this.state.locations.map((loc) =>
+                                                    <option key={loc} value={loc}>{loc}</option>
+                                                )}
+                                            </Input>
+                                        </FormGroup>
+                                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                            <Label for="precioMin" className="mr-sm-2">{lang.banner.price} $</Label>
+                                            <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} style={{ width: '100px' }} />
+                                        </FormGroup>
+                                        <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
+                                            <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} style={{ width: '100px' }} />
+                                        </FormGroup>
+                                        {' '}
+                                        <Button color="success" onClick={this.filtrar}>{lang.banner.filtrar}</Button>
+                                    </Form>
+                                    {'      '}
+                                    <NavLink href="#" onClick={this.verCarrito}><img src={carrito} width="40px" height="50px" alt="carrito" /></NavLink>
+                                    <NavLink href="#" onClick={this.salir}><img src={logout} width="40px" height="50px" alt="salir" /></NavLink>
+                                </Nav>
                         }
                     </Collapse>
                 </Navbar>
