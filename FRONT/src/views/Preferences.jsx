@@ -42,7 +42,7 @@ class Preferences extends Component {
             .then(r => {
                 console.log(r);
                 if (r) {
-                    console.log('ir a pagina principal')
+                    this.props.go('list');
                 } else {
                     alert(lang.preferences.errorGuardar)
                 }

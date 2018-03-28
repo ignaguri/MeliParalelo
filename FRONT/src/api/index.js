@@ -40,7 +40,11 @@ export default {
         };
         return axios.post(API + 'user', body)
             .then(function (response) {
-                console.log('user created', response.data);
+                const user = {
+                    username: response.data.created.username,
+                    role: 'user'
+                };
+                sessionStorage.setItem('user', JSON.stringify(user));
                 return [response.data]
             })
             .catch(err => {
@@ -59,7 +63,8 @@ export default {
     },
     postPreferences(categories) {
         const user = this.getUser();
-        return axios.post(API + 'preferences', { username: user, preferences: categories })
+        console.log('post preferences', user);
+        return axios.post(API + 'user/preferences', { username: user, preferences: categories })
             .then(function (response) {
                 return response
             })
@@ -115,10 +120,13 @@ export default {
             })
     },
     getItemsWithFilter(categoryId, condition, price_min, price_max, statename) {
-        return axios.get(API + 'item/filter?category=' + categoryId + '&condition=' + condition + '&price_min=' + price_min + '&price_max=' + price_max + '&statename=' + statename)
+        const condicion = condition? '&condition=' + condition : '';
+        const min = price_min? '&price_min=' + price_min : '';
+        const max = price_max? '&price_max=' + price_max : '';
+        const location = statename? '&statename=' + statename : '';
+        return axios.get(API + 'item/filter?category=' + categoryId + condicion + min + max + location)
             .then(r => {
-                console.log(r);
-                return r
+                return r.data
             })
             .catch(err => {
                 console.error(err);

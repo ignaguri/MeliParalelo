@@ -29,11 +29,14 @@ export default class Banner extends React.Component {
             language: this.props.language,
             isOpen: false,
             locations: [],
+            categorias: [],
+            categoria: "",
             condicion: "",
             location: "",
             precioMin: "",
             precioMax: ""
         };
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
         this.handleConditionChange = this.handleConditionChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
         this.handlePriceMinChange = this.handlePriceMinChange.bind(this);
@@ -51,6 +54,11 @@ export default class Banner extends React.Component {
                 locations: response
             });
         });
+        api.getCategories().then(response => {
+            this.setState({
+                categorias: response
+            });
+        });
     }
     toggle() {
         this.setState({
@@ -59,6 +67,9 @@ export default class Banner extends React.Component {
     }
     handleLocationChange(event) {
         this.setState({ location: event.target.value });
+    }
+    handleCategoryChange(event) {
+        this.setState({ categoria: event.target.value });
     }
     handleConditionChange(event) {
         this.setState({ condicion: event.target.value });
@@ -71,6 +82,12 @@ export default class Banner extends React.Component {
     }
     filtrar(e) {
         let filtros = {};
+        if (this.state.categoria !== "") {
+            filtros.categoria = this.state.categoria;
+        } else {
+            alert('Debe seleccionar al menos una categoría');
+            return
+        }
         if (this.state.condicion !== "") {
             filtros.condicion = this.state.condicion;
         }
@@ -88,7 +105,7 @@ export default class Banner extends React.Component {
                 return;
             }
         }
-        api.getItemsWithFilter('MLA1648', filtros.condicion, filtros.precioMin, filtros.precioMax, filtros.location)
+        api.getItemsWithFilter(filtros.categoria, filtros.condicion, filtros.precioMin, filtros.precioMax, filtros.location)
             .then(r => {
                 if (r) {
                     alert('Mostrar filtrado!')
@@ -121,7 +138,7 @@ export default class Banner extends React.Component {
             <div id="banner">
                 <Navbar color="light" light expand="lg">
                     <NavbarBrand>
-                        <img src={logo} width="80px" height="50px" alt="logo" />
+                        <img src={logo} width="70px" height="45px" alt="logo" />
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
@@ -138,17 +155,26 @@ export default class Banner extends React.Component {
                                 <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider" /></Button>{' '}
                                 <Form inline>
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                        <Label for="condicion" className="mr-sm-2">{lang.banner.condicion}:</Label>
-                                        <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
+                                        <Label for="cmb_categoria" className="mr-sm-2">{lang.banner.categoria}:</Label>
+                                        <Input type="select" name="cmb_categoria" id="cmb_categoria" bsSize="sm" value={this.state.categoria} onChange={this.handleCategoryChange} style={{width: '82px'}}>
                                             <option value="">{lang.banner.noFilter}</option>
-                                            <option value="nuevo">{lang.banner.new}</option>
-                                            <option value="usado">{lang.banner.used}</option>
+                                            {this.state.categorias.map((c) =>
+                                                <option key={c.id} value={c.id}>{c.name}</option>
+                                            )}
+                                        </Input>
+                                    </FormGroup>
+                                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                        <Label for="cmb_condicion" className="mr-sm-2">{lang.banner.condicion}:</Label>
+                                        <Input type="select" name="cmb_condicion" id="cmb_condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} style={{width: '82px'}}>
+                                            <option value="">{lang.banner.noFilter}</option>
+                                            <option value="new">{lang.banner.new}</option>
+                                            <option value="used">{lang.banner.used}</option>
                                             <option value="refurbished">{lang.banner.refurbished}</option>
                                         </Input>
                                     </FormGroup>
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                        <Label for="ubicacion" className="mr-sm-2">{lang.banner.location}:</Label>
-                                        <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
+                                        <Label for="cmb_ubicacion" className="mr-sm-2">{lang.banner.location}:</Label>
+                                        <Input type="select" name="cmb_ubicacion" id="cmb_ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange} style={{width: '82px'}}>
                                             <option value="">{lang.banner.noFilter}</option>
                                             {this.state.locations.map((loc) =>
                                                 <option key={loc} value={loc}>{loc}</option>
@@ -157,10 +183,10 @@ export default class Banner extends React.Component {
                                     </FormGroup>
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                         <Label for="precioMin" className="mr-sm-2">{lang.banner.price} $</Label>
-                                        <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} style={{width: '100px'}}/>
+                                        <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} style={{width: '82px'}}/>
                                     </FormGroup>
                                     <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                        <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} style={{width: '100px'}}/>
+                                        <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} style={{width: '82px'}}/>
                                     </FormGroup>
                                     {' '}
                                     <Button color="success" onClick={this.filtrar}>{lang.banner.filtrar}</Button>

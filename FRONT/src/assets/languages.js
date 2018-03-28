@@ -26,7 +26,8 @@ export default {
             price: 'Precio',
             min: 'Mínimo',
             max: 'Máximo',
-            filtrar: 'Filtrar'
+            filtrar: 'Filtrar',
+            categoria: 'Categoría'
         },
         preferences: {
             errorGuardar: 'Ups! No se pudieron guardar tus preferencias :(',
@@ -93,7 +94,8 @@ export default {
             price: 'Price',
             min: 'Min',
             max: 'Max',
-            filtrar: 'Filter'
+            filtrar: 'Filter',
+            categoria: 'Category'
         },
         preferences: {
             errorGuardar: 'Ups! We couldn\'t save your preferences :(',
@@ -160,7 +162,8 @@ export default {
             price: 'Preço',
             min: 'Mínimo',
             max: 'Máximo',
-            filtrar: 'Filtrar'
+            filtrar: 'Filtrar',
+            categoria: 'Categoria'
         },
         preferences: {
             errorGuardar: 'Ups! Suas preferências não puderam ser salvas :(',
