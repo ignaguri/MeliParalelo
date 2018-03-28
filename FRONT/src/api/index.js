@@ -76,7 +76,7 @@ export default {
     getItems() {
         return axios.get(API + 'item')
             .then(r => {
-                console.log(r);
+                console.log('items', r.data);
                 return r
             })
             .catch(err => {
@@ -125,6 +125,7 @@ export default {
         const location = statename? '&statename=' + statename : '';
         return axios.get(API + 'item/filter?category=' + categoryId + condicion + min + max + location)
             .then(r => {
+                console.log('items filtered', r.data);
                 return r.data
             })
             .catch(err => {
@@ -147,7 +148,7 @@ export default {
     //arreglo strings
     getLocations() {
         //return Promise.resolve([{ name: 'Buenos Aires' }, { name: 'Capital Federal' }])
-        return axios.get(API + '/item/locations')
+        return axios.get(API + 'item/locations')
             .then(r => {
                 console.log(r);
                 return r.data

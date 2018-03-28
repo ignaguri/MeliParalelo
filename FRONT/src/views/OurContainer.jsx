@@ -31,9 +31,14 @@ export default class OurContainer extends React.Component {
         this.pushItems = this.pushItems.bind(this);
     }
     componentDidMount() {
-        console.log('it\'s the user logged?', api.isLoggedIn());
-        if (api.isLoggedIn()) {
-            this.setState({ displayType: 'list' })
+        let logged = api.isLoggedIn();
+        if (logged) {
+            logged = JSON.parse(logged);
+            if(logged.role === 'admin') {
+                this.setState({displayType: 'dashboard'})
+            } else {
+                this.setState({displayType: 'list'})
+            }
         }
     }
     onGo(componente) {

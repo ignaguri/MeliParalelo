@@ -30,7 +30,7 @@ class CarouselDisplay extends Component {
 
     componentWillMount() {
         if(!this.props.items) {
-            api.getItems()
+            api.getItemsPreferences()
                 .then(res => {
                     this.setState({items: res.data})
                 });

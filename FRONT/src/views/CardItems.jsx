@@ -18,7 +18,7 @@ export default class CardItems extends React.Component {
 
     componentWillMount() {
         if(!this.props.items) {
-            api.getItems()
+            api.getItemsPreferences()
                 .then(res => {
                     this.setState({items: res.data})
                 });

@@ -6,14 +6,13 @@ export default class CarouselEntity extends React.Component {
         super();
         this.state = {
             hover: false
-        }
+        };
         this.clicked = this.clicked.bind(this);
-        this.toggleHover = this.toggleHover.bind(this)
+        this.toggleHover = this.toggleHover.bind(this);
     }
 
     clicked() {
-        this.props.changeProduct(this.props.reference)
-        console.log(this.props.reference);
+        this.props.changeProduct(this.props.reference);
     }
 
     toggleHover() {
@@ -21,7 +20,7 @@ export default class CarouselEntity extends React.Component {
     }
 
     render() {
-        var listItemStyle;
+        let listItemStyle;
         if (this.state.hover) {
             listItemStyle = {
                 width: "100%",
@@ -54,11 +53,11 @@ export default class CarouselEntity extends React.Component {
             height: "-webkit-fill-available",
             textAlign: "-webkit-center",
             paddingTop: "5%"
-        }
+        };
         const detailsStyle = {
             width: "70%",
             display: "inline-block"
-        }
+        };
         const titleStyle = {
             display: "inline-block",
             textOverflow: "ellipsis",
@@ -67,10 +66,10 @@ export default class CarouselEntity extends React.Component {
             WebkitLineClamp: "2",
             WebkitBoxOrient: "vertical",
             paddingTop: "5%"
-        }
+        };
         const locationStyle = {
             color: "black"
-        }
+        };
 
         return (
             <Container style={listItemStyle} onClick={this.clicked} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>

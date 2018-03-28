@@ -20,7 +20,7 @@ export default class ListItems extends React.Component {
 
   componentWillMount() {
     if(!this.props.items) {
-        api.getItems()
+        api.getItemsPreferences()
             .then(res => {
                 this.setState({items: res.data})
             });
@@ -47,7 +47,8 @@ export default class ListItems extends React.Component {
   }
 
   render() {
-      this.checkChanges();
+    this.checkChanges();
+    console.log('items', this.state.items);
     return (
       <ListGroup>
         <ListGroupItem disabled tag="a" href="#" className="marginBanner" >
