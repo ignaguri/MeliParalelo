@@ -58,7 +58,7 @@ export default {
             })
     },
     postPreferences(categories) {
-        return axios.post('/preferences', { user: this.getUser, categories: categories })
+        return axios.post(API + 'preferences', { user: this.getUser, preferences: categories })
             .then(function (response) {
                 return response
             })

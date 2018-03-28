@@ -25,6 +25,9 @@ class Preferences extends Component {
 
     }
 
+    goPrincipal() {
+        this.props.go('list');
+    }
 
     onCheckboxBtnClick(selected) {
         const index = this.state.selectedCategories.indexOf(selected);
@@ -42,7 +45,7 @@ class Preferences extends Component {
             .then(r => {
                 console.log(r);
                 if (r) {
-                    console.log('ir a pagina principal')
+                    this.goPrincipal();
                 } else {
                     alert(lang.preferences.errorGuardar)
                 }

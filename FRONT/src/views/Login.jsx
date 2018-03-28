@@ -16,6 +16,10 @@ export default class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    goPrincipal() {
+        this.props.go('list');
+    }
+
     handleChange(event) {
         const value = event.target.value;
         const name = event.target.name;
@@ -36,7 +40,7 @@ export default class Login extends React.Component {
             .then(r => {
                 console.log(r);
                 if (r[0]) {
-                    console.log('ir a pagina principal')
+                    this.goPrincipal();
                 } else {
                     alert(r[1].error)
                 }

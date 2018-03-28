@@ -8,6 +8,7 @@ import SignIn from './SignIn'
 import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
+import ShoppingCart from './ShoppingCart'
 import Producto from './Producto'
 import Dashboard from './Dashboard'
 import api from '../api'
@@ -17,7 +18,7 @@ export default class OurContainer extends React.Component {
         super();
         this.selectedLang = this.selectedLang.bind(this);
         this.state = {
-            displayType: "dashboard",
+            displayType: "shoppingCart",
             language: 'spanish',
             product: {
                 id: "MLA614976100",
@@ -42,22 +43,22 @@ export default class OurContainer extends React.Component {
     }
 
     onGo(componente) {
-        this.setState({displayType: componente})
+        this.setState({ displayType: componente })
     }
 
-    getProduct (id) {
+    getProduct(id) {
         api.getProduct(id)
             .then(r => {
                 if (r) {
-                    this.setState({product: r, displayType: "producto"})
+                    this.setState({ product: r, displayType: "producto" })
                 } else {
                     alert('Error filtrando')
                 }
             })
     }
 
-    selectedLang(lang){
-        this.setState({language: lang})
+    selectedLang(lang) {
+        this.setState({ language: lang })
     }
 
     render() {
@@ -67,8 +68,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide language={this.state.language}/>
-                            <ListItems language={this.state.language}/>
+                            <ChatSlide language={this.state.language} />
+                            <ListItems language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -96,14 +97,14 @@ export default class OurContainer extends React.Component {
                 return (
                     <div>
                         <div style={{ textAlign: "left" }}>
-                            <Login language={this.state.language} />
+                            <Login go={this.onGo} language={this.state.language} />
                         </div>
                     </div>
                 );
             case "landing":
                 return (
                     <div>
-                        <Landing go={this.onGo} langChange={this.selectedLang}/>
+                        <Landing go={this.onGo} langChange={this.selectedLang} />
                     </div>
                 );
             case "preferences":
@@ -111,7 +112,7 @@ export default class OurContainer extends React.Component {
                     <div>
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <Preferences language={this.state.language} />
+                            <Preferences go={this.onGo} language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -130,7 +131,7 @@ export default class OurContainer extends React.Component {
                 return (
                     <div>
                         <div style={{ textAlign: "left" }}>
-                            <SignIn language={this.state.language} />
+                            <SignIn go={this.onGo} language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -139,7 +140,13 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner language={this.state.language} isDashboard />
                         <br /><br /><br /><br />
-                        <Dashboard language={this.state.language}/>
+                        <Dashboard language={this.state.language} />
+                    </div>
+                );
+            case "shoppingCart":
+                return (
+                    <div>
+                        <ShoppingCart go={this.onGo} language={this.state.language} />
                     </div>
                 );
             default:
