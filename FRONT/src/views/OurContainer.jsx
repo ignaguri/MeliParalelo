@@ -19,11 +19,7 @@ export default class OurContainer extends React.Component {
         super();
 
         this.state = {
-<<<<<<< HEAD
             displayType: "list",
-=======
-            displayType: "landing",
->>>>>>> 6d2f444091531fdf032836bf0f6e2e0a426bc38d
             language: 'spanish',
             productId: "MLA627579355",
             product: {
@@ -63,10 +59,6 @@ export default class OurContainer extends React.Component {
         this.setState({productId: id}, function(){
             this.getProduct()
         })
-    }
-
-    selectedLang(lang){
-        this.setState({language: lang})
     }
 
     getProduct () {
