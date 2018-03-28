@@ -7,8 +7,15 @@ export default class CardItem extends React.Component {
         this.state = { 
             hover: false
         }
+        this.clicked = this.clicked.bind(this)
         this.toggleHover = this.toggleHover.bind(this)
     }
+
+    clicked() {
+        this.props.changeProduct(this.props.reference)
+        console.log(this.props.reference);
+    }
+
     toggleHover() {
         this.setState({hover: !this.state.hover})
     }
@@ -61,14 +68,9 @@ export default class CardItem extends React.Component {
         color: "#39b54a",
         fontSize: "22px"
     }
-    var reference = this.props.reference;
-    function testing() {
-        // go to another page passing the link reference
-        console.log(reference)
-    }
 
     return (
-        <Card style={ listItemStyle } onClick={ testing } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+        <Card style={ listItemStyle } onClick={ this.clicked } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
             <CardImg top width="100%" src={ this.props.thumbnail } alt="Card image cap" style={ thumbnailStyle } />
             <CardBody style={ detailsStyle }>
                 <CardTitle style={ titleStyle }>{ this.props.title }</CardTitle>
