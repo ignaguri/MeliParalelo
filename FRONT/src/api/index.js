@@ -63,7 +63,6 @@ export default {
     },
     postPreferences(categories) {
         const user = this.getUser();
-        console.log('post preferences', user);
         return axios.post(API + 'user/preferences', { username: user, preferences: categories })
             .then(function (response) {
                 return response
@@ -86,7 +85,7 @@ export default {
             })
     },
     getItem(id) {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         return axios.get(API + 'item/show/' + id + '?username=' + user)
             .then(r => {
                 return r.data
@@ -97,7 +96,7 @@ export default {
             })
     },
     getItemsById(items) {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         let promesas = [];
         items.forEach(i => {
             promesas.push(axios.get(API + 'item/show/' + i + '?username=' + user)
@@ -233,7 +232,7 @@ export default {
             })
     },
     getStats() {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         return axios.get(API + 'visit/generateStatistics?username=' + user)
             .then(r => {
                 return r.data

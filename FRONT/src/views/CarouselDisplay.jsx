@@ -21,18 +21,40 @@ class CarouselDisplay extends Component {
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
     this.changeProduct = this.changeProduct.bind(this);
+    this.checkChanges = this.checkChanges.bind(this);
   }
 
   changeProduct(id) {
     this.props.changeProduct(id)
   }
 
-  componentWillMount() {
-    api.getItems()
-      .then(res => {
-        this.setState({ items: res.data })
-      });
-  }
+    componentWillMount() {
+        if(!this.props.items) {
+            api.getItems()
+                .then(res => {
+                    this.setState({items: res.data})
+                });
+        } else {
+            this.setState({items: this.props.items})
+        }
+    }
+
+    checkChanges(){
+        if(this.props.items) {
+            if(this.props.items !== this.state.items) {
+                this.setState({items: this.props.items, all: false})
+            }
+        } else {
+            if(!this.state.all){
+                api.getItems()
+                    .then(res => {
+                        if(res.data !== this.state.items) {
+                            this.setState({items: res.data, all: true})
+                        }
+                    });
+            }
+        }
+    }
 
   onExiting() {
     this.animating = true;
@@ -60,6 +82,7 @@ class CarouselDisplay extends Component {
   }
 
   render() {
+    this.checkChanges();
     const { activeIndex } = this.state;
 
     const slides = this.state.items.map((item, i) => {

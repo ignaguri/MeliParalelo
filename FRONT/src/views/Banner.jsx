@@ -84,9 +84,6 @@ export default class Banner extends React.Component {
         let filtros = {};
         if (this.state.categoria !== "") {
             filtros.categoria = this.state.categoria;
-        } else {
-            alert('Debe seleccionar al menos una categoría');
-            return
         }
         if (this.state.condicion !== "") {
             filtros.condicion = this.state.condicion;
@@ -105,10 +102,14 @@ export default class Banner extends React.Component {
                 return;
             }
         }
+        if(!filtros.categoria){
+            this.props.filtered(null);
+            return;
+        }
         api.getItemsWithFilter(filtros.categoria, filtros.condicion, filtros.precioMin, filtros.precioMax, filtros.location)
             .then(r => {
                 if (r) {
-                    alert('Mostrar filtrado!')
+                    this.props.filtered(r);
                 } else {
                     alert('Error filtrando')
                 }
