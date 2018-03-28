@@ -1,0 +1,21 @@
+import back.Item
+
+model {
+    Item item
+}
+json {
+    id item.itemId
+    title item.title
+    price item.price
+    original_price item.originalPrice
+    initial_quantity item.initialQuantity
+    available_quantity item.availableQuantity
+    sold_quantity item.soldQuantity
+    condition_item item.conditionItem
+    thumbnail item.thumbnail
+    category_id item.categoryId
+    state_name item.stateName
+    accepts_mercadopago item.acceptsMP
+    qualification item.qualification
+    pictures item.pictures.collect { it.url }
+}

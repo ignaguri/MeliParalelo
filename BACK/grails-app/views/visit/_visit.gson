@@ -1,0 +1,10 @@
+import back.Visit
+
+model {
+    Visit visit
+}
+json {
+    item visit.item.itemId
+    user visit.user.username
+    count visit.count
+}

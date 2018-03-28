@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import Test from './views/Test'
+import OurContainer from './views/OurContainer'
 
 class App extends React.Component {
     render() {
         return (
-            <Test />
+            <div className="text-center">
+                <OurContainer />
+            </div>
         );
     }
 }
 
-export default App;
+export default App
