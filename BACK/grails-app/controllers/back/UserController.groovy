@@ -22,7 +22,7 @@ class UserController {
         def responseData = ""
 
         try {
-            created = userService.createUser(request.JSON.username,
+            User creado = userService.createUser(request.JSON.username,
                     request.JSON.password,
                     request.JSON.name,
                     request.JSON.lastname,
@@ -30,7 +30,7 @@ class UserController {
                     request.JSON.birthdate,
                     request.JSON.loyaltyPoints)
             response.status = HttpStatus.OK.value()
-            responseData = ["created": created,
+            responseData = ["created": creado,
                             "error"  : ""]
 
         } catch(UserParametersException e) {

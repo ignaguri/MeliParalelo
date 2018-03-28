@@ -1,5 +1,4 @@
 const axios = require('axios');
-//axios.defaults.headers.post['Content-Type'] = 'application/json';
 const API = "http://localhost:8080/";
 
 
@@ -11,9 +10,9 @@ export default {
     postLogin(user, password) {
         return axios.post(API + 'user/login', { username: user, password: password })
             .then(function (response) {
-                console.log('response', response);
                 sessionStorage.setItem('user', JSON.stringify(response.data));
-                return [true]
+                const rol = response.data.role;
+                return [true, rol]
             })
             .catch(err => {
                 console.log('err', err);
@@ -29,7 +28,7 @@ export default {
             })
     },
     //Crear Usuario
-    postSingin(user, password, name, lastname, birthdate, email) {
+    postSignin(user, password, name, lastname, birthdate, email) {
         const body = {
             username: user,
             password: password,
@@ -41,7 +40,8 @@ export default {
         };
         return axios.post(API + 'user', body)
             .then(function (response) {
-                return response
+                console.log('user created', response.data);
+                return [response.data]
             })
             .catch(err => {
                 return [false, err.response.data]
@@ -58,7 +58,8 @@ export default {
             })
     },
     postPreferences(categories) {
-        return axios.post(API + 'preferences', { user: this.getUser, preferences: categories })
+        const user = this.getUser();
+        return axios.post(API + 'preferences', { username: user, preferences: categories })
             .then(function (response) {
                 return response
             })
@@ -79,7 +80,6 @@ export default {
                 return false
             })
     },
-
     getItem(id) {
         const user = 'admin'; //this.getUser()
         return axios.get(API + 'item/show/' + id + '?username=' + user)
@@ -91,7 +91,6 @@ export default {
                 return false
             })
     },
-
     getItemsById(items) {
         const user = 'admin'; //this.getUser()
         let promesas = [];
@@ -115,7 +114,6 @@ export default {
                 return false
             })
     },
-
     getItemsWithFilter(categoryId, condition, price_min, price_max, statename) {
         return axios.get(API + 'item/filter?category=' + categoryId + '&condition=' + condition + '&price_min=' + price_min + '&price_max=' + price_max + '&statename=' + statename)
             .then(r => {
@@ -127,7 +125,6 @@ export default {
                 return false
             })
     },
-
     getItemsPreferences() {
         return axios.get(API + 'item/preferences?username=' + this.getUser())
             .then(r => {
@@ -142,25 +139,26 @@ export default {
     //cargar combo filtros
     //arreglo strings
     getLocations() {
-        return Promise.resolve([{ name: 'Buenos Aires' }, { name: 'Capital Federal' }])
-        // return axios.get(API + 'localidades')
-        //     .then(r => {
-        //         console.log(r);
-        //         return r
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //         return false
-        //     })
+        //return Promise.resolve([{ name: 'Buenos Aires' }, { name: 'Capital Federal' }])
+        return axios.get(API + '/item/locations')
+            .then(r => {
+                console.log(r);
+                return r.data
+            })
+            .catch(err => {
+                console.error(err);
+                return false
+            })
     },
-    //get categorias ya esta arriba
-
-
     getUser() {
         return JSON.parse(sessionStorage.getItem('user')).username;
     },
-
-
+    isLoggedIn() {
+        return sessionStorage.getItem('user');
+    },
+    logout() {
+        sessionStorage.removeItem('user');
+    },
     agregarACarrito(producto, cantidad) {
         const prod = {
             id: producto.id,
@@ -192,11 +190,9 @@ export default {
             }
         }
     },
-
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
-
     postCheckout() {
         return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
@@ -207,7 +203,6 @@ export default {
                 return false
             })
     },
-
     getComments() {
         return axios.get(API + 'comment')
             .then(r => {
@@ -219,7 +214,6 @@ export default {
                 return false
             })
     },
-
     postComment(comment) {
         return axios.post(API + 'comment/save', { username: this.getUser(), comment: comment })
             .then(function (response) {

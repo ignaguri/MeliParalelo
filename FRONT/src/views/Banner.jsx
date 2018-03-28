@@ -45,8 +45,6 @@ export default class Banner extends React.Component {
         this.verCarrito = this.verCarrito.bind(this);
         this.salir = this.salir.bind(this);
     }
-
-    /*
     componentDidMount() {
         api.getLocations().then(response => {
             this.setState({
@@ -54,8 +52,6 @@ export default class Banner extends React.Component {
             });
         });
     }
-    */
-
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -92,7 +88,7 @@ export default class Banner extends React.Component {
                 return;
             }
         }
-        api.filtrar(filtros)
+        api.getItemsWithFilter('MLA1648', filtros.condicion, filtros.precioMin, filtros.precioMax, filtros.location)
             .then(r => {
                 if (r) {
                     alert('Mostrar filtrado!')
@@ -112,11 +108,12 @@ export default class Banner extends React.Component {
     }
     verCarrito(e) {
         e.preventDefault();
-        console.log('ver carrito', e)
+        this.props.go('carrito')
     }
     salir(e) {
         e.preventDefault();
-        console.log('salir', e)
+        api.logout();
+        this.props.go('landing')
     }
     render() {
         const lang = strings[this.props.language];
@@ -140,7 +137,6 @@ export default class Banner extends React.Component {
                                 <Button className="btn btn-light" onClick={this.verLista}><Icon icon="lista" /></Button>{' '}
                                 <Button className="btn btn-light" onClick={this.verSlider}><Icon icon="slider" /></Button>{' '}
                                 <Form inline>
-
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                         <Label for="condicion" className="mr-sm-2">{lang.banner.condicion}:</Label>
                                         <Input type="select" name="cmb_condicion" id="condicion" bsSize="sm" value={this.state.condicion} onChange={this.handleConditionChange} >
@@ -150,22 +146,21 @@ export default class Banner extends React.Component {
                                             <option value="refurbished">{lang.banner.refurbished}</option>
                                         </Input>
                                     </FormGroup>
-
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                         <Label for="ubicacion" className="mr-sm-2">{lang.banner.location}:</Label>
                                         <Input type="select" name="cmb_ubicacion" id="ubicacion" bsSize="sm" value={this.state.location} onChange={this.handleLocationChange}>
-                                            <option value="">{lang.banner.nofilter}</option>
+                                            <option value="">{lang.banner.noFilter}</option>
                                             {this.state.locations.map((loc) =>
-                                                <option key={loc.name} value={loc.name}>{loc.name}</option>
+                                                <option key={loc} value={loc}>{loc}</option>
                                             )}
                                         </Input>
                                     </FormGroup>
                                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                         <Label for="precioMin" className="mr-sm-2">{lang.banner.price} $</Label>
-                                        <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} />
+                                        <Input type="number" name="number" id="precioMin" placeholder={lang.banner.min} bsSize="sm" value={this.state.precioMin} onChange={this.handlePriceMinChange} style={{width: '100px'}}/>
                                     </FormGroup>
                                     <FormGroup className="mb-1 mr-sm-1 mb-sm-0">
-                                        <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} />
+                                        <Input type="number" name="number" id="precioMax" placeholder={lang.banner.max} bsSize="sm" value={this.state.precioMax} onChange={this.handlePriceMaxChange} style={{width: '100px'}}/>
                                     </FormGroup>
                                     {' '}
                                     <Button color="success" onClick={this.filtrar}>{lang.banner.filtrar}</Button>

@@ -43,9 +43,8 @@ export default class Signin extends React.Component {
     postearSignIn() {
         api.postSingin(this.state.user, this.state.password, this.state.name, this.state.lastName, this.state.birthdate, this.state.email)
             .then(r => {
-                console.log(r);
-                if (r[0] || r[1] === undefined) {
-                    this.goPreferences();
+                if (r[0]) {
+                    this.props.go('preferences');
                 } else {
                     alert(r[1].error);
                 }

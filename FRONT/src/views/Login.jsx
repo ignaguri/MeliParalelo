@@ -23,7 +23,6 @@ export default class Login extends React.Component {
     handleChange(event) {
         const value = event.target.value;
         const name = event.target.name;
-
         this.setState({
             [name]: value
         });
@@ -31,16 +30,19 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
         this.postearLogin();
     }
 
     postearLogin() {
         api.postLogin(this.state.user, this.state.password)
             .then(r => {
-                console.log(r);
                 if (r[0]) {
-                    this.goPrincipal();
+                    if(r[1] === 'user') {
+                        this.props.go('list');
+                    }
+                    if(r[1] === 'admin') {
+                        this.props.go('dashboard');
+                    }
                 } else {
                     alert(r[1].error)
                 }

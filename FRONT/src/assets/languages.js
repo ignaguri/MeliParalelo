@@ -67,13 +67,14 @@ export default {
         }
     },
     english: {
-        singIn: {
+        signIn: {
             nombre: 'Name',
             apellido: 'Lastname',
             fechaNacimiento: 'Birthdate',
             email: 'Email',
             usuario: 'User',
-            pass: 'Password'
+            pass: 'Password',
+            crearCuenta: 'Register'
         },
         login: {
             error: 'Wrong username or password',
@@ -123,8 +124,8 @@ export default {
         },
         dashboard: {
             visitado: 'This item was visited',
-            comprado: 'This item was buyed',
-            ratioCompra: 'For each visit, it gets buyed',
+            comprado: 'This item was purchased',
+            ratioCompra: 'For each visit, it gets purchased',
             vez: 'time',
             veces: 'times',
             select: 'Select an item',
@@ -133,13 +134,14 @@ export default {
         }
     },
     portuguese: {
-        singIn: {
+        signIn: {
             nombre: 'Nome',
             apellido: 'Sobrenome',
             fechaNacimiento: 'Data de Nascimento',
             email: 'Email',
             usuario: 'Nome de Usuário',
-            pass: 'Senha'
+            pass: 'Senha',
+            crearCuenta: 'Crear conta'
         },
         login: {
             error: 'O Usuário ou Senha está incorreto',
