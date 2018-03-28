@@ -4,26 +4,6 @@ import strings from '../assets/languages';
 import api from "../api";
 
 const pointsPercentage = 0.1;
-const textMap = {
-    table: {
-        header: {
-            quantity: 'Cantidad',
-            title: 'Titulo',
-            price: 'Precio',
-            subTotal: 'Subtotal',
-            quit: 'Quitar',
-        }
-    },
-    total: 'Total',
-    points: 'Puntos',
-    subtitle: 'Con cada compra sumas puntos',
-    message: 'El 10% del total de tu compra',
-    title: 'Productos seleccionados',
-    buttons: {
-        buy: 'Comprar'
-    }
-};
-
 
 class ShoppingCart extends Component {
     constructor(props) {

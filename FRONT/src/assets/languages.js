@@ -4,7 +4,11 @@ export default {
             error: 'El usuario o la contraseña no son correctas',
             usuario: 'Usuario',
             pass: 'Constraseña',
-            ingresar: 'Ingresar'
+            ingresar: 'Ingresar',
+            placeholders: {
+                user: 'Ingrese su nombre de usuario',
+                pass: 'Ingrese su contraseña'
+            }
         },
         signIn: {
             nombre: 'Nombre',
@@ -13,7 +17,14 @@ export default {
             email: 'Email',
             usuario: 'Nombre de Usuario',
             pass: 'Contraseña',
-            crearCuenta: 'Crear Cuenta'
+            crearCuenta: 'Crear Cuenta',
+            placeholders: {
+                nombre: 'Ingrese su nombre',
+                apellido: 'Ingrese su apellido',
+                mail: 'Ingrese su correo',
+                user: 'Ingrese un usuario',
+                pass: 'Ingrese una contraseña'
+            }
         },
         banner: {
             ver: 'Vista',
@@ -95,13 +106,24 @@ export default {
             email: 'Email',
             usuario: 'User',
             pass: 'Password',
-            crearCuenta: 'Register'
+            crearCuenta: 'Register',
+            placeholders: {
+                nombre: 'Enter a name',
+                apellido: 'Enter a lastname',
+                mail: 'Enter an email',
+                user: 'Enter a username',
+                pass: 'Enter a password'
+            }
         },
         login: {
             error: 'Wrong username or password',
             usuario: 'User',
             pass: 'Password',
-            ingresar: 'Log In!'
+            ingresar: 'Log In!',
+            placeholders: {
+                user: 'Enter your username',
+                pass: 'Enter your password'
+            }
         },
         banner: {
             ver: 'View',
@@ -182,13 +204,24 @@ export default {
             email: 'Email',
             usuario: 'Nome de Usuário',
             pass: 'Senha',
-            crearCuenta: 'Crear conta'
+            crearCuenta: 'Crear conta',
+            placeholders: {
+                nombre: 'Ingrese sua nome',
+                apellido: 'Ingrese sua sobrenome',
+                mail: 'Ingrese su email',
+                user: 'Ingrese un usuário',
+                pass: 'Ingrese una senha'
+            }
         },
         login: {
             error: 'O Usuário ou Senha está incorreto',
             usuario: 'Usuário',
             pass: 'Senha',
-            ingresar: 'Entrar'
+            ingresar: 'Entrar',
+            placeholders: {
+                user: 'Ingrese sua nome de usuário',
+                pass: 'Ingrese sua senha'
+            }
         },
         banner: {
             ver: 'View',
