@@ -40,7 +40,11 @@ export default {
         };
         return axios.post(API + 'user', body)
             .then(function (response) {
-                console.log('user created', response.data);
+                const user = {
+                    username: response.data.created.username,
+                    role: 'user'
+                };
+                sessionStorage.setItem('user', JSON.stringify(user));
                 return [response.data]
             })
             .catch(err => {
@@ -59,7 +63,7 @@ export default {
     },
     postPreferences(categories) {
         const user = this.getUser();
-        return axios.post(API + 'preferences', { username: user, preferences: categories })
+        return axios.post(API + 'user/preferences', { username: user, preferences: categories })
             .then(function (response) {
                 return response
             })
@@ -81,7 +85,7 @@ export default {
             })
     },
     getItem(id) {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         return axios.get(API + 'item/show/' + id + '?username=' + user)
             .then(r => {
                 return r.data
@@ -92,7 +96,7 @@ export default {
             })
     },
     getItemsById(items) {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         let promesas = [];
         items.forEach(i => {
             promesas.push(axios.get(API + 'item/show/' + i + '?username=' + user)
@@ -115,10 +119,13 @@ export default {
             })
     },
     getItemsWithFilter(categoryId, condition, price_min, price_max, statename) {
-        return axios.get(API + 'item/filter?category=' + categoryId + '&condition=' + condition + '&price_min=' + price_min + '&price_max=' + price_max + '&statename=' + statename)
+        const condicion = condition? '&condition=' + condition : '';
+        const min = price_min? '&price_min=' + price_min : '';
+        const max = price_max? '&price_max=' + price_max : '';
+        const location = statename? '&statename=' + statename : '';
+        return axios.get(API + 'item/filter?category=' + categoryId + condicion + min + max + location)
             .then(r => {
-                console.log(r);
-                return r
+                return r.data
             })
             .catch(err => {
                 console.error(err);
@@ -157,7 +164,7 @@ export default {
         return sessionStorage.getItem('user');
     },
     logout() {
-        sessionStorage.removeItem('user');
+        sessionStorage.clear();
     },
     agregarACarrito(producto, cantidad) {
         const prod = {
@@ -194,8 +201,9 @@ export default {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
     postCheckout() {
-        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + 'checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
+                sessionStorage.removeItem('carrito');
                 return response
             })
             .catch(err => {
@@ -225,7 +233,7 @@ export default {
             })
     },
     getStats() {
-        const user = 'admin'; //this.getUser()
+        const user = this.getUser();
         return axios.get(API + 'visit/generateStatistics?username=' + user)
             .then(r => {
                 return r.data
