@@ -57,6 +57,7 @@ class ShoppingCart extends Component {
 
     onAcceptClick() {
         api.postCheckout();
+        api.vaciarCarrito();
         this.props.go('list');
         console.log('Compra Confirmada');
     }

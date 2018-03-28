@@ -190,11 +190,14 @@ export default {
             }
         }
     },
+    vaciarCarrito() {
+        sessionStorage.setItem('carrito', '');
+    },
     getCarrito() {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
     postCheckout() {
-        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + 'checkout/save', { username: this.getUser(), detail_checkout: this.getCarrito(), observation: "none" })
             .then(function (response) {
                 return response
             })
