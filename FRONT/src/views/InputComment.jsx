@@ -21,6 +21,7 @@ export default class InputComment extends React.Component {
         api.postComment(this.state.message)
             .then(r => {
                 this.props.loadComments()
+                this.setState({inputValue: ""})
             })
     }
 

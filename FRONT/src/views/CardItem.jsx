@@ -7,7 +7,7 @@ export default class CardItem extends React.Component {
         this.state = { 
             hover: false
         }
-        this.clicked = this.clicked.bind(this)
+        this.clicked = this.clicked.bind(this);
         this.toggleHover = this.toggleHover.bind(this)
     }
 
@@ -19,9 +19,8 @@ export default class CardItem extends React.Component {
     toggleHover() {
         this.setState({hover: !this.state.hover})
     }
-    
     render() {
-    var listItemStyle;
+    let listItemStyle;
     if (this.state.hover) {
         listItemStyle = {
             height: "400px",
@@ -49,25 +48,25 @@ export default class CardItem extends React.Component {
         padding: "40px",
         width: "100%",
         minHeight: "250px"
-    }
+    };
     const detailsStyle = {
         width: "250px",
         display: "inline-block"
-    }
+    };
     const titleStyle = {
         overflow: "hidden",
         display: "-webkit-box",
         WebkitLineClamp: 2,
         WebkitBoxOrient: "vertical",
         fontSize: "18px"
-    }
+    };
     const locationStyle = {
         color: "black"
-    }
+    };
     const priceStyle = {
         color: "#39b54a",
         fontSize: "22px"
-    }
+    };
 
     return (
         <Card style={ listItemStyle } onClick={ this.clicked } onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>

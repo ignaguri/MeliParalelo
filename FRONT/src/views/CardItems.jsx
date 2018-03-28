@@ -7,22 +7,45 @@ export default class CardItems extends React.Component {
     super(props);
     this.state = {
       items: []
-    }
+    };
     this.changeProduct = this.changeProduct.bind(this);
+    this.checkChanges = this.checkChanges.bind(this);
   }
 
   changeProduct(id) {
     this.props.changeProduct(id)
   }
 
-  componentWillMount() {
-    api.getItems()
-      .then(res => {
-        this.setState({ items: res.data })
-      });
-  }
+    componentWillMount() {
+        if(!this.props.items) {
+            api.getItems()
+                .then(res => {
+                    this.setState({items: res.data})
+                });
+        } else {
+            this.setState({items: this.props.items})
+        }
+    }
+
+    checkChanges(){
+        if(this.props.items) {
+            if(this.props.items !== this.state.items) {
+                this.setState({items: this.props.items, all: false})
+            }
+        } else {
+            if(!this.state.all){
+                api.getItems()
+                    .then(res => {
+                        if(res.data !== this.state.items) {
+                            this.setState({items: res.data, all: true})
+                        }
+                    });
+            }
+        }
+    }
 
   render() {
+    this.checkChanges();
     return (
       <div className="text-center" >
         <br /><br /><br /> <br />
