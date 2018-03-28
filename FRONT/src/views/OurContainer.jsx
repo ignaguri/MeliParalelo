@@ -8,7 +8,6 @@ import SignIn from './SignIn'
 import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
-import ShoppingCart from './ShoppingCart'
 import Producto from './Producto'
 import Dashboard from './Dashboard'
 import Carrito from './ShoppingCart'
@@ -47,8 +46,8 @@ export default class OurContainer extends React.Component {
     }
     componentDidMount() {
         console.log('it\'s the user logged?', api.isLoggedIn());
-        if (api.isLoggedIn()){
-            this.setState({displayType: 'list'})
+        if (api.isLoggedIn()) {
+            this.setState({ displayType: 'list' })
         }
     }
     onGo(componente) {
@@ -56,12 +55,12 @@ export default class OurContainer extends React.Component {
     }
 
     changeProduct(id) {
-        this.setState({productId: id}, function(){
+        this.setState({ productId: id }, function () {
             this.getProduct()
         })
     }
 
-    getProduct () {
+    getProduct() {
         api.getItem(this.state.productId)
             .then(r => {
                 if (r) {
@@ -82,8 +81,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide language={this.state.language}/>
-                            <ListItems changeProduct={this.changeProduct} language={this.state.language}/>
+                            <ChatSlide language={this.state.language} />
+                            <ListItems changeProduct={this.changeProduct} language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -150,25 +149,19 @@ export default class OurContainer extends React.Component {
                     </div>
                 );
             case "dashboard":
-            return (
-                <div>
-                    <Banner go={this.onGo} language={this.state.language} isDashboard />
-                    <br /><br /><br /><br />
-                    <Dashboard language={this.state.language}/>
-                </div>
-            );
+                return (
+                    <div>
+                        <Banner go={this.onGo} language={this.state.language} isDashboard />
+                        <br /><br /><br /><br />
+                        <Dashboard language={this.state.language} />
+                    </div>
+                );
             case "carrito":
                 return (
                     <div>
                         <Banner go={this.onGo} language={this.state.language} />
                         <br /><br /><br /><br />
-                        <Carrito language={this.state.language}/>
-                    </div>
-                );
-            case "shoppingCart":
-                return (
-                    <div>
-                        <ShoppingCart go={this.onGo} language={this.state.language} />
+                        <Carrito go={this.onGo} language={this.state.language} />
                     </div>
                 );
             default:

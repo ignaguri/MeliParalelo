@@ -29,7 +29,8 @@ class ShoppingCart extends Component {
         super(props);
 
         this.state = {
-            purchases: [],
+            purchases: [
+            ],
             totalPrice: 0,
             totalPoints: 0,
             language: this.props.language
@@ -44,21 +45,24 @@ class ShoppingCart extends Component {
     }
 
     componentWillMount() {
-        this.mockCarro();
+        // this.mockCarro();
         const aux = api.getCarrito();
         if (aux != null) {
-
-            this.setState({ purchases: aux });
+            this.setState({ purchases: aux }, function () {
+                this.totals();
+            });
         }
-        this.totals();
+
     }
 
     onAcceptClick() {
         api.postCheckout();
-        console.log('Confirmar compra');
+        this.props.go('list');
+        console.log('Compra Confirmada');
     }
 
     totals() {
+
         var totalPoints = 0;
         var totalPrice = 0;
         for (let index = 0; index < this.state.purchases.length; index++) {
@@ -66,6 +70,7 @@ class ShoppingCart extends Component {
             totalPrice += element.price * element.quantity;
             totalPoints += element.price * element.quantity * pointsPercentage;
         }
+        totalPoints = parseInt(totalPoints, 10);
         this.setState({ totalPoints: totalPoints });
         this.setState({ totalPrice: totalPrice });
     }
@@ -76,7 +81,6 @@ class ShoppingCart extends Component {
             const element = this.state.purchases[index];
             if (element.id === idItem) {
                 this.state.purchases.splice(index, 1);
-                console.log("paso")
                 break;
             }
         }
@@ -85,12 +89,10 @@ class ShoppingCart extends Component {
     }
 
     render() {
-        var total = 0, points = 0;
+
         var purchasesRow = this.state.purchases.map((item) => {
-            total += (item.quantity * item.price);
-            points += item.quantity * item.price * pointsPercentage;
             return (
-                <tr>
+                <tr key={item.id}>
 
                     <td>{item.quantity}</td>
                     <td>{item.title}</td>
