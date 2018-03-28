@@ -44,7 +44,8 @@ export default class Producto extends React.Component {
 
     agregarACarrito() {
         if (this.state.cantidad > 0) {
-            api.agregarACarrito(this.props.producto, this.state.cantidad)
+            api.agregarACarrito(this.props.producto, this.state.cantidad);
+            alert('Agregado al carrito!');
         } else {
             alert('La cantidad debe ser mayor a 0!')
         }
@@ -94,7 +95,7 @@ export default class Producto extends React.Component {
                                         <Counter min={0} max={5000} onChange={this.handleCounter} />
                                     </Col>
                                     <Col xs="7">
-                                        <Button className="btn btn-block btn-info" onClick={this.agregarACarrito}>{lang.producto.agregar}</Button>
+                                        <Button className="btn btn-block btn-info" onClick={this.agregarACarrito}><Icon icon="carrito" size="20" color="white"/>{' '}{lang.producto.agregar}</Button>
                                     </Col>
                                 </Row>
                                 <hr />
