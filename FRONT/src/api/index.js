@@ -164,7 +164,7 @@ export default {
         return sessionStorage.getItem('user');
     },
     logout() {
-        sessionStorage.removeItem('user');
+        sessionStorage.clear();
     },
     agregarACarrito(producto, cantidad) {
         const prod = {
@@ -201,8 +201,9 @@ export default {
         return JSON.parse(sessionStorage.getItem('carrito'))
     },
     postCheckout() {
-        return axios.post(API + '/checkout/save', { username: this.getUser(), items: this.getCarrito() })
+        return axios.post(API + 'checkout/save', { username: this.getUser(), items: this.getCarrito() })
             .then(function (response) {
+                sessionStorage.removeItem('carrito');
                 return response
             })
             .catch(err => {
