@@ -14,9 +14,8 @@ class UserService {
 
     }
 
-    boolean createUser(String username, String password, String name, String lastname, String email, String birthdate, String points) {
+    User createUser(String username, String password, String name, String lastname, String email, String birthdate, String points) {
         def user = User.findByUsername(username)
-        boolean status
 
         if(user == null) {
             int loyaltyPoints = points == null || points.size() == 0 || points.equals("") ? 0 : points.toInteger()
@@ -34,17 +33,14 @@ class UserService {
             newUser.validate()
 
             if(newUser.save()) {
-                status = true
+                return newUser
             } else {
                 println(newUser.errors)
                 throw new UserCreationException("error al crear el usuario")
-                status = false
             }
         } else {
             throw new UserAlreadyExistsException("El usuario ya existe")
-            status = false
         }
-        return status
     }
 
     User login(String username, String password) {
