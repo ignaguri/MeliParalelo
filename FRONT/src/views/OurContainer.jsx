@@ -8,6 +8,7 @@ import SignIn from './SignIn'
 import Login from './Login'
 import Landing from './Landing'
 import Preferences from './Preferences'
+import ShoppingCart from './ShoppingCart'
 import Producto from './Producto'
 import Dashboard from './Dashboard'
 import Carrito from './ShoppingCart'
@@ -18,8 +19,9 @@ export default class OurContainer extends React.Component {
         super();
 
         this.state = {
-            displayType: "landing",
+            displayType: "list",
             language: 'spanish',
+            productId: "MLA627579355",
             product: {
                 id: "MLA614976100",
                 title: "Kit De Seguridad Para Auto 9 En 1 Tarjeta Patente Vtv Neokit",
@@ -39,6 +41,7 @@ export default class OurContainer extends React.Component {
             }
         };
         this.onGo = this.onGo.bind(this);
+        this.changeProduct = this.changeProduct.bind(this);
         this.getProduct = this.getProduct.bind(this);
         this.selectedLang = this.selectedLang.bind(this);
     }
@@ -49,22 +52,27 @@ export default class OurContainer extends React.Component {
         }
     }
     onGo(componente) {
-        this.setState({displayType: componente})
+        this.setState({ displayType: componente })
     }
 
-    getProduct (id) {
-        api.getProduct(id)
+    changeProduct(id) {
+        this.setState({productId: id}, function(){
+            this.getProduct()
+        })
+    }
+
+    getProduct () {
+        api.getItem(this.state.productId)
             .then(r => {
                 if (r) {
-                    this.setState({product: r, displayType: "producto"})
+                    this.setState({ product: r, displayType: "producto" })
                 } else {
-                    alert('Error filtrando')
                 }
             })
     }
 
-    selectedLang(lang){
-        this.setState({language: lang})
+    selectedLang(lang) {
+        this.setState({ language: lang })
     }
 
     render() {
@@ -75,7 +83,7 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language}/>
-                            <ListItems language={this.state.language}/>
+                            <ListItems changeProduct={this.changeProduct} language={this.state.language}/>
                         </div>
                     </div>
                 );
@@ -85,7 +93,7 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <CardItems language={this.state.language} getProduct={this.getProduct} />
+                            <CardItems changeProduct={this.changeProduct} language={this.state.language} getProduct={this.getProduct} />
                         </div>
                     </div>
                 );
@@ -95,7 +103,7 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <CarouselDisplay language={this.state.language} />
+                            <CarouselDisplay changeProduct={this.changeProduct} language={this.state.language} />
                         </div>
                     </div>
                 );
@@ -110,7 +118,7 @@ export default class OurContainer extends React.Component {
             case "landing":
                 return (
                     <div>
-                        <Landing go={this.onGo} langChange={this.selectedLang}/>
+                        <Landing go={this.onGo} langChange={this.selectedLang} />
                     </div>
                 );
             case "preferences":
@@ -155,6 +163,12 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <br /><br /><br /><br />
                         <Carrito language={this.state.language}/>
+                    </div>
+                );
+            case "shoppingCart":
+                return (
+                    <div>
+                        <ShoppingCart go={this.onGo} language={this.state.language} />
                     </div>
                 );
             default:

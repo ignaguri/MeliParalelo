@@ -21,9 +21,11 @@ export default class Landing extends React.Component {
     registrar() {
         this.props.go('registration')
     }
+
     login() {
         this.props.go('login')
     }
+
     onLangChange(lang) {
         this.setState({ language: lang });
         this.props.langChange(lang)

@@ -16,6 +16,10 @@ export default class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    goPrincipal() {
+        this.props.go('list');
+    }
+
     handleChange(event) {
         const value = event.target.value;
         const name = event.target.name;
