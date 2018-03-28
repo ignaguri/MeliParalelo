@@ -76,7 +76,7 @@ export default class CarouselEntity extends React.Component {
             <Container style={listItemStyle} onClick={this.clicked} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
                 <Row>
                     <Col xs="3" style={thumbnailStyle}>
-                        <img src={this.props.thumbnail} alt={"true"} />
+                        <img src={this.props.picture} style={{ height: "250px", width: "250px" }} alt={"true"} />
                     </Col>
                     <Col xs="9" style={detailsStyle}>
                         <p style={titleStyle} >{this.props.title}</p>
