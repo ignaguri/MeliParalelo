@@ -7,8 +7,15 @@ export default class CarouselEntity extends React.Component {
         this.state = {
             hover: false
         }
+        this.clicked = this.clicked.bind(this);
         this.toggleHover = this.toggleHover.bind(this)
     }
+
+    clicked() {
+        this.props.changeProduct(this.props.reference)
+        console.log(this.props.reference);
+    }
+
     toggleHover() {
         this.setState({ hover: !this.state.hover })
     }
@@ -64,14 +71,9 @@ export default class CarouselEntity extends React.Component {
         const locationStyle = {
             color: "black"
         }
-        var reference = this.props.reference;
-        function testing() {
-            // go to another page passing the link reference
-            console.log(reference)
-        }
 
         return (
-            <Container style={listItemStyle} onClick={testing} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
+            <Container style={listItemStyle} onClick={this.clicked} onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover}>
                 <Row>
                     <Col xs="3" style={thumbnailStyle}>
                         <img src={this.props.thumbnail} alt={"true"} />

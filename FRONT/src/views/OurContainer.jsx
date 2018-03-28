@@ -19,8 +19,9 @@ export default class OurContainer extends React.Component {
         super();
 
         this.state = {
-            displayType: "landing",
+            displayType: "list",
             language: 'spanish',
+            productId: "MLA627579355",
             product: {
                 id: "MLA614976100",
                 title: "Kit De Seguridad Para Auto 9 En 1 Tarjeta Patente Vtv Neokit",
@@ -40,6 +41,7 @@ export default class OurContainer extends React.Component {
             }
         };
         this.onGo = this.onGo.bind(this);
+        this.changeProduct = this.changeProduct.bind(this);
         this.getProduct = this.getProduct.bind(this);
         this.selectedLang = this.selectedLang.bind(this);
     }
@@ -53,13 +55,18 @@ export default class OurContainer extends React.Component {
         this.setState({ displayType: componente })
     }
 
-    getProduct(id) {
-        api.getProduct(id)
+    changeProduct(id) {
+        this.setState({productId: id}, function(){
+            this.getProduct()
+        })
+    }
+
+    getProduct () {
+        api.getItem(this.state.productId)
             .then(r => {
                 if (r) {
                     this.setState({ product: r, displayType: "producto" })
                 } else {
-                    alert('Error filtrando')
                 }
             })
     }
@@ -75,8 +82,8 @@ export default class OurContainer extends React.Component {
                     <div>
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
-                            <ChatSlide language={this.state.language} />
-                            <ListItems language={this.state.language} />
+                            <ChatSlide language={this.state.language}/>
+                            <ListItems changeProduct={this.changeProduct} language={this.state.language}/>
                         </div>
                     </div>
                 );
@@ -86,7 +93,7 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <CardItems language={this.state.language} getProduct={this.getProduct} />
+                            <CardItems changeProduct={this.changeProduct} language={this.state.language} getProduct={this.getProduct} />
                         </div>
                     </div>
                 );
@@ -96,7 +103,7 @@ export default class OurContainer extends React.Component {
                         <Banner go={this.onGo} language={this.state.language} />
                         <div style={{ textAlign: "left" }}>
                             <ChatSlide language={this.state.language} />
-                            <CarouselDisplay language={this.state.language} />
+                            <CarouselDisplay changeProduct={this.changeProduct} language={this.state.language} />
                         </div>
                     </div>
                 );
