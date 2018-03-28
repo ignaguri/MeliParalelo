@@ -18,7 +18,7 @@ export default class CardItems extends React.Component {
 
     componentWillMount() {
         if(!this.props.items) {
-            api.getItems()
+            api.getItemsPreferences()
                 .then(res => {
                     this.setState({items: res.data})
                 });
@@ -34,7 +34,7 @@ export default class CardItems extends React.Component {
             }
         } else {
             if(!this.state.all){
-                api.getItems()
+                api.getItemsPreferences()
                     .then(res => {
                         if(res.data !== this.state.items) {
                             this.setState({items: res.data, all: true})

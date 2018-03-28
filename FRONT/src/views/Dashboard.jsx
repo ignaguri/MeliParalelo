@@ -33,11 +33,8 @@ export default class Dashboard extends React.Component {
 
     handleSelected(p) {
         let prod = this.state.stats.find(o => o.Item === p);
-        prod.title = this.state.items.find(i => {
-            if (i.id === p) {
-                return i.title;
-            } else return p
-        });
+        const item = this.state.items.find(i => i.id === p);
+        prod.title = item.title;
         this.setState({producto: prod});
     }
 
@@ -46,7 +43,7 @@ export default class Dashboard extends React.Component {
         let stat = null;
         if (this.state.producto) {
             stat = <Container fluid>
-                    <h1 className="display-4">{this.state.producto.title.title}</h1>
+                    <h1 className="display-4">{this.state.producto.title}</h1>
                     <ul style={{listStyleType: 'none'}}>
                         <li><h4>{lang.dashboard.visitado}: <span className="text-warning">{this.state.producto.Visits} {this.state.producto.Visits === 1? lang.dashboard.vez : lang.dashboard.veces}</span></h4></li>
                         <li><h4>{lang.dashboard.comprado}: <span className="text-info">{this.state.producto.Purchases} {this.state.producto.Purchases === 1? lang.dashboard.vez : lang.dashboard.veces}</span></h4></li>
