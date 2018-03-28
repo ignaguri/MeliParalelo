@@ -13,7 +13,7 @@ json {
     sold_quantity item.soldQuantity
     condition_item item.conditionItem
     thumbnail item.thumbnail
-    category_ir item.categoryId
+    category_id item.categoryId
     state_name item.stateName
     accepts_mercadopago item.acceptsMP
     qualification item.qualification

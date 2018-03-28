@@ -73,19 +73,18 @@ class ItemController {
             values.each {
                 def itemAux = Item.findByCategoryId(it.categoryId)
                 if(itemAux != null)
-                    println itemAux
                     responseData.push(itemAux)
             }
 
+            response.status = HttpStatus.OK.value()
+            respond responseData
+
         } catch (Exception e) {
             responseData = [e.getMessage()]
+            render responseData as JSON
         }
 
-        withFormat {
-            json {
-                render responseData as JSON
-            }
-        }
+
     }
 
     def filter() {
