@@ -59,11 +59,11 @@ export default class Signin extends React.Component {
                                     <Jumbotron>
                                         <FormGroup>
                                             <Label for="name">{lang.signIn.nombre}</Label>
-                                            <Input type="text" name="name" id="name" placeholder="Ingrese su nombre" value={this.state.value} onChange={this.handleChange} />
+                                            <Input type="text" name="name" id="name" placeholder={lang.signIn.placeholders.nombre} value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="lastName">{lang.signIn.apellido}</Label>
-                                            <Input type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido" value={this.state.value} onChange={this.handleChange} />
+                                            <Input type="text" name="lastName" id="lastName" placeholder={lang.signIn.placeholders.apellido} value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="birthdate">{lang.signIn.fechaNacimiento}</Label>
@@ -75,15 +75,15 @@ export default class Signin extends React.Component {
                                     <Jumbotron>
                                         <FormGroup>
                                             <Label for="email">{lang.signIn.email}</Label>
-                                            <Input type="email" name="email" id="email" placeholder="Ingrese su correo" value={this.state.value} onChange={this.handleChange} />
+                                            <Input type="email" name="email" id="email" placeholder={lang.signIn.placeholders.mail} value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="user">{lang.signIn.usuario}</Label>
-                                            <Input type="text" name="user" id="user" placeholder="Ingrese un usuario" value={this.state.value} onChange={this.handleChange} />
+                                            <Input type="text" name="user" id="user" placeholder={lang.signIn.placeholders.user} value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="password">{lang.signIn.pass}</Label>
-                                            <Input type="password" name="password" id="password" placeholder="Ingrese una contraseña" value={this.state.value} onChange={this.handleChange} />
+                                            <Input type="password" name="password" id="password" placeholder={lang.signIn.placeholders.pass} value={this.state.value} onChange={this.handleChange} />
                                         </FormGroup>
                                     </Jumbotron>
                                 </Col>

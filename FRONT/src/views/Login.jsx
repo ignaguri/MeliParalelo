@@ -59,11 +59,11 @@ export default class Login extends React.Component {
                             <Jumbotron>
                                 <FormGroup>
                                     <Label for="user">{lang.login.usuario}</Label>
-                                    <Input type="text" name="user" id="user" placeholder="Ingrese su nombre de usuario" value={this.state.value} onChange={this.handleChange} />
+                                    <Input type="text" name="user" id="user" placeholder={lang.login.placeholders.user} value={this.state.value} onChange={this.handleChange} />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="password">{lang.login.pass}</Label>
-                                    <Input type="password" name="password" id="password" placeholder="Ingrese su contraseña" value={this.state.value} onChange={this.handleChange} />
+                                    <Input type="password" name="password" id="password" placeholder={lang.login.placeholders.pass} value={this.state.value} onChange={this.handleChange} />
                                 </FormGroup>
                                 <Button type="submit" value="Submit" color="success" >{lang.login.ingresar}</Button>
                             </Jumbotron>
