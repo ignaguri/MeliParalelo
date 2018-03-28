@@ -93,7 +93,7 @@ class CarouselDisplay extends Component {
           onExited={this.onExited}
           key={i}
         >
-          <CarouselEntity obj={item} key={i} changeProduct={this.changeProduct} reference={item.id} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.state_name} condition={item.item_condition} />
+          <CarouselEntity obj={item} key={i} changeProduct={this.changeProduct} reference={item.id} picture={item.pictures[0]} thumbnail={item.thumbnail} price={item.price} title={item.title} location={item.state_name} condition={item.item_condition} />
 
           { /* <CarouselCaption captionText={item.altText} captionHeader={item.caption} style={{ position: "absolute", right: "0px", top: "10%", margin: "0% 10%", marginLeft: "30%" }} />*/}
         </CarouselItem>
