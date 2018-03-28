@@ -6,7 +6,7 @@ import strings from '../assets/languages'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,
-    Container, Row, Col, CardHeader, Button
+    Container, Row, Col, CardHeader, Button, Modal, ModalBody, ModalFooter, ModalHeader
 } from 'reactstrap';
 
 export default class Producto extends React.Component {
@@ -16,10 +16,17 @@ export default class Producto extends React.Component {
         this.parsearEstado = this.parsearEstado.bind(this);
         this.agregarACarrito = this.agregarACarrito.bind(this);
         this.handleCounter = this.handleCounter.bind(this);
+        this.toggle = this.toggle.bind(this);
         this.state = {
             language: this.props.language,
             cantidad: 0
         };
+    }
+
+    toggle() {
+        this.setState({
+            modal: !this.state.modal
+        });
     }
 
     handleCounter(cant) {
@@ -45,7 +52,7 @@ export default class Producto extends React.Component {
     agregarACarrito() {
         if (this.state.cantidad > 0) {
             api.agregarACarrito(this.props.producto, this.state.cantidad);
-            alert('Agregado al carrito!');
+            this.toggle();
         } else {
             alert('La cantidad debe ser mayor a 0!')
         }
@@ -95,7 +102,7 @@ export default class Producto extends React.Component {
                                         <Counter min={0} max={5000} onChange={this.handleCounter} />
                                     </Col>
                                     <Col xs="7">
-                                        <Button className="btn btn-block btn-info" onClick={this.agregarACarrito}><Icon icon="carrito" size="20" color="white"/>{' '}{lang.producto.agregar}</Button>
+                                        <Button className="btn btn-block btn-info" onClick={this.agregarACarrito}><Icon icon="carrito" size="20" color="white" />{' '}{lang.producto.agregar}</Button>
                                     </Col>
                                 </Row>
                                 <hr />
@@ -116,6 +123,24 @@ export default class Producto extends React.Component {
                             </CardBody>
                         </Card>
                     </Col>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Agregado al Carrito </ModalHeader>
+                        <ModalBody>
+                            <span style={{ fontWeight: "bold" }}>
+                                Item:
+                            </span>
+                            {this.props.producto.title}
+                            <br />
+                            <span style={{ fontWeight: "bold" }}>
+                                Cantidad:
+                            </span>
+                            {this.state.cantidad}
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.toggle}>Aceptar</Button>
+                        </ModalFooter>
+                    </Modal>
+
                 </Row>
             </Container>
         );
