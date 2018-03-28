@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from "../api"
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Button, Col, Container, Row, Table } from 'reactstrap';
 
 const pointsPercentage = 0.1;
 const textMap = {
@@ -9,6 +9,7 @@ const textMap = {
             quantity: 'Cantidad',
             title: 'Titulo',
             price: 'Precio',
+            subTotal: 'Subtotal',
             quit: 'Quitar',
         }
     },
@@ -37,17 +38,36 @@ class ShoppingCart extends Component {
         this.borrar = this.borrar.bind(this);
     }
 
+    mockCarro() {
+        api.agregarACarrito({ id: 'MLA614976100', title: 'Kit De Seguridad Para Auto 9 En 1 Tarjeta Patente Vtv Neokit', price: 436.5 }, 2)
+        api.agregarACarrito({ id: 'MLA627579355', title: 'Practicuna Plegable Cuna Bebé Megababy+colchón. Creciendo', price: 2899 }, 3)
+    }
+
     componentWillMount() {
+        this.mockCarro();
         const aux = api.getCarrito();
         if (aux != null) {
 
             this.setState({ purchases: aux });
         }
+        this.totals();
     }
 
     onAcceptClick() {
         api.postCheckout();
         console.log('Confirmar compra');
+    }
+
+    totals() {
+        var totalPoints = 0;
+        var totalPrice = 0;
+        for (let index = 0; index < this.state.purchases.length; index++) {
+            const element = this.state.purchases[index];
+            totalPrice += element.price * element.quantity;
+            totalPoints += element.price * element.quantity * pointsPercentage;
+        }
+        this.setState({ totalPoints: totalPoints });
+        this.setState({ totalPrice: totalPrice });
     }
 
     borrar(idItem) {
@@ -56,10 +76,12 @@ class ShoppingCart extends Component {
             const element = this.state.purchases[index];
             if (element.id === idItem) {
                 this.state.purchases.splice(index, 1);
+                console.log("paso")
                 break;
             }
         }
         this.setState({ purchases: this.state.purchases });
+        this.totals();
     }
 
     render() {
@@ -68,11 +90,16 @@ class ShoppingCart extends Component {
             total += (item.quantity * item.price);
             points += item.quantity * item.price * pointsPercentage;
             return (
-                <CartItem key={item.id} id={item.id} quantity={item.quantity} title={item.title} price={item.quantity * item.price} borrar={this.borrar} />
+                <tr>
+
+                    <td>{item.quantity}</td>
+                    <td>{item.title}</td>
+                    <td>{item.price}</td>
+                    <td>{item.quantity * item.price}</td>
+                    <td><Button onClick={() => this.borrar(item.id)} color='danger' style={{ fontWeight: "bold" }}>x</Button> </td>
+                </tr>
             );
         });
-        this.setState({ totalPrice: total });
-        this.setState({ totalPoints: points });
 
         return (
             <Container >
@@ -86,17 +113,21 @@ class ShoppingCart extends Component {
                         </p>
                     </Col>
                     <Col md="7" sm="12" >
-                        <table>
+                        <Table hover>
                             <thead>
                                 <tr style={{ width: "100%" }}>
                                     <th>{textMap.table.header.quantity}</th>
                                     <th>{textMap.table.header.title}</th>
                                     <th>{textMap.table.header.price}</th>
+                                    <th>{textMap.table.header.subTotal}</th>
                                     <th>{textMap.table.header.quit}</th>
                                 </tr>
                             </thead>
-                        </table>
-                        {purchasesRow}
+                            <tbody>
+
+                                {purchasesRow}
+                            </tbody>
+                        </Table>
 
 
                         <div className="clearfix" style={{ padding: '.5rem' }}>
@@ -136,89 +167,3 @@ class ShoppingCart extends Component {
 
 }
 export default ShoppingCart;
-
-
-class CartItem extends Component {
-    constructor(props) {
-        super(props);
-        this.borrar = this.borrar.bind(this);
-    }
-
-    borrar() {
-        this.props.borrar(this.props.id);
-    }
-
-    render() {
-        return (
-            <div style={{ boxShadow: "0 1px 0 #e1e5e8", width: "100%", paddingLeft: "15px", fontWeight: "bold", marginBottom: "11px", height: "60px" }}>
-                <span style={{ color: "#4ea6bc", float: "left", paddingTop: "20px", paddingBottom: "5px", width: "35px" }}>
-                    {this.props.quantity}
-                </span>
-                <span style={{ color: "#727578", float: "left", paddingTop: "20px", paddingBottom: "5px", paddingLeft: "10px" }}>
-                    {this.props.title}
-                </span>
-                <Button color="danger" size="sm" onClick={this.borrar} style={{ paddingTop: "20px", paddingBottom: "5px", float: "right" }}>x</Button>
-                <span style={{ color: "#f06953", float: "right", paddingTop: "20px", paddingBottom: "5px", paddingRight: "5px" }}>
-                    {this.props.price}
-                </span>
-            </div>
-        )
-    }
-}
-
-// <div class="container text-center">
-
-//     <div class="col-md-5 col-sm-12">
-//         <div class="bigcart"></div>
-//         <h1>Your shopping cart</h1>
-//         <p>
-//             This is a free and <b><a href="http://tutorialzine.com/2014/04/responsive-shopping-cart-layout-twitter-bootstrap-3/" title="Read the article!">responsive shopping cart layout, made by Tutorialzine</a></b>. It looks nice on both desktop and mobile browsers. Try it by resizing your window (or opening it on your smartphone and pc).
-// 				</p>
-//     </div>
-
-//     <div class="col-md-7 col-sm-12 text-left">
-//         <ListGroup>
-//             <li class="row list-inline columnCaptions">
-//                 <span>QTY</span>
-//                 <span>ITEM</span>
-//                 <span>Price</span>
-//             </li>
-//             <li class="row">
-//                 <span class="quantity">1</span>
-//                 <span class="itemName">Birthday Cake</span>
-//                 <span class="popbtn"><a class="arrow"></a></span>
-//                 <span class="price">$49.95</span>
-//             </li>
-//             <li class="row">
-//                 <span class="quantity">50</span>
-//                 <span class="itemName">Party Cups</span>
-//                 <span class="popbtn"><a class="arrow"></a></span>
-//                 <span class="price">$5.00</span>
-//             </li>
-//             <li class="row">
-//                 <span class="quantity">20</span>
-//                 <span class="itemName">Beer kegs</span>
-//                 <span class="popbtn"><a class="arrow"></a></span>
-//                 <span class="price">$919.99</span>
-//             </li>
-//             <li class="row">
-//                 <span class="quantity">18</span>
-//                 <span class="itemName">Pound of beef</span>
-//                 <span class="popbtn"><a class="arrow"></a></span>
-//                 <span class="price">$269.45</span>
-//             </li>
-//             <li class="row">
-//                 <span class="quantity">1</span>
-//                 <span class="itemName">BListGrouplet-proof vest</span>
-//                 <span class="popbtn" data-parent="#asd" data-toggle="collapse" data-target="#demo"><a class="arrow"></a></span>
-//                 <span class="price">$450.00</span>
-//             </li>
-//             <li class="row totals">
-//                 <span class="itemName">Total:</span>
-//                 <span class="price">$1694.43</span>
-//                 <span class="order"> <a class="text-center">ORDER</a></span>
-//             </li>
-//         </ListGroup>
-//     </div>
-
-// </div>
